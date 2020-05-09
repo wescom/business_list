@@ -1,7 +1,7 @@
 class CreateBusinessTypes < ActiveRecord::Migration[6.0]
     def self.up
       create_table :business_types do |t|
-        t.string :type
+        t.string :name
         t.timestamps
       end
     end

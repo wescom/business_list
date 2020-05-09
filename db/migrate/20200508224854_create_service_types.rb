@@ -1,7 +1,7 @@
 class CreateServiceTypes < ActiveRecord::Migration[6.0]
     def self.up
       create_table :service_types do |t|
-        t.string :type
+        t.string :name
         t.timestamps
       end
     end
