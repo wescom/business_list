@@ -1,0 +1,267 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap-datepicker3";
+@import "bootstrap";
+
+
+/*** Main custimation ***/
+.body_defaults {
+	width: 100vw;
+	min-width: 400px;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+.indent { text-indent: 50px; }
+.max_100 {max-width: 100%; max-height: 100%;}
+.btn { margin-left: 5px; }
+.panel-heading {background: lightgrey;}
+.content_block { margin: 0px 10px; min-height: 650px; }
+td.image_column { padding: 0.75rem 0px 0.75rem 0 }
+.img-thumb {width: 100px; height: auto;}
+.cart_heading, .checkout_heading { margin: 20px 0px 0px 10%;}
+.image_heading, .default_heading, .dashboard_heading, .default_page_heading { margin: 20px 10% 10px 10%; }
+#checkout_form { width: 100% }
+
+.default_block { 
+	margin: 20px 10% 0px 10%; 
+	min-height: 300px; 
+	border: 1px solid #33393c;
+	padding: 2%;
+}
+.default_fields {
+	background-color: #eeeeee;
+    font: 1.0em Arial, Tahoma, sans-serif;
+    color: #33393c;
+    padding: 10px;
+	margin-right: 10px;
+}
+
+.default_fields_textarea {
+	max-height: 75px;
+	overflow: scroll;
+}
+#default_settings_show.table td { border: none;}
+
+#login-page { margin: 10px 10%; }
+#login-page h1 {
+	font: bold italic 2.0em Georgia, "Times New Roman", Times, serif;
+	color: #33393c;
+	margin: 0px 0px 10px 0px;
+	padding: 0px 0px 1px 0px;
+	border-bottom: 1px solid #33393c;
+}
+
+#login-page h1 span {
+	font: bold italic 0.5em Georgia, "Times New Roman", Times, serif;
+	color: #33393c;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+#login-page #page-content {
+	background-color: #e6e6d2;
+	padding: 20px 10px 10px 10px;
+	min-width: 320px;
+}
+
+#login-page .inner-box {
+	background-color: #fff;
+    padding: 1.5957%;
+    min-height: 300px;
+}
+.dropdown-menu { padding: 0.5rem 1rem; }
+
+@include media-breakpoint-down(xs) {
+	.succeed_col { display: none; }
+	.colspan_column { display: none; }
+	.image_related .form-search-text { display: none; }
+	.related_image_block  { display: none; }
+	.menu-items-bar { display: none; }
+	.menu-items-icon-admin { display: none; }
+	.menu-items-icon-all { display: block; }
+ 	.btn-menu { margin-left: 0px; }
+}
+
+@include media-breakpoint-down(sm) {
+	.menu-item-home { display: none; }
+}
+
+@include media-breakpoint-down(md) {
+	.auth_col { display: none; }
+}
+
+@include media-breakpoint-up(sm) {
+	.mobile_action_row { display: none; } 
+	.menu-items-icon-admin { display: block; }
+	.menu-items-icon-all { display: none; }
+}
+
+/*** Branding ***/
+#branding { padding-right: 25px;}
+#branding h1 { }
+#branding h1 a {
+	font: italic 0.88em Georgia, "Times New Roman", Times, serif;
+	color: #fff;
+	margin: 0px;
+	padding: 0px;
+}
+#branding h1 a span {
+	font: italic 0.88em Georgia, "Times New Roman", Times, serif;
+	color: #6da9d2;
+}
+#branding a:link, #branding a:visited, #branding a:hover, #branding a:active,  { 
+    text-decoration:none; 
+}
+.newspaper_logo { 
+	max-height: 40px; 
+	@include media-breakpoint-down(sm) { max-height: 30px; }
+}
+#header_bar { padding: 15px; }
+
+/*** Home Page ***/
+.publication_head{ 
+	margin: 20px 10% 10px 10%;
+	overflow: hidden;
+	max-height: 700px;
+}
+.publication_head{ 
+	margin: 20px 10% 10px 10%;
+}
+.publication_block{ 
+	margin: 20px 5% 10px 5%;
+}
+.publication_banner {
+	position: relative;
+	margin: 5px;
+	width: 48%;
+	height: 400px;
+	@include media-breakpoint-only(md) { width: 48%; height: 300px; }
+	@include media-breakpoint-down(sm) { width: 100%; height: 250px; }
+}
+.publication_banner_img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+	opacity: .8;
+}
+.publication_logo {
+	position: absolute;
+    background: rgba(0,0,0,0.35);
+    height: 150px;
+	width: 80%;
+	-webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+	box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+	background-color: white;
+}
+.publication_logo_img { 
+	width: 100%;
+	padding: 0px 10px;
+}
+
+.home-page-head {
+/***	height: 500px;
+    min-height: 500px;
+    background: url('/images/Bend_Homes_cinemagraph.gif') no-repeat center center; 
+    background-size: cover; ***/
+    text-align: center;
+    position: relative;
+}
+.home-page-head img {
+	height: 500px;
+    min-height: 500px;
+	width: 100%;
+    object-fit: cover;
+}
+.home-page-head .banner-search-wrap {
+	position: absolute;
+    top: 50%;
+    width: 100%;
+    background: rgba(0,0,0,.35);
+    height: 280px;
+    margin-top: -140px;
+    color: #fff;
+}
+.home-page-head .banner-search-wrap h1 {
+    color: #fff;
+    margin-top: 70px;
+    margin-bottom: 40px;
+	font-size: calc(100% + 2.4vw);
+    text-transform: none;
+    width: 100%;
+}
+.header-search .form-search-text-col { flex-grow: 1; }
+.header-search {
+    background: rgba(0,0,0,.5);
+    border: 1px solid #222;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.header-search .form-search {
+	margin: 0;
+    padding: 10px;
+}
+.header-search .form-search > div {
+    width: 73%;
+}
+
+.header-search .form-search-fields {
+}
+.header-search .form-search-text {
+    height: 46px;
+    width: 98%;
+    margin: 5px 0px 5px 0px;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: .05em;
+    text-indent: 10px;
+}
+.header-search .form-search-button {
+    border: 1px solid #02888f;
+    background: #02888f;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: .05em;
+    height: 46px;
+	width: 46px;
+    margin: 5px 0px 5px 0px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.home-page-info {
+	margin: 50px 50px;
+    text-align: center;
+}
+.card { margin-bottom: 10px; }
+.card_section_img { width: 100% }
+.card_pdf_image { height: 300px; width: auto; max-width: 100%; }
+
+/*** Pagination ***/
+.flickr_pagination { text-align: center; padding: 0.3em; cursor: default; }
+.flickr_pagination a, .flickr_pagination span, .flickr_pagination em { padding: 0.2em 0.5em; }
+.flickr_pagination .disabled { color: #fff; }
+.flickr_pagination .current { font-style: normal; font-weight: bold; color: black; background-color: #3C8DC5; border-radius: 0.25rem; }
+.flickr_pagination a { background-color: #6FB7E9; border: 1px solid #dddddd; color: white; text-decoration: none; border-radius: 0.25rem; }
+.flickr_pagination a:hover, .flickr_pagination a:focus { border-color: #3C8DC5; background: #3C8DC5; color: white; }
+.flickr_pagination .page_info { color: #aaaaaa; padding-top: 0.8em; }
+.flickr_pagination .previous_page, .flickr_pagination .next_page { border-width: 2px; }
+/*.flickr_pagination .previous_page { margin-right: 1em; }
+.flickr_pagination .next_page { margin-left: 1em; } */

@@ -1,0 +1,24 @@
+<tr>
+	<td class="text-center d-none d-sm-table-cell"></td>	
+	<td><%= table_row.name %></td>	
+	<td class="text-center d-none d-sm-table-cell"></td>
+	<td class="text-center d-none d-sm-table-cell"><%= table_row.hours %></td>
+	<td class="d-none d-sm-table-cell"><%= table_row.address1 %><%= table_row.address2 %>, <%= table_row.city %></td>
+	<td class="text-center d-none d-sm-table-cell"><%= table_row.phonenum %></td>
+	<td class="text-center d-none d-sm-table-cell"><%= table_row.website %></td>
+	<td class="text-center d-none d-sm-table-cell"></td>
+
+	<td class="text-center">
+		<p class="btn btn-outline-info">
+			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_path(table_row),
+				title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+		</p>
+		<p class="btn btn-outline-info">
+			<%= link_to icon('trash-o fa-lg'), 
+				business_path(table_row),
+				:method=> :delete, :action => 'destroy',
+				data: {confirm:'Delete business?'},
+				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+		</p>
+	</td>
+</tr>

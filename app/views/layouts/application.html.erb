@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% if flash[:admin_error]  %>
+			<META NAME="robots" CONTENT="noindex,nofollow">
+		<% end %>
+
+		<title><%= yield :title %>Bulletin Business Listings</title>
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+
+	<body class="body_defaults">
+		<%= render 'shared/header' %>
+		<%= render :partial => 'shared/messages' %>
+		<div class="content_block">
+			<%= yield %>
+		</div>
+
+		<%= render 'shared/footer' %>
+	</body>
+</html>
