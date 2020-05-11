@@ -1,5 +1,4 @@
 class Business < ApplicationRecord
-    has_many :business_types
-    has_many :service_types
+    belongs_to :business_type, optional: true
 #    has_many :contacts, :dependent => :destroy
 end

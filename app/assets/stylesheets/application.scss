@@ -34,17 +34,16 @@
 .content_block { margin: 0px 10px; min-height: 650px; }
 td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .img-thumb {width: 100px; height: auto;}
-.cart_heading, .checkout_heading { margin: 20px 0px 0px 10%;}
-.image_heading, .default_heading, .dashboard_heading, .default_page_heading { margin: 20px 10% 10px 10%; }
+.business_heading, .business_type_heading, .service_type_heading, .default_heading { margin: 20px 10% 10px 10%; }
 #checkout_form { width: 100% }
 
-.default_block { 
-	margin: 20px 10% 0px 10%; 
+.business_block { 
+	margin: 20px 10% 20px 10%; 
 	min-height: 300px; 
 	border: 1px solid #33393c;
 	padding: 2%;
 }
-.default_fields {
+.business_fields {
 	background-color: #eeeeee;
     font: 1.0em Arial, Tahoma, sans-serif;
     color: #33393c;
@@ -52,39 +51,11 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 	margin-right: 10px;
 }
 
-.default_fields_textarea {
+.business_fields_textarea {
 	max-height: 75px;
 	overflow: scroll;
 }
-#default_settings_show.table td { border: none;}
 
-#login-page { margin: 10px 10%; }
-#login-page h1 {
-	font: bold italic 2.0em Georgia, "Times New Roman", Times, serif;
-	color: #33393c;
-	margin: 0px 0px 10px 0px;
-	padding: 0px 0px 1px 0px;
-	border-bottom: 1px solid #33393c;
-}
-
-#login-page h1 span {
-	font: bold italic 0.5em Georgia, "Times New Roman", Times, serif;
-	color: #33393c;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-}
-
-#login-page #page-content {
-	background-color: #e6e6d2;
-	padding: 20px 10px 10px 10px;
-	min-width: 320px;
-}
-
-#login-page .inner-box {
-	background-color: #fff;
-    padding: 1.5957%;
-    min-height: 300px;
-}
 .dropdown-menu { padding: 0.5rem 1rem; }
 
 @include media-breakpoint-down(xs) {

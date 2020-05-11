@@ -3,6 +3,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.0]
       create_table :businesses do |t|
         t.string :name
         t.integer :business_type_id
+        t.integer :service_type_id
         t.string :hours
         t.string :website
         t.string :address1

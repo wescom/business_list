@@ -3,82 +3,11 @@
 </div>
 
 <div class="business_block" >
-	<%= form_for(@business) do |f| %>
-		<div class="form-group row">
-			<label for="name" class="offset-1 col-3 col-form-label">Business Name:</label>
-			<div class="col-3">
-				<%= f.text_field :name, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="business_type" class="offset-1 col-3 col-form-label">Business Type:</label>
-			<div class="col-3">
-
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="hours" class="offset-1 col-3 col-form-label">Hours:</label>
-			<div class="col-3">
-				<%= f.text_field :hours, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="website" class="offset-1 col-3 col-form-label">Website:</label>
-			<div class="col-3">
-				<%= f.text_field :website, class: "form-control" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="address1" class="offset-1 col-3 col-form-label">Address1:</label>
-			<div class="col-3">
-				<%= f.text_field :address1, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="address2" class="offset-1 col-3 col-form-label">Address2:</label>
-			<div class="col-3">
-				<%= f.text_field :address2, class: "form-control" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="city" class="offset-1 col-3 col-form-label">City:</label>
-			<div class="col-3">
-				<%= f.text_field :city, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="state" class="offset-1 col-3 col-form-label">State:</label>
-			<div class="col-3">
-				<%= f.text_field :state, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="zipcode" class="offset-1 col-3 col-form-label">Zipcode:</label>
-			<div class="col-3">
-				<%= f.text_field :zipcode, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="phonenum" class="offset-1 col-3 col-form-label">Phone Number:</label>
-			<div class="col-3">
-				<%= f.text_field :phonenum, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="email" class="offset-1 col-3 col-form-label">Email:</label>
-			<div class="col-3">
-				<%= f.text_field :email, class: "form-control", :required => "true" %>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label for="notes" class="offset-1 col-3 col-form-label">Notes:</label>
-			<div class="col-3">
-				<%= f.text_area :notes, class: "form-control", :required => "true" %>
-			</div>
-		</div>
+	<%= form_for(@business) do |form| %>
+		<%= render :partial => 'form', :object => form %>
 		<div class="form-group row d-flex justify-content-end">
-			<%= f.submit "Cancel", :name => 'cancel_button', :class => 'btn btn-primary'%>
-			<%= f.submit "Update", :class => 'btn btn-primary'%>
+			<%= form.submit "Cancel", :name => 'cancel_button', :class => 'btn btn-primary'%>
+			<%= form.submit "Create", :class => 'btn btn-primary'%>
 		</div>
 	<% end %>
 </div>

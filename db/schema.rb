@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_225203) do
   create_table "businesses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "business_type_id"
+    t.integer "service_type_id"
     t.string "hours"
     t.string "website"
     t.string "address1"

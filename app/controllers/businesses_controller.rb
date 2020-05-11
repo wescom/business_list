@@ -1,24 +1,27 @@
 class BusinessesController < ApplicationController
     def index
-      @businesses = Business.all.order('name')
+        @businesses = Business.all.order('name')
     end
 
     def show
-      @business = Business.find(params[:id])
+        @business = Business.find(params[:id])
+puts@business.inspect
     end
 
     def new
       @business = Business.new
+      @business_types = BusinessType.all.order("name")
     end
 
     def create
       if params[:cancel_button]
         redirect_to businesses_path
       else
+        @business_types = BusinessType.all.order("name")
         @business = Business.new(business_params)
         if @business.save
           flash_message :notice, "Business Created"
-          redirect_to businesses_path
+          redirect_to business_path(@business)
         else
           flash_message :error, "Business Creation Failed"
           render :action => :new
@@ -28,13 +31,15 @@ class BusinessesController < ApplicationController
   
     def edit
       @business = Business.find(params[:id])
+      @business_types = BusinessType.all.order("name")
     end
 
     def update
       @business = Business.find(params[:id])
+      @business_types = BusinessType.all.order("name")
       if @business.update_attributes(business_params)
           flash_message :notice, "Business Updated"
-          redirect_to businesses_path
+          redirect_to business_path(@business)
       else
           flash_message :error, "Business Update Failed"
           render :action => :edit
@@ -54,6 +59,6 @@ class BusinessesController < ApplicationController
 
     private
       def business_params
-        params.require(:business).permit(:name,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+        params.require(:business).permit(:name,:business_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
       end
 end
