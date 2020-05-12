@@ -63,6 +63,6 @@ puts@business.inspect
 
     private
       def business_params
-        params.require(:business).permit(:name,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+        params.require(:business).permit(:name,:logo,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
       end
 end

@@ -2,6 +2,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.0]
     def self.up
       create_table :businesses do |t|
         t.string :name
+        t.attachment :logo
         t.integer :business_type_id
         t.integer :service_type_id
         t.string :hours

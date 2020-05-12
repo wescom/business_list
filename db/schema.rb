@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(version: 2020_05_08_225203) do
 
   create_table "businesses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.bigint "logo_file_size"
+    t.datetime "logo_updated_at"
     t.integer "business_type_id"
     t.integer "service_type_id"
     t.string "hours"

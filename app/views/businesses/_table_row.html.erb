@@ -1,12 +1,12 @@
 <tr>
-	<td class="text-center d-none d-sm-table-cell"></td>	
+	<td class="text-center d-none d-sm-table-cell"><%= image_tag table_row.logo.url(:thumb) %></td>	
 	<td><%= link_to table_row.name, business_path(table_row)  %></td>	
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.business_type.name %></td>
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.hours %></td>
 	<td class="d-none d-sm-table-cell"><%= table_row.address1 %><%= table_row.address2 %>, <%= table_row.city %></td>
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.phonenum %></td>
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.website %></td>
-	<td class="text-center d-none d-sm-table-cell"></td>
+	<td class="text-center d-none d-sm-table-cell"><%= table_row.service_type.name %></td>
 
 	<td class="text-center">
 		<p class="btn btn-outline-info">

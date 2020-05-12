@@ -31,7 +31,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'progress_bar'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-#gem "paperclip", "~> 6.0.0"
+gem "kt-paperclip", "~> 6.2.0"
 gem 'premailer-rails' # use for css styling in mailer
 
 # Authentication

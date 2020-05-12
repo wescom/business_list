@@ -1,18 +1,12 @@
 <div class="business_heading">
-	<h1><%= @business.name %>
+	<h1>
+		<%= image_tag @business.logo.url(:medium) %>
+		<%= @business.name %>
 		<div class="float-right"><%= link_to "Edit", edit_business_path(@business), :class => 'btn btn-primary' %></div>
 	</h1>
 </div>
 
 <div class="business_block" >
-	<div class="form-row">
-		<div class="form-group col-md-12">
-			<label for="name" class="col-form-label">Business Name:</label>
-			<div class="col-12">
-				<%= @business.name %>
-			</div>
-		</div>
-	</div>
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<label for="business_type" class="col-form-label">Business Type:</label>
