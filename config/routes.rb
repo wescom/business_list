@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   #get 'home/index'
   get 'business/index'
   
-  resources :businesses
+  resources :businesses do
+    collection do
+      get 'business_listing'
+      get 'restaurant_listing'
+    end
+  end
   resources :business_types
   resources :service_types
 

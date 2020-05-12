@@ -1,10 +1,21 @@
 class BusinessesController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:index]
+  skip_before_action :authenticate_user!, :only => [:index,:business_listing,:restaurant_listing]
+  layout 'listings', :only => [:business_listing, :restaurant_listing]
 
   def index
       @businesses = Business.all.order('name')
   end
-
+  
+  def business_listing
+    # lists retail businesses for embedding into an external webpage
+    @businesses = Business.joins(:business_type).where('business_types.name = ?', "Restaurant").order('name')
+  end
+  
+  def restaurant_listing
+    # lists restaurants for embedding into an external webpage
+    @businesses = Business.joins(:business_type).where('business_types.name = ?', "Retail").order('name')
+  end
+  
   def show
       @business = Business.find(params[:id])
   end
