@@ -1,9 +1,10 @@
 class BusinessesController < ApplicationController
   skip_before_action :authenticate_user!, :only => [:index,:business_listing,:restaurant_listing]
   layout 'listings', :only => [:business_listing, :restaurant_listing]
+  helper_method :sort_column, :sort_direction
 
   def index
-      @businesses = Business.all.order('name')
+      @businesses = Business.all.order(sort_column + " " + sort_direction)
   end
   
   def business_listing
@@ -76,5 +77,13 @@ class BusinessesController < ApplicationController
   private
     def business_params
       params.require(:business).permit(:name,:logo,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+    end
+    
+    def sort_column
+      Business.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
