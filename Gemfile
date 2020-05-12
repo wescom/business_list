@@ -35,7 +35,7 @@ gem "kt-paperclip", "~> 6.2.0"
 gem 'premailer-rails' # use for css styling in mailer
 
 # Authentication
-gem 'adauth'
+gem 'devise'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

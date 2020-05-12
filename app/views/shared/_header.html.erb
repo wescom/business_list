@@ -18,13 +18,21 @@
 							<%= link_to "Businesses", businesses_path, :class=>"nav-link menu-item-images" %>
 						</li>
 						<li class="nav-item">
-							<%= link_to "Businesses", businesses_path, :class=>"nav-link menu-item-pages" %>
+							<%= link_to "Restaurants", businesses_path, :class=>"nav-link menu-item-pages" %>
 						</li>
 					</ul>
 				</div>
 			</div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-2">
+				<div class="float-right">
+					<% if current_user.nil? %>
+						<%= link_to new_user_session_path, class: 'login-button' do %>Login<% end %>
+					<% else %>
+						<%= current_user.email %> (<%= link_to destroy_user_session_path, method: :delete do %>Logout<% end %>)
+					<% end %>
+				</div>
+			</div>
 			<div class="col-lg-1 col-md-1 col-sm-2 col-2">
-
 				<div class="d-flex align-items-center">
 					<div class="btn-group-vertical">
 
@@ -33,13 +41,13 @@
 									<%= icon('bars fa-lg') %>
 								</button>
 								<div class="dropdown-menu">
-									<%= link_to "Dashboard", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Orders", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Images Purchased", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Widgets", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Locations", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Businesses", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Restaurants", businesses_path, :class=>"dropdown-item" %>
 									<div class="dropdown-divider"></div>
-									<%= link_to "Logout", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Business Types", business_types_path, :class=>"dropdown-item" %>
+									<%= link_to "Service Types", service_types_path, :class=>"dropdown-item" %>
+									<div class="dropdown-divider"></div>
+									<%= link_to "Logout", destroy_user_session_path, :class=>"dropdown-item" %>
 								</div>
 							</div>
 
@@ -53,12 +61,13 @@
 								<%= link_to "Pages", businesses_path, :class=>"dropdown-item" %>
 
 									<div class="dropdown-divider"></div>
-									<%= link_to "Dashboard", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Orders", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Images Purchased", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Locations", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Businesses", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Restaurants", businesses_path, :class=>"dropdown-item" %>
 									<div class="dropdown-divider"></div>
-									<%= link_to "Logout", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Business Types", business_types_path, :class=>"dropdown-item" %>
+									<%= link_to "Service Types", service_types_path, :class=>"dropdown-item" %>
+									<div class="dropdown-divider"></div>
+									<%= link_to "Logout", destroy_user_session_path, :class=>"dropdown-item" %>
 
 							</div>
 						</div>
