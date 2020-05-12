@@ -17,10 +17,10 @@ class BusinessTypesController < ApplicationController
       else
         @business_type = BusinessType.new(business_type_params)
         if @business_type.save
-          flash_message :notice, "Business Type Created"
+          flash[:notice] = "Business Type Created"
           redirect_to business_types_path
         else
-          flash_message :error, "Business Type Creation Failed"
+          flash[:error] = "Business Type Creation Failed"
           render :action => :new
         end
       end    
@@ -33,10 +33,10 @@ class BusinessTypesController < ApplicationController
     def update
       @business_type = BusinessType.find(params[:id])
       if @business_type.update_attributes(business_type_params)
-          flash_message :notice, "Business Type Updated"
+          flash[:notice] = "Business Type Updated"
           redirect_to business_types_path
       else
-          flash_message :error, "Business Type Update Failed"
+          flash[:error] = "Business Type Update Failed"
           render :action => :edit
       end
     end
@@ -44,10 +44,10 @@ class BusinessTypesController < ApplicationController
     def destroy
       @business_type = BusinessType.find(params[:id])
       if @business_type.destroy
-          flash_message :notice, "Business Type Killed!"
+          flash[:notice] = "Business Type Killed"
           redirect_to business_types_path
       else
-          flash_message :error, "Business Type Deletion Failed"
+          flash[:error] = "Business Type Deletion Failed"
           redirect_to business_types_path
       end
     end

@@ -3,7 +3,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<%= flash[:success].html_safe %>
+		<%= flash[:success] %>
 	</div>
 <% end %>
 <% if flash[:notice] %>
@@ -11,7 +11,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<%= flash[:notice].html_safe %>
+		<%= flash[:notice] %>
 	</div>
 <% end %>
 <% if flash[:error] %>
@@ -19,7 +19,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<%= flash[:error].html_safe %>
+		<%= flash[:error] %>
 	</div>
 <% end %>
 <% if flash[:admin_error] and admin? %>
@@ -27,7 +27,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<%= flash[:admin_error].html_safe %>
+		<%= flash[:admin_error] %>
 	</div>
 <% end %>
 <% flash.clear %>

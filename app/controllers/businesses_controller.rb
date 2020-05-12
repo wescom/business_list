@@ -23,10 +23,10 @@ class BusinessesController < ApplicationController
       @service_types = ServiceType.all.order("name")
       @business = Business.new(business_params)
       if @business.save
-        flash_message :notice, "Business Created"
+        flash[:notice] = "Business Created"
         redirect_to businesses_path
       else
-        flash_message :error, "Business Creation Failed"
+        flash[:notice] = "Business Creation Failed"
         render :action => :new
       end
     end    
@@ -43,10 +43,10 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @service_types = ServiceType.all.order("name")
     if @business.update_attributes(business_params)
-        flash_message :notice, "Business Updated"
+        flash[:notice] = "Business Updated"
         redirect_to businesses_path
     else
-        flash_message :error, "Business Update Failed"
+        flash[:notice] = "Business Update Failed"
         render :action => :edit
     end
   end
@@ -54,10 +54,10 @@ class BusinessesController < ApplicationController
   def destroy
     @business = Business.find(params[:id])
     if @business.destroy
-        flash_message :notice, "Business Killed!"
+        flash[:notice] = "Business Killed"
         redirect_to businesses_path
     else
-        flash_message :error, "Business Deletion Failed"
+        flash[:notice] = "Business Deletion Failed"
         redirect_to businesses_path
     end
   end

@@ -17,10 +17,10 @@ class ServiceTypesController < ApplicationController
       else
         @service_type = ServiceType.new(service_type_params)
         if @service_type.save
-          flash_message :notice, "Business Type Created"
+          flash[:notice] = "Service Type Created"
           redirect_to service_types_path
         else
-          flash_message :error, "Business Type Creation Failed"
+          flash[:error] = "Service Type Creation Failed"
           render :action => :new
         end
       end    
@@ -33,10 +33,10 @@ class ServiceTypesController < ApplicationController
     def update
       @service_type = ServiceType.find(params[:id])
       if @service_type.update_attributes(service_type_params)
-          flash_message :notice, "Business Type Updated"
+          flash[:notice] = "Service Type Updated"
           redirect_to service_types_path
       else
-          flash_message :error, "Business Type Update Failed"
+          flash[:error] = "Service Type Update Failed"
           render :action => :edit
       end
     end
@@ -44,10 +44,10 @@ class ServiceTypesController < ApplicationController
     def destroy
       @service_type = ServiceType.find(params[:id])
       if @service_type.destroy
-          flash_message :notice, "Business Type Killed!"
+          flash[:notice] = "Service Type Killed"
           redirect_to service_types_path
       else
-          flash_message :error, "Business Type Deletion Failed"
+          flash[:error] = "Service Type Deletion Failed"
           redirect_to service_types_path
       end
     end
