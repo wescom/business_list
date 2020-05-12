@@ -11,6 +11,7 @@ puts@business.inspect
     def new
       @business = Business.new
       @business_types = BusinessType.all.order("name")
+      @service_types = ServiceType.all.order("name")
     end
 
     def create
@@ -18,10 +19,11 @@ puts@business.inspect
         redirect_to businesses_path
       else
         @business_types = BusinessType.all.order("name")
+        @service_types = ServiceType.all.order("name")
         @business = Business.new(business_params)
         if @business.save
           flash_message :notice, "Business Created"
-          redirect_to business_path(@business)
+          redirect_to businesses_path
         else
           flash_message :error, "Business Creation Failed"
           render :action => :new
@@ -32,14 +34,16 @@ puts@business.inspect
     def edit
       @business = Business.find(params[:id])
       @business_types = BusinessType.all.order("name")
+      @service_types = ServiceType.all.order("name")
     end
 
     def update
       @business = Business.find(params[:id])
       @business_types = BusinessType.all.order("name")
+      @service_types = ServiceType.all.order("name")
       if @business.update_attributes(business_params)
           flash_message :notice, "Business Updated"
-          redirect_to business_path(@business)
+          redirect_to businesses_path
       else
           flash_message :error, "Business Update Failed"
           render :action => :edit
@@ -59,6 +63,6 @@ puts@business.inspect
 
     private
       def business_params
-        params.require(:business).permit(:name,:business_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+        params.require(:business).permit(:name,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
       end
 end

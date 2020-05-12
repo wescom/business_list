@@ -1,3 +1,5 @@
 class ServiceType < ApplicationRecord
-    has_and_belongs_to_many :businesses
+    has_many :businesses
+    
+    validates :name, uniqueness: true
 end

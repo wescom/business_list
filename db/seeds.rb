@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts 'Creating Business_Types...'
+BusinessType.create(name: 'Retail')
+BusinessType.create(name: 'Restaurant')
+puts ''
+
+puts 'Creating Service_Types...'
+ServiceType.create(name: 'Pickup')
+ServiceType.create(name: 'Delivery')
+puts ''
