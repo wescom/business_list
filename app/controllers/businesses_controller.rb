@@ -5,7 +5,6 @@ class BusinessesController < ApplicationController
 
     def show
         @business = Business.find(params[:id])
-puts@business.inspect
     end
 
     def new

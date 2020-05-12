@@ -1,30 +1,71 @@
-<div id="header_bar" class="d-flex justify-content-between bg-dark">
-	<div class="align-items-center">
-		<div id="branding">
-			<h1>
-				<%= link_to root_url do %>
-					Bulletin <span>- Business Listings</span>
-				<% end %>
-			</h1>
-		</div>
-	</div>
-	<div class="d-flex align-items-center">
-		<div class="btn-group-vertical">
-			<div class="btn-block text-center">
+<div id="header_bar" class="bg-dark">
+	<div class="container-fluid">
+		<div class="row align-items-end">
+			<div class="col d-flex align-items-end">
+				<div id="branding" class="float-left">
+					<h1>
+						<%= link_to root_url do %>
+							Bulletin <span>- Business Listings</span>
+						<% end %>
+					</h1>
+				</div>
+				<div class="">
+					<ul class="nav menu-items-bar">
+						<li class="nav-item">
+		 				   <%= link_to "Home", root_path, :class=>"nav-link menu-item-home" %>
+						</li>
+						<li class="nav-item">
+							<%= link_to "Businesses", businesses_path, :class=>"nav-link menu-item-images" %>
+						</li>
+						<li class="nav-item">
+							<%= link_to "Businesses", businesses_path, :class=>"nav-link menu-item-pages" %>
+						</li>
+					</ul>
+				</div>
 			</div>
-				<div class="dropleft btn-block text-center">
-					<button type="button" class="btn btn-secondary" data-toggle="dropdown">
-						<%= icon('bars fa-lg') %>
-					</button>
-					<div class="dropdown-menu">
-						<%= link_to "Dashboard", root_path, :class=>"dropdown-item" %></a>
-						<%= link_to "Orders", root_path, :class=>"dropdown-item" %></a>
-						<%= link_to "Locations", root_path, :class=>"dropdown-item" %></a>
-						<%= link_to "Default Settings", root_path, :class=>"dropdown-item" %></a>
-						<%= link_to "Default Pages", root_path, :class=>"dropdown-item" %></a>
-						<div class="dropdown-divider"></div>
+			<div class="col-lg-1 col-md-1 col-sm-2 col-2">
+
+				<div class="d-flex align-items-center">
+					<div class="btn-group-vertical">
+
+							<div class="dropleft btn-block text-center menu-items-icon-admin">
+								<button type="button" class="btn btn-secondary btn-menu" data-toggle="dropdown">
+									<%= icon('bars fa-lg') %>
+								</button>
+								<div class="dropdown-menu">
+									<%= link_to "Dashboard", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Orders", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Images Purchased", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Widgets", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Locations", businesses_path, :class=>"dropdown-item" %>
+									<div class="dropdown-divider"></div>
+									<%= link_to "Logout", businesses_path, :class=>"dropdown-item" %>
+								</div>
+							</div>
+
+						<div class="dropleft btn-block text-center menu-items-icon-all">
+							<button type="button" class="btn btn-secondary btn-menu" data-toggle="dropdown">
+								<%= icon('bars fa-lg') %>
+							</button>
+							<div class="dropdown-menu">
+								<%= link_to "Home", root_path, :class=>"dropdown-item" %>
+								<%= link_to "Images", businesses_path, :class=>"dropdown-item" %>
+								<%= link_to "Pages", businesses_path, :class=>"dropdown-item" %>
+
+									<div class="dropdown-divider"></div>
+									<%= link_to "Dashboard", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Orders", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Images Purchased", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Locations", businesses_path, :class=>"dropdown-item" %>
+									<div class="dropdown-divider"></div>
+									<%= link_to "Logout", businesses_path, :class=>"dropdown-item" %>
+
+							</div>
+						</div>
 					</div>
 				</div>
+
+			</div>
 		</div>
 	</div>
 </div>

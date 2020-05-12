@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :contacts
 
   #root 'home#index'
-  root 'business#index'
+  root 'businesses#index'
 end
