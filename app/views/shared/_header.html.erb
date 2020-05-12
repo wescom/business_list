@@ -23,8 +23,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-2 col-sm-2 col-2">
-				<div class="float-right">
+			<div class="col-lg-3 col-md-3 col-sm-2 col-2">
+				<div class="login-box d-flex align-items-center justify-content-end">
 					<% if current_user.nil? %>
 						<%= link_to new_user_session_path, class: 'login-button' do %>Login<% end %>
 					<% else %>
