@@ -24,3 +24,4 @@
 # Ignore default_settings images for locations
 /public/images
 /public/assets
+/public/system/db_images
