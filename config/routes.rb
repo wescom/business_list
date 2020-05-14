@@ -11,10 +11,9 @@ Rails.application.routes.draw do
       get 'restaurant_listing'
     end
   end
-  resources :business_types
-  resources :service_types
-
-  resources :contacts
+  resources :business_types, :only => [:new, :create, :edit, :update, :destroy]
+  resources :service_types, :only => [:new, :create, :edit, :update, :destroy]
+  resources :contacts, :only => [:new, :create, :edit, :update, :destroy]
 
   #root 'home#index'
   root 'businesses#index'

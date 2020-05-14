@@ -1,0 +1,55 @@
+<div class="form-group row">
+	<label for="name" class="col-form-label">Name:</label>
+	<div class="col-12">
+		<%= form.text_field :name, class: "form-control", :required => "true" %>
+	</div>
+</div>
+<div class="form-group row">
+	<label for="phonenum" class="col-form-label">Phone Number:</label>
+	<div class="col-12">
+		<%= form.text_field :phonenum, class: "form-control", :required => "true" %>
+	</div>
+</div><div class="form-group row">
+	<label for="email" class="col-form-label">Email:</label>
+	<div class="col-12">
+		<%= form.text_field :email, class: "form-control", :required => "true" %>
+	</div>
+</div>
+<hr/>
+
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label for="address1" class="col-form-label">Address1:</label>
+		<div class="col-12">
+			<%= form.text_field :address1, class: "form-control" %>
+		</div>
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		<label for="address2" class="col-form-label">Address2:</label>
+		<div class="col-12">
+			<%= form.text_field :address2, class: "form-control" %>
+		</div>
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-4">
+		<label for="city" class="col-form-label">City:</label>
+		<div class="col-12">
+			<%= form.text_field :city, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group col-md-2">
+		<label for="state" class="col-form-label">State:</label>
+		<div class="col-12">
+			<%= form.select :state, options_for_select(us_states, @business.state || 'OR'), {}, {:class => "form-control"} %>
+		</div>
+	</div>
+	<div class="form-group col-md-2">
+		<label for="zipcode" class="col-form-label">Zipcode:</label>
+		<div class="col-12">
+			<%= form.text_field :zipcode, class: "form-control" %>
+		</div>
+	</div>
+</div>

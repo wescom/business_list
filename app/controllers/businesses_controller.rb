@@ -5,8 +5,6 @@ class BusinessesController < ApplicationController
 
   def index
       @businesses = Business.joins(:business_type).joins(:service_type).order(sort_column + " " + sort_direction)
-#@businesses = Business.joins(:business_type).order('business_types.name')
-#@businesses = Business.joins(:service_type).order('service_types.name')
   end
   
   def business_listing
@@ -86,6 +84,8 @@ class BusinessesController < ApplicationController
         return true
       else
         case
+        when column.nil?
+          return false
         when column.include?('business_types')
           return true
         when column.include?('service_types')
