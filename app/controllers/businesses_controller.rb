@@ -4,7 +4,9 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-      @businesses = Business.all.order(sort_column + " " + sort_direction)
+      @businesses = Business.joins(:business_type).joins(:service_type).order(sort_column + " " + sort_direction)
+#@businesses = Business.joins(:business_type).order('business_types.name')
+#@businesses = Business.joins(:service_type).order('service_types.name')
   end
   
   def business_listing
@@ -79,8 +81,23 @@ class BusinessesController < ApplicationController
       params.require(:business).permit(:name,:logo,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
     end
     
+    def column_exists?(column)
+      if Business.column_names.include?(column) 
+        return true
+      else
+        case
+        when column.include?('business_types')
+          return true
+        when column.include?('service_types')
+          return true
+        else
+          return false
+        end
+      end
+    end
+    
     def sort_column
-      Business.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      column_exists?(params[:sort]) ? params[:sort] : "name"
     end
 
     def sort_direction

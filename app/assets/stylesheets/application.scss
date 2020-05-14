@@ -231,10 +231,10 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .flickr_pagination .next_page { margin-left: 1em; } */
 
 /*** Table Column Sorting ***/
-.pretty th .current {
+.sorting th .current {
   padding-right: 12px;
   background-repeat: no-repeat;
   background-position: right center;
 }
-.pretty th .asc {background-image: url(/images/up_arrow.gif);}
-.pretty th .desc {background-image: url(/images/down_arrow.gif);}
+.sorting th .asc {background-image: url("./images/Up_arrow.png")}
+.sorting th .desc {background-image: url("./images/Down_arrow.png")}
