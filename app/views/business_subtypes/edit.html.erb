@@ -1,0 +1,22 @@
+<div class="business_subtype_heading">
+	<div class="container search_container">
+		<div class="row justify-content-between">
+			<h1>Edit <%= @business_subtype.business_type.name %> subtype</h1>
+		</div>
+	</div>
+
+</div>
+
+<div class="business_subtype_block" >
+	<%= form_for @business_subtype do |form| %>
+		<%= form.hidden_field :business_type_id, :value => @business_subtype.business_type.id %>
+
+		<%= render :partial => 'form', :object => form %>
+	
+		<div class="form-group row d-flex justify-content-end">
+			<%= form.submit "Update", :class => 'btn btn-primary'%>
+			<%= form.submit "Cancel", :name => 'cancel_button', :class => 'btn btn-primary'%>
+		</div>
+	
+	<% end %>
+</div>
