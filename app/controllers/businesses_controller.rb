@@ -19,11 +19,13 @@ class BusinessesController < ApplicationController
   
   def show
       @business = Business.find(params[:id])
+      @business_subtypes = @business.business_subtypes
   end
 
   def new
     @business = Business.new
     @business_types = BusinessType.all.order("name")
+#    @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
   end
 
@@ -32,6 +34,7 @@ class BusinessesController < ApplicationController
       redirect_to businesses_path
     else
       @business_types = BusinessType.all.order("name")
+      @business_subtypes = @business.business_type.business_subtypes
       @service_types = ServiceType.all.order("name")
       @business = Business.new(business_params)
       if @business.save
@@ -47,12 +50,14 @@ class BusinessesController < ApplicationController
   def edit
     @business = Business.find(params[:id])
     @business_types = BusinessType.all.order("name")
+    @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
   end
 
   def update
     @business = Business.find(params[:id])
     @business_types = BusinessType.all.order("name")
+    @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
     if @business.update_attributes(business_params)
         flash[:notice] = "Business Updated"
@@ -76,7 +81,7 @@ class BusinessesController < ApplicationController
 
   private
     def business_params
-      params.require(:business).permit(:name,:logo,:business_type_id,:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
     end
     
     def column_exists?(column)

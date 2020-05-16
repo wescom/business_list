@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_201845) do
+ActiveRecord::Schema.define(version: 2020_05_15_020817) do
 
   create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_type_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "business_subtypes_businesses", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "business_subtype_id"
+    t.index ["business_id"], name: "index_business_subtypes_businesses_on_business_id"
+    t.index ["business_subtype_id"], name: "index_business_subtypes_businesses_on_business_subtype_id"
   end
 
   create_table "business_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

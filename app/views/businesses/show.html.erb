@@ -20,6 +20,14 @@
 		<div class="col-3">
 			<%= @business.business_type.name %>
 		</div>
+		<div class="col-3">
+			<%= @business_subtypes.each do |business_subtype| %>
+				test
+			<% end %>
+		</div>
+	</div>
+
+	<div class="form-group row">
 		<label for="service_type" class="col-2">Service Options:</label>
 		<div class="col-3">
 			<%= @business.service_type.name %>

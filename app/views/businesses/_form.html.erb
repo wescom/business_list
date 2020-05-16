@@ -8,28 +8,39 @@
 	<div class="form-group col-md-6">
 		<label for="logo" class="col-form-label">Business Logo:</label>
 		<div class="col-8">
-			<%= form.file_field :logo %>
+			<%= image_tag @business.logo.url(:thumb) unless @business.logo.nil? %>
+			<br/><br/><%= form.file_field :logo %>
 		</div>
 	</div>
 </div>
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="business_type" class="col-form-label">Business Type:</label>
-		<div class="col-12">
-			<%= form.select :business_type_id, 
-				options_from_collection_for_select(@business_types, 'id', 'name', 
-				:selected => params[:business_type_id]), 
-				{:prompt => "- Select Type -", :required => true},
-				{:class => "form-control"} %>
-  		</div>
+<div class="">
+	<div class="">
+		<label for="business_type" class="col-form-label">Type of Business:</label>
+		<div class="row">
+			<div class="col-6">
+				<%= form.select :business_type_id, 
+					options_from_collection_for_select(@business_types, 'id', 'name', 
+					:selected => params[:business_type_id]), 
+					{:prompt => "- Select business type -", :required => true},
+					{:class => "form-control"} %>
+			</div>
+			<div class="col-6">
+				<%= form.select(:business_subtype_ids, @business_subtypes.collect {|p| [ p.name, p.id ] }, 
+					{:prompt => "- Select -"}, 
+					{:class => "form-control", :multiple => true, :size => 10  }) unless @business_subtypes.nil? %>
+			</div>
+		</div>
 	</div>
+</div>
+
+<div class="form-row">
 	<div class="form-group col-md-6">
 		<label for="service_type" class="col-form-label">Service Options:</label>
 		<div class="col-12">
 			<%= form.select :service_type_id, 
 				options_from_collection_for_select(@service_types, 'id', 'name', 
 				:selected => params[:service_type_id]), 
-				{:prompt => "- Select Service Available -", :required => true}, 
+				{:prompt => "- Select available services -", :required => true}, 
 				{:class => "form-control"} %>
   		</div>
 	</div>
