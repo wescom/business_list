@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       get 'restaurant_listing'
     end
   end
-  resources :business_types
+  resources :business_types do
+    get 'business_subtype_options', :on => :collection
+  end
   resources :business_subtypes, :only => [:new, :create, :edit, :update, :destroy]
   resources :service_types
   resources :contacts, :only => [:new, :create, :edit, :update, :destroy]

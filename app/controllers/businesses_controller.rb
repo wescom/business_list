@@ -25,7 +25,6 @@ class BusinessesController < ApplicationController
   def new
     @business = Business.new
     @business_types = BusinessType.all.order("name")
-#    @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
   end
 
@@ -34,7 +33,6 @@ class BusinessesController < ApplicationController
       redirect_to businesses_path
     else
       @business_types = BusinessType.all.order("name")
-      @business_subtypes = @business.business_type.business_subtypes
       @service_types = ServiceType.all.order("name")
       @business = Business.new(business_params)
       if @business.save
@@ -59,7 +57,7 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
-    if @business.update_attributes(business_params)
+    if @business.update(business_params)
         flash[:notice] = "Business Updated"
         redirect_to businesses_path
     else
@@ -83,7 +81,7 @@ class BusinessesController < ApplicationController
     def business_params
       params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
     end
-    
+
     def column_exists?(column)
       if Business.column_names.include?(column) 
         return true

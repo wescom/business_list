@@ -51,6 +51,22 @@ class BusinessTypesController < ApplicationController
           redirect_to business_types_path
       end
     end
+    
+    def get_subtypes_for_business_type(business_type_id)
+      puts business_type_id.to_s
+      @business_subtypes = BusinessType.find(business_type_id).business_subtypes unless business_type_id.nil?
+      puts @business_subtypes.inspect
+    end
+    
+    def business_subtype_options
+      business_subtypes = BusinessSubtype.where(:business_type_id => params[:business_type_id]) unless params[:business_type_id].nil?
+puts "Return business_subtypes to form: "+business_subtypes.inspect
+
+      respond_to do |format|
+        format.html
+        format.json  { render :json => {:business_subtypes => business_subtypes} }
+      end
+    end
 
     private
       def business_type_params

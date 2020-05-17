@@ -8,7 +8,7 @@
 	<div class="form-group col-md-6">
 		<label for="logo" class="col-form-label">Business Logo:</label>
 		<div class="col-8">
-			<%= image_tag @business.logo.url(:thumb) unless @business.logo.nil? %>
+			<%= image_tag @business.logo.url(:thumb) unless @business.new_record? %>
 			<br/><br/><%= form.file_field :logo %>
 		</div>
 	</div>
@@ -20,14 +20,13 @@
 			<div class="col-6">
 				<%= form.select :business_type_id, 
 					options_from_collection_for_select(@business_types, 'id', 'name', 
-					:selected => params[:business_type_id]), 
+					:selected => @business.business_type.id), 
 					{:prompt => "- Select business type -", :required => true},
-					{:class => "form-control"} %>
+					{:id => "select_business_type", :class => "form-control"} %>
 			</div>
 			<div class="col-6">
 				<%= form.select(:business_subtype_ids, @business_subtypes.collect {|p| [ p.name, p.id ] }, 
-					{:prompt => "- Select -"}, 
-					{:class => "form-control", :multiple => true, :size => 10  }) unless @business_subtypes.nil? %>
+					{}, {:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }) unless @business_subtypes.nil? %>
 			</div>
 		</div>
 	</div>
