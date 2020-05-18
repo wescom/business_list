@@ -25,6 +25,7 @@ class BusinessesController < ApplicationController
   def new
     @business = Business.new
     @business_types = BusinessType.all.order("name")
+    @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
   end
 
