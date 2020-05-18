@@ -70,6 +70,6 @@ puts "Return business_subtypes to form: "+business_subtypes.inspect
 
     private
       def business_type_params
-        params.require(:business_type).permit(:name)
+        params.require(:business_type).permit(:name,:title_for_subtypes)
       end
 end

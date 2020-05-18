@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_020817) do
 
   create_table "business_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.string "title_for_subtypes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -7,11 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Creating Business_Types...'
-BusinessType.create(name: 'Retail')
-BusinessType.create(name: 'Restaurant')
+BusinessType.create(name: 'Retail', title_for_subtypes: 'Business Type')
+puts '   created businesstype: Retail'
+@business_type = BusinessType.where('name = ?', 'Retail').first
+types = ["Clothing","Toys","Auto","Jewelry","Gifts","Hair","Candy","Banking","Mortgage","Theatre","Gallery","Shoes","Books","Antiques","Hotel","Media"]
+types.each do |type|
+  BusinessSubtype.create(business_type_id: @business_type.id, name: type)
+  puts '           subtype: '+type
+end
+
+
+BusinessType.create(name: 'Restaurant', title_for_subtypes: 'Cuisine')
+puts '   created businesstype: Restaurant'
+@business_type = BusinessType.where('name = ?', 'Restaurant').first
+types = ["Mexican","Italian","Thai","Chinese","Greek","American","Hawaiian","Indian","Japanese","Pizza","Burgers","Coffee"]
+types.each do |type|
+  BusinessSubtype.create(business_type_id: @business_type.id, name: type)
+  puts '           subtype: '+type
+end
 puts ''
 
 puts 'Creating Service_Types...'
-ServiceType.create(name: 'Pickup')
-ServiceType.create(name: 'Delivery')
+service_types = ['Pickup','Delivery','Both']
+service_types.each do |servicetype|
+  ServiceType.create(name: servicetype)
+  puts '   servicetype: '+servicetype
+end
+
 puts ''

@@ -7,7 +7,13 @@
 		<div class="form-group row">
 			<label for="name" class="offset-1 col-3 col-form-label">Business Type:</label>
 			<div class="col-3">
-				<%= f.text_field :name, class: "form-control", :required => "true" %>
+				<%= f.text_field :name, class: "form-control", :required => "true", :placeholder => 'Retail, Restaurants,...' %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="name" class="offset-1 col-3 col-form-label">Title for SubTypes:</label>
+			<div class="col-3">
+				<%= f.text_field :title_for_subtypes, class: "form-control", :required => "true", :placeholder => 'Cuisine, Business Types,...' %>
 			</div>
 		</div>
 

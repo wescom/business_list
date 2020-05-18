@@ -10,7 +10,7 @@
 		<div class="">
 			<% if @business_types %>
 				<% unless @business_types.nil? %>
-					<table id="businesss_types" class="table table-hover table-condensed table-sm">
+					<table id="businesss_types" class="table table-condensed table-sm">
 						<thead class="">
 							<tr>
 								<th class="">Type</th>
@@ -22,7 +22,11 @@
 							<% @business_types.each do |business_type| %>
 								<tr class="table-info">
 									<td><%= business_type.name %></td>	
-									<td><small><%= link_to "add subtype", new_business_subtype_path(:current_business_type=>business_type) %></small></td>
+									<td>
+										<br/>
+										<small><%= link_to "Add #{business_type.name} #{business_type.title_for_subtypes.singularize}",
+											new_business_subtype_path(:current_business_type=>business_type) %></small>
+									</td>
 									<td class="text-center">
 										<p class="btn btn-outline-info">
 											<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_type_path(business_type),
@@ -37,7 +41,7 @@
 										</p>
 									</td>
 								</tr>
-								<% business_type.business_subtypes.each do |subtype| %>
+								<% business_type.business_subtypes.order("name").each do |subtype| %>
 									<tr>
 										<td></td>
 										<td><%= subtype.name %></td>	
