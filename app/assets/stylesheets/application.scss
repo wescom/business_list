@@ -35,7 +35,7 @@
 td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .img-thumb {width: 100px; height: auto;}
 .business_heading, .business_type_heading, .service_type_heading, .contact_heading, .default_heading { margin: 20px 10% 10px 10%; }
-.business_type_block, .business_subtype_block { margin: 20px 10% 10px 10%; }
+.business_type_block, .business_subtype_block, .service_type_block { margin: 20px 10% 10px 10%; }
 #checkout_form { width: 100% }
 
 .business_block, .contact_block { 
@@ -231,7 +231,7 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 /*.flickr_pagination .previous_page { margin-right: 1em; }
 .flickr_pagination .next_page { margin-left: 1em; } */
 
-/*** Table Column Sorting ***/
+/*** Table Column ***/
 .sorting th .current {
   padding-right: 12px;
   background-repeat: no-repeat;
@@ -239,3 +239,4 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 }
 .sorting th .asc {background-image: url("./images/Up_arrow.png")}
 .sorting th .desc {background-image: url("./images/Down_arrow.png")}
+.business_type_block td {padding: 0px;}

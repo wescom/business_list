@@ -2,16 +2,14 @@
 	<td><%= table_row.name %></td>	
 
 	<td class="text-center">
-		<p class="btn btn-outline-info">
+		<div class="btn">
 			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_service_type_path(table_row),
 				title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-		</p>
-		<p class="btn btn-outline-info">
 			<%= link_to icon('trash-o fa-lg'), 
 				service_type_path(table_row),
 				:method=> :delete, :action => 'destroy',
 				data: {confirm:'Delete service type?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-		</p>
+		</div>
 	</td>
 </tr>

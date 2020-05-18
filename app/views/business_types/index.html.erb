@@ -6,11 +6,11 @@
 		</div>
 	</div>
 
-	<div class="page-content-body">
+	<div class="business_type_block">
 		<div class="">
 			<% if @business_types %>
 				<% unless @business_types.nil? %>
-					<table id="businesss_types" class="table table-condensed table-sm">
+					<table id="businesss_types" class="table table-hover table-sm">
 						<thead class="">
 							<tr>
 								<th class="">Type</th>
@@ -21,42 +21,39 @@
 						<tbody>
 							<% @business_types.each do |business_type| %>
 								<tr class="table-info">
-									<td><%= business_type.name %></td>	
-									<td>
-										<br/>
+									<td class="align-middle"><%= business_type.name %></td>	
+									<td class="align-middle">
 										<small><%= link_to "Add #{business_type.name} #{business_type.title_for_subtypes.singularize}",
-											new_business_subtype_path(:current_business_type=>business_type) %></small>
+											new_business_subtype_path(:current_business_type=>business_type), :class => "" %></small>
 									</td>
-									<td class="text-center">
-										<p class="btn btn-outline-info">
+									<td class="text-center align-middle">
+										<div class="btn">
 											<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_type_path(business_type),
 												title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-										</p>
-										<p class="btn btn-outline-info">
 											<%= link_to icon('trash-o fa-lg'), 
 												business_type_path(business_type),
 												:method=> :delete, :action => 'destroy',
 												data: {confirm:'Delete business type?'},
 												title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-										</p>
+										</div>
 									</td>
 								</tr>
 								<% business_type.business_subtypes.order("name").each do |subtype| %>
 									<tr>
 										<td></td>
-										<td><%= subtype.name %></td>	
+										<td class="align-middle">
+											<%= subtype.name %>
+										</td>	
 										<td class="text-center">
-											<p class="btn btn-outline-info">
+											<div class="btn">
 												<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_subtype_path(subtype),
 													title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-											</p>
-											<p class="btn btn-outline-info">
 												<%= link_to icon('trash-o fa-lg'), 
 													business_subtype_path(subtype),
 													:method=> :delete, :action => 'destroy',
 													data: {confirm:'Delete business type?'},
 													title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-											</p>
+											</div>
 										</td>
 									</tr>
 								<% end %>
