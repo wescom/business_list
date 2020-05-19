@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :businesses do
     collection do
       get 'business_listing'
-      get 'restaurant_listing'
     end
   end
   resources :business_types do

@@ -8,13 +8,8 @@ class BusinessesController < ApplicationController
   end
   
   def business_listing
-    # lists retail businesses for embedding into an external webpage
-    @businesses = Business.joins(:business_type).where('business_types.name = ?', "Restaurant").order('name')
-  end
-  
-  def restaurant_listing
-    # lists restaurants for embedding into an external webpage
-    @businesses = Business.joins(:business_type).where('business_types.name = ?', "Retail").order('name')
+    # lists businesses for embedding into an external webpage using paramter 'type'
+    @businesses = Business.joins(:business_type).where('business_types.name = ?', params[:type]).order('name')
   end
   
   def show

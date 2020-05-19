@@ -20,10 +20,9 @@
 		<div class="col-3">
 			<%= @business.business_type.name %>
 		</div>
+		<label for="business_subtype" class="col-3"><%= @business.business_type.name %> <%= @business.business_type.title_for_subtypes %>:</label>
 		<div class="col-3">
-			<%= @business_subtypes.each do |business_subtype| %>
-				test
-			<% end %>
+			<%= @business.business_subtypes.map{|v| v.name }.join(", ") %>
 		</div>
 	</div>
 
