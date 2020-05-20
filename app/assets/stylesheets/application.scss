@@ -30,6 +30,7 @@
 .indent { text-indent: 50px; }
 .max_100 {max-width: 100%; max-height: 100%;}
 .btn { margin-left: 5px; }
+.dropdown-menu { padding: 0.5rem 1rem; }
 .panel-heading {background: lightgrey;}
 .content_block { margin: 0px 10px; min-height: 650px; }
 td.image_column { padding: 0.75rem 0px 0.75rem 0 }
@@ -113,7 +114,6 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
     padding: 1.5957%;
     min-height: 300px;
 }
-.dropdown-menu { padding: 0.5rem 1rem; }
 
 /*** Branding ***/
 #branding { padding-right: 25px;}
