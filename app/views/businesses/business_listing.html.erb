@@ -4,13 +4,15 @@
 			<thead class="">
 				<tr class="d-flex">
 					<th class="col-1 text-center d-none d-sm-table-cell">Logo</th>
-					<th class="col-2">Name</th>
-					<th class="col-1 text-center d-none d-lg-table-cell"><%= @businesses.first.business_type.title_for_subtypes %></th>
+					<th class="col-2"><%= sortable "name" %></th>
+					<th class="col-1 text-center d-none d-lg-table-cell">
+						<%= sortable "business_types.name", @businesses.first.business_type.title_for_subtypes %>
+					</th>
 					<th class="col-1 text-center d-none d-lg-table-cell">Hours</th>
 					<th class="col-2 d-none d-lg-table-cell">Location</th>
 					<th class="col-2 text-center d-none d-sm-table-cell">Phone</th>
 					<th class="col-2 text-center d-none d-sm-table-cell">Website</th>
-					<th class="col-1 text-center d-none d-lg-table-cell">Service</th>
+					<th class="col-1 text-center d-none d-lg-table-cell"><%= sortable "service_types.name", "Service" %></th>
 				</tr>
 			</thead>
 			<tbody>

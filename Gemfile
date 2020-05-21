@@ -36,6 +36,7 @@ gem 'premailer-rails' # use for css styling in mailer
 
 # Authentication
 gem 'devise'
+gem 'cancancan'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

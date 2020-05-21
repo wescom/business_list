@@ -15,10 +15,10 @@
 		 				   <%= link_to "Home", root_path, :class=>"nav-link menu-item-home" %>
 						</li>
 						<li class="nav-item">
-							<%= link_to "Businesses", businesses_path, :class=>"nav-link menu-item-images" %>
+							<%= link_to "Businesses", businesses_path(:type=>'retail'), :class=>"nav-link menu-item-images" %>
 						</li>
 						<li class="nav-item">
-							<%= link_to "Restaurants", businesses_path, :class=>"nav-link menu-item-pages" %>
+							<%= link_to "Restaurants", businesses_path(:type=>'restaurant'), :class=>"nav-link menu-item-pages" %>
 						</li>
 					</ul>
 				</div>
@@ -43,8 +43,8 @@
 									<%= icon('bars fa-lg') %>
 								</button>
 								<div class="dropdown-menu">
-									<%= link_to "Business List", businesses_path, :class=>"dropdown-item" %>
-									<%= link_to "Restaurant List", businesses_path, :class=>"dropdown-item" %>
+									<%= link_to "Business List", businesses_path(:type=>'retail'), :class=>"dropdown-item" %>
+									<%= link_to "Restaurant List", businesses_path(:type=>'restaurant'), :class=>"dropdown-item" %>
 									<div class="dropdown-divider"></div>
 									<%= link_to "Business Types", business_types_path, :class=>"dropdown-item" %>
 									<%= link_to "Service Types", service_types_path, :class=>"dropdown-item" %>

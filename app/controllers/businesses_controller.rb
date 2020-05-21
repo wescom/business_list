@@ -4,12 +4,18 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-      @businesses = Business.joins(:business_type).joins(:service_type).order(sort_column + " " + sort_direction)
+    @businesses = Business.joins(:business_type).joins(:service_type)
+    if !params[:type].nil?
+      @businesses = @businesses.where('business_types.name = ?', params[:type])
+    end
+    @businesses = @businesses.order(sort_column + " " + sort_direction)
   end
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.joins(:business_type).where('business_types.name = ?', params[:type]).order('name')
+    @businesses = Business.joins(:business_type).joins(:service_type)
+    @businesses = @businesses.where('business_types.name = ?', params[:type])
+    @businesses = @businesses.order(sort_column + " " + sort_direction)
   end
   
   def show

@@ -35,3 +35,12 @@ service_types.each do |servicetype|
 end
 
 puts ''
+
+# Initialize first account:
+User.create! do |u|
+    u.email     = 'admin@bendbulletin.com'
+    u.password    = 'password123'
+    u.admin_role = true
+    puts 'Create initial superadmin user: admin@bendbulletin.com, password123'
+end
+
