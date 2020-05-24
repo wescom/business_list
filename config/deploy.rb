@@ -30,7 +30,7 @@ set :keep_releases, 5
 ##### Need change to your own configs #####
 server 'newmedia1.wescompapers.com', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url, "git@github.com:wescom/business_lis.git"
+set :repo_url, "git@github.com:wescom/business_list.git"
 set :application, "business_list"
 
 # Settings for Git
@@ -45,7 +45,7 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/u/apps/#{fetch(:application)}"
+set :deploy_to,       "/var/www/html/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
