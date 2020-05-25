@@ -37,10 +37,10 @@ class Ability
           can :access, :rails_admin       # only allow admin users to access Rails Admin
     end
     if user.supervisor_role?
-          can :manage, Business
+          can :manage, Business, BusinessType, ServcieType
     end
     if user.sales_role?
-          can :manage, User
+          can :manage, Business
     end
   end
 end

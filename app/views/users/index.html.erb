@@ -1,0 +1,47 @@
+<div class="page-content">
+	<div class="page-content-header">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2>Users</h2>
+		</div>
+	</div>
+
+	<div class="user_block">
+		<div class="">
+			<% if @users %>
+				<% unless @users.nil? %>
+					<table id="services_types" class="table table-hover table-condensed table-striped table-sm">
+						<thead class="">
+							<tr>
+								<th class="">Email</th>
+								<th class="text-center align-middle">Created At</th>
+								<th class="text-center align-middle">Last Signed In</th>
+								<th class="text-center align-middle">Login Count</th>
+								<th class="text-center align-middle">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @users.each do |user| %>
+								<tr>
+									<td><%= link_to user.email, user_path(user) %></td>	
+									<td class="text-center align-middle"><%= user.created_at.strftime('%m/%d/%y %I:%M%p') %></td>	
+									<td class="text-center align-middle"><%= user.last_sign_in_at %></td>	
+									<td class="text-center align-middle"><%= user.sign_in_count %></td>	
+
+									<td class="text-center">
+										<div class="btn">
+											<%= link_to icon('trash-o fa-lg'), 
+												registration_path(user),
+												:method=> :delete, :action => 'destroy',
+												data: {confirm:'Delete user?'},
+												title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+										</div>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

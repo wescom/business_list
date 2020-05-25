@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   #get 'home/index'
   get 'business/index'
+  resources :users, :only => [:index, :show, :destroy]
   
   resources :businesses do
     collection do
