@@ -1,5 +1,5 @@
 class BusinessesController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:index,:business_listing,:restaurant_listing]
+  skip_before_action :authenticate_user!, :only => [:business_listing,:restaurant_listing]
   layout 'listings', :only => [:business_listing, :restaurant_listing]
   helper_method :sort_column, :sort_direction
 

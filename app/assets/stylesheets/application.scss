@@ -29,13 +29,13 @@
 }
 .indent { text-indent: 50px; }
 .max_100 {max-width: 100%; max-height: 100%;}
-.btn { margin-left: 5px; }
+.btn, .btn-sm { margin-left: 5px; }
 .dropdown-menu { padding: 0.5rem 1rem; }
 .panel-heading {background: lightgrey;}
 .content_block { margin: 0px 10px; min-height: 650px; }
 td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .img-thumb {width: 100px; height: auto;}
-.business_heading, .business_type_heading, .service_type_heading, .contact_heading, .default_heading { margin: 20px 10% 10px 10%; }
+.business_heading, .business_type_heading, .service_type_heading, .contact_heading, .user_heading, .default_heading { margin: 20px 10% 10px 10%; }
 .business_type_block, .business_subtype_block, .service_type_block, .user_block { margin: 20px 10% 10px 10%; }
 #checkout_form { width: 100% }
 
