@@ -1,4 +1,5 @@
 class BusinessSubtypesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @business_subtypes = BusinessSubtype.all.order('name')

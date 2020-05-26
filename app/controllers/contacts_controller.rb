@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @business = Business.find(params[:current_business])

@@ -1,5 +1,8 @@
 <div class="user_heading">
-	<h1>Edit User:</h1>
+	<h1>
+		Edit User:
+		<div class="float-right"><%= link_to "All Users", users_path, :class => 'btn btn-primary btn-sm' %></div>
+	</h1>
 </div>
 
 <div class="user_block" >
@@ -11,24 +14,59 @@
 	</div>
 
 	<div class="form-group row">
+		<label for="name" class="col-2">Roles:</label>
+		<div class="col-4">
+			<table class="table table-condensed table-sm">
+				<tbody>
+					<tr>
+						<td><%= @user.admin_role %></td>	
+						<td>Admin</td>	
+					</tr>
+					<tr>
+						<td><%= @user.supervisor_role %></td>	
+						<td>Supervisor</td>	
+					</tr>
+					<tr>
+						<td><%= @user.sales_role %></td>	
+						<td>Sales</td>	
+					</tr>
+					<tr>
+						<td><%= @user.user_role %></td>	
+						<td>Generic User</td>	
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+<hr/>
+	<div class="form-group row">
 		<label for="name" class="col-2">Created At:</label>
-		<div class="col-6">
-			<%= @user.created_at %>
+		<div class="col-4">
+			<%= @user.created_at.strftime('%m/%d/%y %I:%M%p') unless @user.created_at.nil?  %>
+		</div>
+		<label for="name" class="col-2">Last Login:</label>
+		<div class="col-4">
+			<%= @user.last_sign_in_at.strftime('%m/%d/%y %I:%M%p') unless @user.last_sign_in_at.nil? %>
 		</div>
 	</div>
 
 	<div class="form-group row">
 		<label for="name" class="col-2">Last Updated:</label>
-		<div class="col-6">
-			<%= @user.updated_at %>
+		<div class="col-4">
+			<%= @user.updated_at.strftime('%m/%d/%y %I:%M%p') unless @user.updated_at.nil?  %>
+		</div>
+		<label for="name" class="col-2"># Logins:</label>
+		<div class="col-4">
+			<%= @user.sign_in_count %>
 		</div>
 	</div>
 
-
+	<hr/>
 	<div class="form-group row">
 		<label for="name" class="col-2">Reset Password?</label>
 		<div class="col-6">
-			<%= link_to "Reset password?", new_password_path(@user) %>
+
 		</div>
 	</div>
 
