@@ -6,7 +6,7 @@
 					<th class="col-1 text-center d-none d-sm-table-cell">Logo</th>
 					<th class="col-2"><%= sortable "name" %></th>
 					<th class="col-1 text-center d-none d-lg-table-cell">
-						<%= sortable "business_types.name", @businesses.first.business_type.title_for_subtypes %>
+						<%= sortable "business_types.name", @businesses.first.business_type.title_for_subtypes unless @businesses.first.nil? %>
 					</th>
 					<th class="col-1 text-center d-none d-lg-table-cell">Hours</th>
 					<th class="col-2 d-none d-lg-table-cell">Location</th>
@@ -20,12 +20,12 @@
 					<tr class="d-flex">
 						<td class="col-1 text-center d-none d-sm-table-cell"><%= image_tag business.logo.url(:thumb), :class => "max_100" %></td>	
 						<td class="col-2"><%= business.name %></td>	
-						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.business_subtypes.map{|v| v.name }.join(", ") %></td>
+						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.business_subtypes.map{|v| v.name }.join(", ") unless business.business_subtypes.nil? %></td>
 						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.hours %></td>
 						<td class="col-2 d-none d-sm-table-cell"><%= business.address1 %><%= business.address2 %>, <%= business.city %></td>
 						<td class="col-2 text-center d-none d-sm-table-cell"><%= number_to_phone(business.phonenum) %></td>
 						<td class="col-2 text-center d-none d-sm-table-cell"><%= business.website %></td>
-						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.service_type.name %></td>
+						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.service_type.name unless business.service_type.nil? %></td>
 					</tr>
 				<% end %>
 			</tbody>
