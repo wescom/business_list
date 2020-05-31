@@ -18,7 +18,7 @@
 			<tbody>
 				<% @businesses.each do |business| %>
 					<tr class="d-flex">
-						<td class="col-1 text-center d-none d-sm-table-cell"><%= image_tag business.logo.url(:thumb) %></td>	
+						<td class="col-1 text-center d-none d-sm-table-cell"><%= image_tag business.logo.url(:thumb), :class => "max_100" %></td>	
 						<td class="col-2"><%= business.name %></td>	
 						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.business_subtypes.map{|v| v.name }.join(", ") %></td>
 						<td class="col-1 text-center d-none d-lg-table-cell"><%= business.hours %></td>

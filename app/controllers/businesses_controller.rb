@@ -4,7 +4,7 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @businesses = Business.joins(:business_type).joins(:service_type)
+    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_type)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end

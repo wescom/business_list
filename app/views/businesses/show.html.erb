@@ -18,7 +18,7 @@
 	<div class="form-group row">
 		<label for="business_type" class="col-2">Type:</label>
 		<div class="col-3">
-			<%= @business.business_type.name %>
+			<%= @business.business_type.name unless @business.business_type.nil? %>
 		</div>
 		<label for="business_subtype" class="col-3"><%= @business.business_type.name %> <%= @business.business_type.title_for_subtypes %>:</label>
 		<div class="col-3">
@@ -29,7 +29,7 @@
 	<div class="form-group row">
 		<label for="service_type" class="col-2">Service Options:</label>
 		<div class="col-3">
-			<%= @business.service_type.name %>
+			<%= @business.service_type.name unless @business.service_type.nil? %>
 		</div>
 	</div>
 
@@ -45,7 +45,7 @@
 		<label for="address" class="col-2">Address:</label>
 		<div class="col-8">
 				<%= @business.address1 %><br/>
-				<% if !@business.address2.empty? %>
+				<% if !@business.address2.nil? %>
 					<%= @business.address2 %><br/>
 				<% end %>
 				<%= @business.city %>, <%= @business.state %>	<%= @business.zipcode %>
