@@ -20,7 +20,9 @@ end
 BusinessType.create(name: 'Restaurant', title_for_subtypes: 'Cuisine')
 puts '   created businesstype: Restaurant'
 @business_type = BusinessType.where('name = ?', 'Restaurant').first
-types = ["Mexican","Italian","Thai","Chinese","Greek","American","Hawaiian","Indian","Japanese","Pizza","Burgers","Coffee"]
+types = ["Mexican","Italian","Thai","Chinese","Greek","American","Hawaiian","Indian","Japanese","Pizza","Coffee","Tea","Pub"]
+types += ["Barbeque","Donuts","Deli","Bakery","Vietnemese","Mediterranean","Ice Cream / Yogurt","German","Fusion","Mongolian"]
+types += ["Middle Eastern","Cupcakery","Cuban","Brewery"]
 types.each do |type|
   BusinessSubtype.create(business_type_id: @business_type.id, name: type)
   puts '           subtype: '+type
