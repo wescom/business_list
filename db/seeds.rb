@@ -10,7 +10,9 @@ puts 'Creating Business_Types...'
 BusinessType.create(name: 'Retail', title_for_subtypes: 'Business Type')
 puts '   created businesstype: Retail'
 @business_type = BusinessType.where('name = ?', 'Retail').first
-types = ["Clothing","Toys","Auto","Jewelry","Gifts","Hair","Candy","Banking","Mortgage","Theatre","Gallery","Shoes","Books","Antiques","Hotel","Media"]
+types = ["Clothing","Toys","Auto","Jewelry","Gifts","Hair","Candy","Banking","Mortgage","Theatre","Gallery","Shoes","Books","Attorney"]
+types += ["Antiques","Hotel","Media","Computer","Real Estate","Golf","Art","Furniture","Hardware","Beauty","Pawn","Medical","Carpet"]
+types += ["Grocery","Insurance","Cellular","Veterinary","Pets","Pediatrics","Construction","Church","Yoga","Lawyer","Bikes","Printing"]
 types.each do |type|
   BusinessSubtype.create(business_type_id: @business_type.id, name: type)
   puts '           subtype: '+type
@@ -39,10 +41,10 @@ end
 puts ''
 
 # Initialize first account:
-User.create! do |u|
-    u.email     = 'admin@bendbulletin.com'
-    u.password    = 'password123'
-    u.admin_role = true
+user = User.find_or_create_by(email: 'admin@bendbulletin.com')
+if user
+    user.password    = 'password123'
+    user.admin_role = true
     puts 'Create initial superadmin user: admin@bendbulletin.com, password123'
 end
 

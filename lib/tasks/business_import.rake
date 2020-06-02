@@ -6,14 +6,15 @@ namespace :business do
   task :import_retail => [:environment] do
     puts "Importing businesses from CSV file"
 
-    file = "/Users/shoffmann/Downloads/Web Retailers.csv"
+    file = "/Users/shoffmann/Downloads/Web_Retailers.csv"
     business_type = "Retail"
 
     CSV.foreach(file) do |row|
       if !row[1].nil? && row[1] != "Restaurant" && row[1] != "Business"
         logo = row[0]
         name = row[1]
-        business_subtype = row[2]
+        business_subtypes = row[2]
+        business_subtypes = cleanup_subtypes(row[2]).split(" ") unless business_subtypes.nil?
         location = row[3]
         phone = row[4]
         website = row[5]
@@ -24,6 +25,21 @@ namespace :business do
         
         business = Business.find_or_create_by(name: name, city: city)
         business.business_type = BusinessType.find_by(name: business_type)
+
+        unless business_subtypes.nil?
+          #puts "business_subtypes: "+business_subtypes.to_s
+          unless business_subtypes.nil?
+            business_subtypes.each do |x|
+                business_subtype = BusinessSubtype.find_by(name: x)
+                if business_subtype.nil?
+                  puts "        *** business_subtype not found: "+x
+                else
+                  business.business_subtypes << business_subtype unless business.business_subtypes.include?(business_subtype)
+                end
+            end
+          end
+        end
+
         business.address1 = location
         business.phonenum = phone
         business.website = website
@@ -36,9 +52,20 @@ namespace :business do
           end
         end
         
+        filename = business.name.gsub(' ',"-")
+        image_filename = Dir.glob("/Volumes/GoogleDrive/My Drive/IT.Department User - Shared Docs/Advertising/LOGOS - Retailers Re-Sized/*"+filename+"*")
+        if image_filename.empty?
+          puts "Logo NOT found: "+filename
+        else
+          #puts "Logo uploaded: " + image_filename[0] unless image_filename.nil?
+          business.logo = File.open(image_filename[0]) unless image_filename.nil?
+        end
+        
         business.save!
         
-        puts "  Imported: "+name
+        puts "\n  Imported: "+name
+        puts "            "+business.business_subtypes.collect{ |x| x.name }.join(",") unless business.business_subtypes.nil?
+        puts "\n"
       end
     end
   end
@@ -46,7 +73,7 @@ namespace :business do
   task :import_restaurant => [:environment] do
     puts "Importing restaurants from CSV file"
 
-    file = "/Users/shoffmann/Downloads/Web Restaurants.csv"
+    file = "/Users/shoffmann/Downloads/Web_Restaurants.csv"
     business_type = "Restaurant"
 
     CSV.foreach(file) do |row|
@@ -92,6 +119,14 @@ namespace :business do
           end
         end
         
+        filename = business.name.gsub(' ',"-")
+        image_filename = Dir.glob("/Volumes/GoogleDrive/My Drive/IT.Department User - Shared Docs/Advertising/LOGOS - Restaurants Re-Sized/*"+filename+"*")
+        if image_filename.empty?
+          puts "Logo NOT found: "+filename
+        else
+          #puts "Logo uploaded: " + image_filename[0] unless image_filename.nil?
+          business.logo = File.open(image_filename[0]) unless image_filename.nil?
+        end
         business.save!
         
         puts "\n  Imported: "+name
