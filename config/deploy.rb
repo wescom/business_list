@@ -119,6 +119,7 @@ namespace :deploy do
     end
   end
 
+  after :deploy:updated, :webpack:build
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
