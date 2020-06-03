@@ -288,9 +288,9 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   byebug
   cancancan
-  capistrano (~> 3.6)
+  capistrano (~> 3.10)
   capistrano-bundler
-  capistrano-rails (~> 1.2)
+  capistrano-rails (~> 1.5)
   capistrano-rvm
   capistrano-yarn
   capistrano3-puma (~> 1.2.1)

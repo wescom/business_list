@@ -94,8 +94,6 @@ namespace :deploy do
   desc "Update links"
   after :finished, :update_links do
     on roles(:web) do
-      execute "rm -rf #{release_path}/solr #{release_path}/log #{release_path}/public/system #{release_path}/tmp/pids"
-      #execute "ln -s /WescomArchive/solr #{release_path}/solr"
       execute "mkdir -p #{release_path}/public && ln -s #{shared_path}/system #{release_path}/public/system"
       execute "ln -s #{shared_path}/log #{release_path}/log"
     end
@@ -119,7 +117,7 @@ namespace :deploy do
     end
   end
 
-#  after "deploy:updated", "webpack:build"
+  after "deploy:updated", "webpack:build"
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
