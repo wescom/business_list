@@ -9,3 +9,4 @@ namespace :webpack do
       end
     end
   end
+end
