@@ -53,6 +53,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma', '~> 1.2.1',   require: false
+  gem 'capistrano-yarn'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
