@@ -118,19 +118,8 @@ namespace :deploy do
       invoke 'puma:start'
     end
   end
-  
-  task :webpack do
-    on roles(:app) do
-      within release_path do
-        # https://github.com/capistrano/sshkit#the-command-map
-        with path: "#{release_path}/bin:$PATH" do
-          execute :webpack
-        end
-      end
-    end
-  end
 
-  after "deploy:updated", "webpack"
+  after "deploy:updated", "webpack:build"
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
