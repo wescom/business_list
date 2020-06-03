@@ -128,6 +128,7 @@ namespace :deploy do
         end
       end
     end
+  end
 
   after "deploy:updated", "webpack"
   before :starting,     :check_revision
