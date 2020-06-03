@@ -16,10 +16,10 @@ set :migration_role, :app
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/application.yml"
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -91,14 +91,6 @@ namespace :deploy do
     end
   end
 
-  desc "Update links"
-  after :finished, :update_links do
-    on roles(:web) do
-      execute "mkdir -p #{release_path}/public && ln -s #{shared_path}/system #{release_path}/public/system"
-      execute "ln -s #{shared_path}/log #{release_path}/log"
-    end
-  end
-  
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -117,7 +109,6 @@ namespace :deploy do
     end
   end
 
-#  after "deploy:updated", "webpack:build"
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
