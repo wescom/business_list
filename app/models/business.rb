@@ -12,8 +12,8 @@ class Business < ApplicationRecord
     },
     :convert_options => {
         :thumb => "-quality 75 -strip" },
-    :url => "/system/db_images/:id/:style_:basename.:extension",  
-    :path => ":rails_root/public/system/db_images/:id/:style_:basename.:extension",
+    :url => "/uploads/db_images/:id/:style_:basename.:extension",  
+    :path => ":rails_root/public/uploads/db_images/:id/:style_:basename.:extension",
     :default_url => '/images/no-image.jpg'
 
   validates_attachment_content_type :logo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
