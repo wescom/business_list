@@ -6,8 +6,8 @@ namespace :business do
   task :import_retail => [:environment] do
     puts "Importing businesses from CSV file"
 
-    file = "/Users/shoffmann/Downloads/Web_Retailers.csv"
-    file = "/home/shoffmann/Web_Restaurants.csv" if not File.exist?(file)
+    file = "/Users/shoffmann/Downloads/Web_Retailers.csv" if File.exist?("/Users/shoffmann/Downloads/Web_Retailers.csv")
+    file = "/home/shoffmann/Web_Restaurants.csv" if File.exist?("/home/shoffmann/Web_Restaurants.csv")
     business_type = "Retail"
 
     CSV.foreach(file) do |row|
@@ -75,8 +75,8 @@ namespace :business do
   task :import_restaurant => [:environment] do
     puts "Importing restaurants from CSV file"
 
-    file = "/Users/shoffmann/Downloads/Web_Restaurants.csv"
-    file = "/home/shoffmann/Web_Restaurants.csv" if not File.exist?(file)
+    file = "/Users/shoffmann/Downloads/Web_Restaurants.csv" if File.exist?("/Users/shoffmann/Downloads/Web_Restaurants.csv")
+    file = "/home/shoffmann/Web_Restaurants.csv" if File.exist?("/home/shoffmann/Web_Restaurants.csv")
     business_type = "Restaurant"
 
     CSV.foreach(file) do |row|
