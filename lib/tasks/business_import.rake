@@ -55,7 +55,7 @@ namespace :business do
         
         filename = business.name.gsub(' ',"-")
         image_filename = Dir.glob("/Volumes/GoogleDrive/My Drive/IT.Department User - Shared Docs/Advertising/LOGOS - Retailers Re-Sized/*"+filename+"*")
-#        image_filename = Dir.glob("~/logos/*"+filename+"*")
+        image_filename = Dir.glob("/home/shoffmann/logos/*"+filename+"*") if image_filename.empty?
         if image_filename.empty?
           puts "Logo NOT found: "+filename
         else
@@ -122,9 +122,9 @@ namespace :business do
           end
         end
         
-        filename = business.name.gsub(' ',"-")
+        filename = business.name.gsub(' ',"-").gsub("'","")
         image_filename = Dir.glob("/Volumes/GoogleDrive/My Drive/IT.Department User - Shared Docs/Advertising/LOGOS - Restaurants Re-Sized/*"+filename+"*")
-#        image_filename = Dir.glob("~/logos/*"+filename+"*")
+        image_filename = Dir.glob("/home/shoffmann/logos/*"+filename+"*") if image_filename.empty?
         if image_filename.empty?
           puts "Logo NOT found: "+filename
         else
