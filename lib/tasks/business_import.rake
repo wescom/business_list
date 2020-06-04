@@ -7,7 +7,7 @@ namespace :business do
     puts "Importing businesses from CSV file"
 
     file = "/Users/shoffmann/Downloads/Web_Retailers.csv" if File.exist?("/Users/shoffmann/Downloads/Web_Retailers.csv")
-    file = "/home/shoffmann/Web_Restaurants.csv" if File.exist?("/home/shoffmann/Web_Restaurants.csv")
+    file = "/home/shoffmann/Web_Retailers.csv" if File.exist?("/home/shoffmann/Web_Retailers.csv")
     business_type = "Retail"
 
     CSV.foreach(file) do |row|
