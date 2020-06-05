@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    UserMailer.send_welcome_email(@user).deliver_now
+#    UserMailer.send_welcome_email(@user).deliver_now
   end
 
   def destroy
