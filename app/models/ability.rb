@@ -36,7 +36,9 @@ class Ability
           can :manage, :all
     end
     if user.supervisor_role?
-          can :manage, Business, BusinessType, ServiceType
+          can :manage, Business
+          can :manage, BusinessType
+          can :manage, ServiceType
     end
     if user.sales_role?
           can :manage, Business
