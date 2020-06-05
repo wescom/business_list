@@ -7,7 +7,7 @@ class AddRolesToUsers < ActiveRecord::Migration[6.0]
   end
 
   def self.down
-    remove_column :users, :superadmin_role
+    remove_column :users, :admin_role
     remove_column :users, :supervisor_role
     remove_column :users, :sales_role
     remove_column :users, :user_role

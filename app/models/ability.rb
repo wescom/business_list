@@ -34,10 +34,9 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin_role?
           can :manage, :all
-          can :access, :rails_admin       # only allow admin users to access Rails Admin
     end
     if user.supervisor_role?
-          can :manage, Business, BusinessType, ServcieType
+          can :manage, Business, BusinessType, ServiceType
     end
     if user.sales_role?
           can :manage, Business

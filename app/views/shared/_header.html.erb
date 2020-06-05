@@ -15,7 +15,7 @@
 							<li class="nav-item">
 			 				   <%= link_to "Home", root_path, :class=>"nav-link menu-item-home" %>
 							</li>
-							<% if can? :manage, Business %>
+							<% if current_user.admin_role? || current_user.supervisor_role? || current_user.sales_role? %>
 								<li class="nav-item">
 									<%= link_to "Businesses", businesses_path(:type=>'retail'), :class=>"nav-link menu-item-images" %>
 								</li>
@@ -35,7 +35,7 @@
 						<%= link_to new_user_session_path, class: 'login-button' do %>Login<% end %>
 					<% else %>
 						<%= link_to('My Account', edit_user_registration_path) %>&nbsp;
-						( <%= link_to destroy_user_session_path, method: :delete do %>Logout<% end %> )
+						( <%= link_to "Logout", destroy_user_session_path %> )
 					<% end %>
 				</div>
 			</div>

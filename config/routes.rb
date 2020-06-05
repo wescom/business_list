@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   #get 'home/index'
   get 'business/index'
-  resources :users, :only => [:index, :show, :destroy]
+  resources :users, :only => [:index, :show, :destroy] do
+    put 'set_role'
+    put 'send_password_reset_instructions'
+  end
   
   resources :businesses do
     collection do

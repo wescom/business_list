@@ -45,6 +45,6 @@ user = User.find_or_create_by(email: 'admin@bendbulletin.com')
 if user
     user.password    = 'password123'
     user.admin_role = true
-    puts 'Create initial superadmin user: admin@bendbulletin.com, password123'
+    puts 'Create initial admin user: admin@bendbulletin.com, password123'
 end
 

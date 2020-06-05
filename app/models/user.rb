@@ -3,4 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  ROLES = %i[admin supervisor sales user]
+
+  after_create :send_admin_mail
+  def send_admin_mail
+    UserMailer.send_welcome_email(self).deliver_later
+  end
+    
 end

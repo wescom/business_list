@@ -12,4 +12,16 @@ module ApplicationHelper
       link_to title, {:sort => column, :direction => direction, :type => params[:type]}, {:class => css_class}
     end
 
+    def get_user_role(user)
+      case
+      when user.admin_role?
+        return "admin"
+      when user.supervisor_role?
+        return "supervisor"
+      when user.sales_role?
+        return "sales"
+      else
+        return "user"
+      end
+    end
 end
