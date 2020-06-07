@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome, <%= @user.email %></h1>
+    <h3>Welcome, <%= @user.email %></h3>
     <p>
-      Access to app under following URL: <%= @url %>.
+      You can manage your listing at <%= link_to "bulletin.bendbulletin.com", "bulletin.bendbulletin.com" %>.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>

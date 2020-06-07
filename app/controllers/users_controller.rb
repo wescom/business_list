@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def password_reset_instructions
     #reset password for a user_id and send email
     @user = User.find(params[:user_id])
-@user.send_reset_password_instructions
+    @user.send_reset_password_instructions
     redirect_to user_path(@user)
   end
 

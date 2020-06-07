@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   def send_welcome_email(user)
     @user = user
 
-    subject = "business.bendbulletin.com - Welcome to our listings"
+    subject = "business.bendbulletin.com - Welcome to our business listings"
     mail(to: @user.email, subject: subject)
   end
 end
