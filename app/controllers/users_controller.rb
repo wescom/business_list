@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    UserMailer.send_welcome_email(@user).deliver_now
+#    UserMailer.send_welcome_email(@user).deliver_now
   end
 
   def destroy
@@ -33,13 +33,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def send_password_reset_instructions
-    # This only sends the password reset instructions, the
-    # password is not changed. (Recipient has to click link
-    # in email and follow instructions to actually change
-    # the password).
+  def password_reset_instructions
+    #reset password for a user_id and send email
     @user = User.find(params[:user_id])
-    @user.send_reset_password_instructions
+@user.send_reset_password_instructions
+    redirect_to user_path(@user)
   end
 
   private

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'business/index'
   resources :users, :only => [:index, :show, :destroy] do
     put 'set_role'
-    put 'send_password_reset_instructions'
+    put 'password_reset_instructions'
   end
   
   resources :businesses do
