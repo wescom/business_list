@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'wescomutility@wescompapers.com'
+  default from: 'business@utility.wescompapers.com'
 
   def send_welcome_email(user)
     @user = user
