@@ -20,7 +20,7 @@
 			<div class="col-6">
 				<%= form.select :business_type_id, 
 					options_from_collection_for_select(@business_types, 'id', 'name', 
-					:selected => params[:business_type_id]), 
+					:selected => @business.business_type_id), 
 					{:prompt => "- Select business type -", :required => true},
 					{:id => "select_business_type", :class => "form-control"} %>
 			</div>

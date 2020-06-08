@@ -1,5 +1,5 @@
 class ServiceTypesController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @service_types = ServiceType.all.order('name')

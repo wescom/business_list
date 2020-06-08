@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  load_and_authorize_resource
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!

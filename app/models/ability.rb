@@ -42,7 +42,7 @@ class Ability
     end
     if user.sales_role?
       can :manage, Business
-      can :read, BusinessType
+      can [:read, :business_subtype_options], BusinessType
       can :read, ServiceType
     end
     if user.user_role?
