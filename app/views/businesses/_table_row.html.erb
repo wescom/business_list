@@ -2,24 +2,24 @@
 	<td class="text-center d-none d-sm-table-cell"><%= image_tag table_row.logo.url(:thumb) unless table_row.logo_file_name.nil? %></td>	
 	<td><%= link_to table_row.name, business_path(table_row)  %></td>	
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.business_type.name unless table_row.business_type.nil? %></td>
-	<td class="text-center d-none d-sm-table-cell"><%= table_row.hours %></td>
-	<td class="d-none d-sm-table-cell">
+	<td class="text-center d-none d-lg-table-cell"><%= table_row.hours %></td>
+	<td class="d-none d-lg-table-cell">
 		<%= table_row.address1 %>
 		<%= table_row.address2 unless table_row.address2.nil? %>
 		<%= table_row.city %>
 	</td>
-	<td class="text-center d-none d-sm-table-cell"><%= number_to_phone(table_row.phonenum) %></td>
-	<td class="text-center d-none d-sm-table-cell">
+	<td class="text-center d-none d-lg-table-cell"><%= number_to_phone(table_row.phonenum) %></td>
+	<td class="text-center d-none d-lg-table-cell">
 		<%= link_to shrink_url_field(table_row.website), table_row.website, target: :_blank unless table_row.website.nil? %>
 	</td>
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.service_type.name unless table_row.service_type.nil? %></td>
 
 	<td class="text-center">
 		<div class="btn">
-			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_type_path(table_row),
+			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_path(table_row),
 				title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 			<%= link_to icon('trash-o fa-lg'), 
-				business_type_path(table_row),
+				business_path(table_row),
 				:method=> :delete, :action => 'destroy',
 				data: {confirm:'Delete business type?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>

@@ -1,5 +1,5 @@
 <div class="page-content">
-	<div class="page-content-header">
+	<div class="business_listing_heading">
 		<div class="d-flex justify-content-between align-items-center">
 			<h2>
 				<%= params[:type].nil? ? "All" :params[:type].camelize %>
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-	<div class="page-content-body">
+	<div class="business_black">
 		<div class="">
 			<% if @businesses %>
 				<% unless @businesses.nil? %>
@@ -23,7 +23,7 @@
 								<th class="align-middle d-none d-lg-table-cell">Location</th>
 								<th class="text-center align-middle d-none d-lg-table-cell">Phone</th>
 								<th class="text-center align-middle d-none d-lg-table-cell">Website</th>
-								<th class="text-center align-middle d-none d-lg-table-cell"><%= sortable "service_types.name", "Service" %></th>
+								<th class="text-center align-middle d-none d-sm-table-cell"><%= sortable "service_types.name", "Service" %></th>
 								<th class="text-center align-middle ">Action</th>
 							</tr>
 						</thead>
