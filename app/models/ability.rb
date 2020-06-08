@@ -33,15 +33,21 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
     if user.admin_role?
-          can :manage, :all
+      can :manage, :all
     end
     if user.supervisor_role?
-          can :manage, Business
-          can :manage, BusinessType
-          can :manage, ServiceType
+      can :manage, Business
+      can :manage, BusinessType
+      can :manage, ServiceType
     end
     if user.sales_role?
-          can :manage, Business
+      can :manage, Business
+      can :read, BusinessType
+      can :read, ServiceType
+    end
+    if user.user_role?
+      can :read, Business
+#      can :manage, Business, user_id: user.id # can manage their own business
     end
   end
 end
