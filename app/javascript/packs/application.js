@@ -34,6 +34,8 @@ document.addEventListener("turbolinks:load", () => {
 			// update Business_subtypes list
 			$("#select_business_subtypes").empty();
 			var row = "";
+			// sort business_subtypes by name
+			data["business_subtypes"].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
 			for (var i = 0; i < data["business_subtypes"].length; i++) {
 				row = "<option value=\"" + data["business_subtypes"][i].id + "\">" + data["business_subtypes"][i].name + "</option>";
 				$(row).appendTo("#select_business_subtypes");

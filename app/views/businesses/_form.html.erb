@@ -25,7 +25,7 @@
 					{:id => "select_business_type", :class => "form-control"} %>
 			</div>
 			<div class="col-6">
-				<%= form.select(:business_subtype_ids, @business_subtypes.collect {|p| [ p.name, p.id ] }, 
+				<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] }, 
 					{}, {:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }) unless @business_subtypes.nil? %>
 			</div>
 		</div>
@@ -88,13 +88,13 @@
 	<div class="form-group col-md-6">
 		<label for="hours" class="col-form-label">Business Hours:</label>
 		<div class="col-6">
-			<%= form.text_field :hours, class: "form-control", :placeholder => "Hours", :required => "true" %>
+			<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
 		</div>
 	</div>
 	<div class="form-group col-md-6">
 		<label for="website" class="col-form-label">Website:</label>
 		<div class="col-12">
-			<%= form.text_field :website, class: "form-control" %>
+			<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
 		</div>
 	</div>
 </div>
@@ -102,13 +102,13 @@
 	<div class="form-group col-md-6">
 		<label for="phonenum" class="col-form-label">Phone Number:</label>
 		<div class="col-6">
-			<%= form.text_field :phonenum, class: "form-control", :required => "true" %>
+			<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx', :required => "true" %>
 		</div>
 	</div>
 	<div class="form-group col-md-6">
 		<label for="email" class="col-form-label">Email:</label>
 		<div class="col-12">
-			<%= form.text_field :email, class: "form-control", :required => "true" %>
+			<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
 		</div>
 	</div>
 </div>
@@ -116,6 +116,6 @@
 <div class="form-group row">
 	<label for="notes" class="col-form-label">Notes:</label>
 	<div class="col-12">
-		<%= form.text_area :notes, class: "form-control", :required => "true" %>
+		<%= form.text_area :notes, class: "form-control" %>
 	</div>
 </div>
