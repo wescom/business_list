@@ -44,6 +44,11 @@ namespace :business do
         business.address1 = location
         business.phonenum = phone
         business.website = website
+        unless business.website.nil?
+          unless business.website[/\Ahttp:\/\//] || business.website[/\Ahttps:\/\//]
+            business.website = "http://#{business.website}"
+          end
+        end
 
         unless service_type.nil?
           service_type = cleanup_service_type(service_type)
@@ -113,6 +118,11 @@ namespace :business do
         business.address1 = location
         business.phonenum = phone
         business.website = website
+        unless business.website.nil?
+          unless business.website[/\Ahttp:\/\//] || business.website[/\Ahttps:\/\//]
+            business.website = "http://#{business.website}"
+          end
+        end
 
         unless service_type.nil?
           service_type = cleanup_service_type(service_type)

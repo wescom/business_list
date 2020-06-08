@@ -9,20 +9,20 @@
 		<%= table_row.city %>
 	</td>
 	<td class="text-center d-none d-sm-table-cell"><%= number_to_phone(table_row.phonenum) %></td>
-	<td class="text-center d-none d-sm-table-cell"><%= link_to shrink_url_field(table_row.website), table_row.website unless table_row.website.nil? %></td>
+	<td class="text-center d-none d-sm-table-cell">
+		<%= link_to shrink_url_field(table_row.website), table_row.website, target: :_blank unless table_row.website.nil? %>
+	</td>
 	<td class="text-center d-none d-sm-table-cell"><%= table_row.service_type.name unless table_row.service_type.nil? %></td>
 
 	<td class="text-center">
-		<p class="btn btn-outline-info">
-			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_path(table_row),
+		<div class="btn">
+			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_business_type_path(table_row),
 				title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-		</p>
-		<p class="btn btn-outline-info">
 			<%= link_to icon('trash-o fa-lg'), 
-				business_path(table_row),
+				business_type_path(table_row),
 				:method=> :delete, :action => 'destroy',
-				data: {confirm:'Delete business?'},
+				data: {confirm:'Delete business type?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
-		</p>
+		</div>
 	</td>
 </tr>
