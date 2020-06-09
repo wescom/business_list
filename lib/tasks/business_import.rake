@@ -15,11 +15,7 @@ namespace :business do
         logo = row[0]
         name = row[1]
         business_subtypes = row[2]
-        puts "business_subtypes: "+business_subtypes.to_s
-        business_subtypes = cleanup_subtypes(row[2]) unless business_subtypes.nil?
-        puts "business_subtypes: "+business_subtypes.to_s
-        business_subtypes = business_subtypes.split(" ") unless business_subtypes.nil?
-        puts "business_subtypes: "+business_subtypes.to_s
+        business_subtypes = cleanup_subtypes(row[2]).split(" ") unless business_subtypes.nil?
         location = row[3]
         phone = row[4]
         website = row[5]
