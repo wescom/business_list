@@ -1,7 +1,12 @@
 <tr>
 	<td class="text-center d-none d-sm-table-cell"><%= image_tag table_row.logo.url(:thumb) unless table_row.logo_file_name.nil? %></td>	
 	<td><%= link_to table_row.name, business_path(table_row)  %></td>	
-	<td class="text-center d-none d-sm-table-cell"><%= table_row.business_type.name unless table_row.business_type.nil? %></td>
+	<td class="text-center d-none d-sm-table-cell">
+		<%= table_row.business_type.name unless table_row.business_type.nil? %><br/>
+		<% table_row.business_subtypes.each do |subtype| %>
+			<%= subtype.name %>
+		<% end %>
+	</td>
 	<td class="text-center d-none d-lg-table-cell"><%= table_row.hours %></td>
 	<td class="d-none d-lg-table-cell"><%= business_address_city(table_row) %></td>
 	<td class="text-center d-none d-lg-table-cell"><%= number_to_phone(table_row.phonenum) %></td>

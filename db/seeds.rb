@@ -10,9 +10,9 @@ puts 'Creating Business_Types...'
 BusinessType.create(name: 'Retail', title_for_subtypes: 'Business Type')
 puts '   created businesstype: Retail'
 @business_type = BusinessType.where('name = ?', 'Retail').first
-types = ["Clothing","Toys","Auto","Jewelry","Gifts","Hair","Candy","Banking","Mortgage","Theatre","Gallery","Shoes","Books","Attorney"]
-types += ["Antiques","Hotel","Media","Computer","Real Estate","Golf","Art","Furniture","Hardware","Beauty","Pawn","Medical","Carpet"]
-types += ["Grocery","Insurance","Cellular","Veterinary","Pets","Pediatrics","Construction","Church","Yoga","Lawyer","Bikes","Printing"]
+types = ["General Retail","Clothing","Alcoholic Beverages","Appliances","Automotive Repair","Automotive Sales","Bike Shop"]
+types += ["Books","Financial","Fitness","Garden","Golf","Hobbies/Crafts","Home Furnishings","Home improvement","Nail Salon"]
+types += ["Religous Organization",'Shoes',"Sporting Goods","Styling Salons/Barber","Toys"]
 types.each do |type|
   BusinessSubtype.create(business_type_id: @business_type.id, name: type)
   puts '           subtype: '+type
@@ -22,9 +22,8 @@ end
 BusinessType.create(name: 'Restaurant', title_for_subtypes: 'Cuisine')
 puts '   created businesstype: Restaurant'
 @business_type = BusinessType.where('name = ?', 'Restaurant').first
-types = ["Mexican","Italian","Thai","Chinese","Greek","American","Hawaiian","Indian","Japanese","Pizza","Coffee","Tea","Pub"]
-types += ["Barbeque","Donuts","Deli","Bakery","Vietnemese","Mediterranean","Ice Cream / Yogurt","German","Fusion","Mongolian"]
-types += ["Middle Eastern","Cupcakery","Cuban","Brewery"]
+types = ["American","Brewery","Fine Dining","Mediterranean","French","Chinese","Indian","Thai","Japanese","Sushi","Mexican"]
+types += ["Casual Dining","Italian","French","Seafood","Middle Eastern","Peruvian","Tapas","Food Truck"]
 types.each do |type|
   BusinessSubtype.create(business_type_id: @business_type.id, name: type)
   puts '           subtype: '+type
@@ -49,4 +48,3 @@ if user
     puts 'Create initial admin user: admin@bendbulletin.com, password123'
     puts user.inspect
 end
-
