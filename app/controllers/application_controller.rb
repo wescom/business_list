@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
   before_action :authenticate_user!
   before_action :set_mailer_host
 
