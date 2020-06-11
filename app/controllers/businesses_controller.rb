@@ -6,7 +6,7 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_type)
+    @businesses = Business.left_outer_joins(:business_type)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
@@ -21,8 +21,8 @@ class BusinessesController < ApplicationController
   end
   
   def show
-      @business = Business.find(params[:id])
-      @business_subtypes = @business.business_subtypes
+    @business = Business.find(params[:id])
+    @business_subtypes = @business.business_subtypes
   end
 
   def new
@@ -83,7 +83,7 @@ class BusinessesController < ApplicationController
 
   private
     def business_params
-      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},:service_type_id,:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
     end
 
     def column_exists?(column)

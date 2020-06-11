@@ -4,7 +4,6 @@ class CreateBusinesses < ActiveRecord::Migration[6.0]
         t.string :name
         t.attachment :logo
         t.integer :business_type_id
-        t.integer :service_type_id
         t.string :hours
         t.string :website
         t.string :address1

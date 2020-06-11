@@ -38,12 +38,11 @@
 	<div class="form-group col-md-6">
 		<label for="service_type" class="col-form-label">Service Options:</label>
 		<div class="col-12">
-			<%= form.select :service_type_id, 
-				options_from_collection_for_select(@service_types, 'id', 'name', 
-				:selected => params[:service_type_id]), 
-				{:prompt => "- Select available services -", :required => true}, 
-				{:class => "form-control"} %>
-  		</div>
+			<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
+				{}, 
+				{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 10 }
+				) unless @service_types.nil? %>
+		</div>
 	</div>
 </div>
 <hr/>

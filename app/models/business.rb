@@ -1,7 +1,7 @@
 class Business < ApplicationRecord
   belongs_to :business_type, optional: true
   has_and_belongs_to_many :business_subtypes
-  belongs_to :service_type, optional: true
+  has_and_belongs_to_many :service_type
   has_many :contacts, :dependent => :destroy
 
   has_attached_file :logo, 

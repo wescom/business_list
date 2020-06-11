@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_001329) do
+ActiveRecord::Schema.define(version: 2020_06_11_042327) do
 
   create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_type_id"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2020_05_20_001329) do
     t.bigint "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer "business_type_id"
-    t.integer "service_type_id"
     t.string "hours"
     t.string "website"
     t.string "address1"
@@ -53,6 +52,13 @@ ActiveRecord::Schema.define(version: 2020_05_20_001329) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "businesses_service_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "service_type_id"
+    t.index ["business_id"], name: "index_businesses_service_types_on_business_id"
+    t.index ["service_type_id"], name: "index_businesses_service_types_on_service_type_id"
   end
 
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

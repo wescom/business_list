@@ -31,7 +31,7 @@ end
 puts ''
 
 puts 'Creating Service_Types...'
-service_types = ['Pickup','Delivery','Both']
+service_types = ['Pickup','Delivery','DineIn']
 service_types.each do |servicetype|
   ServiceType.create(name: servicetype)
   puts '   servicetype: '+servicetype
