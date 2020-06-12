@@ -14,7 +14,7 @@
 		<%= link_to shrink_url_field(table_row.website), table_row.website, target: :_blank unless table_row.website.nil? %>
 	</td>
 	<td class="text-center d-none d-sm-table-cell">
-		<% table_row.service_type.each do |service_type| %>
+		<% table_row.service_types.each do |service_type| %>
 			<%= service_type.name %><br/>
 		<% end %>
 	</td>

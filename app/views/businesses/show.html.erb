@@ -30,7 +30,7 @@
 	<div class="form-group row">
 		<label for="service_type" class="col-2">Service Options:</label>
 		<div class="col-3">
-			<% @business.service_type.each do |service_type| %>
+			<% @business.service_types.each do |service_type| %>
 				<%= service_type.name %><br/>
 			<% end %>
 		</div>

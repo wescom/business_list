@@ -15,11 +15,12 @@ namespace :business do
         logo = row[0]
         name = row[1]
         business_subtypes = row[2]
-        business_subtypes = cleanup_subtypes(row[2]).split(" ") unless business_subtypes.nil?
+        business_subtypes = cleanup_subtypes(business_subtypes).split(" ") unless business_subtypes.nil?
         location = row[3]
         phone = row[4]
         website = row[5]
-        service_type = row[6]
+        service_types = row[6]
+        service_types = cleanup_service_type(service_types).split(" ") unless service_types.nil?
         city = row[7]
         
         name = name.gsub("  "," ")
@@ -28,15 +29,12 @@ namespace :business do
         business.business_type = BusinessType.find_by(name: business_type)
 
         unless business_subtypes.nil?
-          #puts "business_subtypes: "+business_subtypes.to_s
-          unless business_subtypes.nil?
-            business_subtypes.each do |x|
-                business_subtype = BusinessSubtype.find_by(name: x)
-                if business_subtype.nil?
-                  puts "        *** business_subtype not found: "+x
-                else
-                  business.business_subtypes << business_subtype unless business.business_subtypes.include?(business_subtype)
-                end
+          business_subtypes.each do |x|
+            business_subtype = BusinessSubtype.find_by(name: x)
+            if business_subtype.nil?
+              puts "        *** business_subtype not found: "+x
+            else
+              business.business_subtypes << business_subtype unless business.business_subtypes.include?(business_subtype)
             end
           end
         end
@@ -50,11 +48,14 @@ namespace :business do
           end
         end
 
-        unless service_type.nil?
-          service_type = cleanup_service_type(service_type)
-          business.service_type = ServiceType.find_by(name: service_type)
-          if business.service_type.nil?
-            puts "        *** service_type not found: "+service_type
+        unless service_types.nil?
+          service_types.each do |x|
+            service_type = ServiceType.find_by(name: x)
+            if service_type.nil?
+              puts "        *** service_type not found: "+service_type.to_s
+            else
+              business.service_types << service_type unless business.service_types.include?(service_type)
+            end
           end
         end
         
@@ -93,7 +94,8 @@ namespace :business do
         location = row[3]
         phone = row[4]
         website = row[5]
-        service_type = row[6]
+        service_types = row[6]
+        service_types = cleanup_service_type(service_types).split(" ") unless service_types.nil?
         city = row[7]
         
         name = name.gsub("  "," ")
@@ -124,11 +126,14 @@ namespace :business do
           end
         end
 
-        unless service_type.nil?
-          service_type = cleanup_service_type(service_type)
-          business.service_type = ServiceType.find_by(name: service_type)
-          if business.service_type.nil?
-            puts "        *** service_type not found: "+service_type
+        unless service_types.nil?
+          service_types.each do |x|
+            service_type = ServiceType.find_by(name: x)
+            if service_type.nil?
+              puts "        *** service_type not found: "+service_type.to_s
+            else
+              business.service_types << service_type unless business.service_types.include?(service_type)
+            end
           end
         end
         
