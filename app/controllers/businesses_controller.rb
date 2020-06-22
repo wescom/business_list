@@ -15,8 +15,10 @@ class BusinessesController < ApplicationController
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_type)
-    @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil?
+    @businesses = Business.limit(10).left_outer_joins(:business_type).left_outer_joins(:businesses_service_types).joins(:service_types)
+    if !params[:type].nil?
+      @businesses = @businesses.where('business_types.name = ?', params[:type])
+    end
     @businesses = @businesses.order(sort_column + " " + sort_direction)
   end
   
