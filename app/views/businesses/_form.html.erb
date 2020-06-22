@@ -1,6 +1,6 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
-		<label for="name" class="col-form-label">Business Name:</label>
+		<label for="name" class="col-form-label">Business Name: *</label>
 		<div class="col-12">
 			<%= form.text_field :name, class: "form-control", :placeholder => "Name", :required => "true" %>
 		</div>
@@ -15,7 +15,7 @@
 </div>
 <div class="">
 	<div class="">
-		<label for="business_type" class="col-form-label">Type of Business:</label>
+		<label for="business_type" class="col-form-label">Type of Business: *</label>
 		<div class="row">
 			<div class="col-6">
 				<%= form.select :business_type_id, 
@@ -36,7 +36,7 @@
 
 <div class="form-row">
 	<div class="form-group col-md-6">
-		<label for="service_type" class="col-form-label">Service Options:</label>
+		<label for="service_type" class="col-form-label">Service Options: *</label>
 		<div class="col-12">
 			<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
 				{}, 
@@ -49,7 +49,7 @@
 
 <div class="form-row">
 	<div class="form-group col-md-6">
-		<label for="address1" class="col-form-label">Address1:</label>
+		<label for="address1" class="col-form-label">Address1: *</label>
 		<div class="col-12">
 			<%= form.text_field :address1, class: "form-control", :required => "true" %>
 		</div>
@@ -65,19 +65,19 @@
 </div>
 <div class="form-row">
 	<div class="form-group col-md-4">
-		<label for="city" class="col-form-label">City:</label>
+		<label for="city" class="col-form-label">City: *</label>
 		<div class="col-12">
 			<%= form.text_field :city, class: "form-control", :required => "true" %>
 		</div>
 	</div>
 	<div class="form-group col-md-2">
-		<label for="state" class="col-form-label">State:</label>
+		<label for="state" class="col-form-label">State: *</label>
 		<div class="col-12">
 			<%= form.select :state, options_for_select(us_states, @business.state || 'OR'), {:required => true}, {:class => "form-control"} %>
 		</div>
 	</div>
 	<div class="form-group col-md-2">
-		<label for="zipcode" class="col-form-label">Zipcode:</label>
+		<label for="zipcode" class="col-form-label">Zipcode: *</label>
 		<div class="col-12">
 			<%= form.text_field :zipcode, class: "form-control", :required => "true" %>
 		</div>
@@ -101,13 +101,13 @@
 </div>
 <div class="form-row">
 	<div class="form-group col-md-6">
-		<label for="phonenum" class="col-form-label">Phone Number:</label>
+		<label for="phonenum" class="col-form-label">Phone Number: *</label>
 		<div class="col-6">
 			<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx', :required => "true" %>
 		</div>
 	</div>
 	<div class="form-group col-md-6">
-		<label for="email" class="col-form-label">Email:</label>
+		<label for="email" class="col-form-label">Email: *</label>
 		<div class="col-12">
 			<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
 		</div>
