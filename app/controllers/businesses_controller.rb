@@ -15,7 +15,7 @@ class BusinessesController < ApplicationController
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.limit(10).left_outer_joins(:business_type).left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:businesses_service_types).joins(:service_types)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
