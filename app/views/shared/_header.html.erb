@@ -64,6 +64,10 @@
 										<%= link_to "Users", users_path, :class=>"dropdown-item" %>
 										<div class="dropdown-divider"></div>
 									<% end %>
+									<% if (can? :manage, DefaultSetting) %>
+										<%= link_to "Default Settings", default_settings_path, :class=>"dropdown-item" %>
+										<div class="dropdown-divider"></div>
+									<% end %>
 
 									<%= link_to "Logout", destroy_user_session_path, :class=>"dropdown-item" %>
 								</div>

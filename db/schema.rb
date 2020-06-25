@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_042327) do
+ActiveRecord::Schema.define(version: 2020_06_24_024343) do
 
   create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_type_id"
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(version: 2020_06_11_042327) do
     t.string "phonenum"
     t.string "email"
     t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "default_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "homepage_banner_image_file_name"
+    t.string "homepage_banner_image_content_type"
+    t.bigint "homepage_banner_image_file_size"
+    t.datetime "homepage_banner_image_updated_at"
+    t.text "home_welcome_text"
+    t.text "general_instructions"
+    t.text "registration_text"
+    t.string "confirmation_from_email"
+    t.string "contact_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

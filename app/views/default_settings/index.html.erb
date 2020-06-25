@@ -1,0 +1,56 @@
+<div class="default_settings_heading">
+	<h1>Default Settings</h1>
+	<%= link_to 'Edit', edit_default_setting_path(1), :class=>"float-right btn btn-primary" %>
+	<h6 class='offset-1'>These settings control site-wide defaults...</h6>
+</div>
+
+<div class="default_settings_block" >
+	<h5>Home Page:</h5>
+	<hr/>
+	<div class="form-group row">
+		<label for="home_welcome_text" class="offset-1 col-2">Welcome Text:</label>
+		<div class="col-5 default_text_field">
+			<%= @default_setting.home_welcome_text %>
+		</div>
+
+		<label for="homepage_banner_image" class="col-2">Banner Image:</label>
+		<div class="col-2">
+			<%= image_tag @default_setting.homepage_banner_image.url(:small) %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="general_instructions" class="offset-1 col-2">General Instructions:</label>
+		<div class="col-5 default_text_field">
+			<%= @default_setting.general_instructions %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="registration_text" class="offset-1 col-2">Registration Text:</label>
+		<div class="col-5 default_text_field">
+			<%= @default_setting.registration_text %>
+		</div>
+	</div>
+	<br/>
+
+	<h5>Emails:</h5>
+	<hr/>
+	<div class="form-group row">
+		<label for="confirmation_from_email" class="offset-1 col-4">Confirmation Emails Sent From:</label>
+		<div class="col-5">
+			<%= @default_setting.confirmation_from_email %>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="contact_email" class="offset-1 col-4">Email Address For Customers to Contact Us:</label>
+		<div class="col-5">
+			<%= @default_setting.contact_email %>
+		</div>
+	</div>
+	<hr/>
+
+	<br/>
+	<br/>
+	
+</div>

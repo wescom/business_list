@@ -36,15 +36,23 @@ service_types.each do |servicetype|
   ServiceType.create(name: servicetype)
   puts '   servicetype: '+servicetype
 end
-
 puts ''
 
 # Initialize first account:
 user = User.find_or_create_by(email: 'admin@bendbulletin.com')
 if user
-    user.password    = 'password123'
-    user.admin_role = true
-    user.save
-    puts 'Create initial admin user: admin@bendbulletin.com, password123'
-    puts user.inspect
+  user.password    = 'password123'
+  user.admin_role = true
+  user.save
+  puts 'Create initial admin user: admin@bendbulletin.com, password123'
+  puts user.inspect
 end
+puts ''
+
+# Initialize default settings:
+default_setting = DefaultSetting.first
+if default_setting.nil?
+  DefaultSetting.create(home_welcome_text: 'This is your welcome message')
+  puts 'Create initial default setting record'
+end
+puts ''

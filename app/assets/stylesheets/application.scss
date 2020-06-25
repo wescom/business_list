@@ -36,8 +36,8 @@
 td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .img-thumb {width: 100px; height: auto;}
 .business_listing_heading { margin: 20px 0px 10px 0px; }
-.business_heading, .business_type_heading, .service_type_heading, .contact_heading, .user_heading, .default_heading { margin: 20px 10% 10px 10%; }
-.business_type_block, .business_subtype_block, .service_type_block, .user_block { margin: 20px 10% 10px 10%; }
+.business_heading, .business_type_heading, .service_type_heading, .contact_heading, .user_heading, .default_settings_heading { margin: 20px 10% 10px 10%; }
+.business_type_block, .business_subtype_block, .service_type_block, .user_block, .default_settings_block { margin: 20px 10% 10px 10%; }
 #checkout_form { width: 100% }
 
 .business_block, .contact_block { 
@@ -139,86 +139,42 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 #header_bar { padding: 15px; }
 
 /*** Home Page ***/
-.publication_head{ 
-	margin: 20px 10% 10px 10%;
-	overflow: hidden;
-	max-height: 700px;
-}
-.publication_head{ 
-	margin: 20px 10% 10px 10%;
-}
-.publication_block{ 
-	margin: 20px 5% 10px 5%;
-}
-.publication_banner {
-	position: relative;
-	margin: 5px;
-	width: 48%;
-	height: 400px;
-	@include media-breakpoint-only(md) { width: 48%; height: 300px; }
-	@include media-breakpoint-down(sm) { width: 100%; height: 250px; }
-}
-.publication_banner_img {
-	width: 100%;
-	height: 100%;
-	-o-object-fit: cover;
-	object-fit: cover;
-	opacity: .8;
-}
-.publication_logo {
-	position: absolute;
-    background: rgba(0,0,0,0.35);
-    height: 150px;
-	width: 80%;
-	-webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-	box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-	background-color: white;
-}
-.publication_logo_img { 
-	width: 100%;
-	padding: 0px 10px;
-}
-
-/*** Home page ***/
 .home-page-head {
-/***	height: 500px;
-    min-height: 500px;
-    background: url('/images/Bend_Homes_cinemagraph.gif') no-repeat center center; 
-    background-size: cover; ***/
-    text-align: center;
-    position: relative;
+	text-align: center;
+	position: relative;
 }
 .home-page-head img {
 	height: 500px;
-    min-height: 500px;
+	min-height: 500px;
 	width: 100%;
-    object-fit: cover;
+	object-fit: cover;
 }
-.home-page-head .banner-search-wrap {
+.home-page-head .banner-wrap {
 	position: absolute;
-    top: 50%;
-    width: 100%;
-    background: rgba(0,0,0,.35);
-    height: 280px;
-    margin-top: -140px;
-    color: #fff;
+	top: 50%;
+	width: 100%;
+	background: rgba(0,0,0,.35);
+	height: 200px;
+	margin-top: -200px;
+	color: #fff;
 }
-.home-page-head .banner-search-wrap h1 {
-    color: #fff;
-    margin-top: 70px;
-    margin-bottom: 40px;
+.home-page-head .banner-wrap h1 {
+	color: #fff;
+	margin-top: 70px;
+	margin-bottom: 40px;
 	font-size: calc(100% + 2.4vw);
-    text-transform: none;
-    width: 100%;
+	text-transform: none;
+	width: 100%;
 }
+.home-page-head .banner-wrap-text {	margin: 50px 50px; }
 .home-page-info {
 	margin: 50px 50px;
-    text-align: center;
+  text-align: center;
 }
-.card { margin-bottom: 10px; }
-.card_section_img { width: 100% }
-.card_pdf_image { height: 300px; width: auto; max-width: 100%; }
+
+
+/*** Default Settings ***/
+.default_text_field{ height: 150px; overflow: scroll; }
 
 /*** Pagination ***/
 .flickr_pagination { text-align: center; padding: 0.3em; cursor: default; }

@@ -1,0 +1,58 @@
+<div class="default_settings_heading">
+	<h1></h1>
+</div>
+
+<div class="default_settings_block" >
+	<%= form_for(@default_setting) do |f| %>
+		<h5>Home Page:</h5>
+		<hr/>
+		<div class="form-group row">
+			<label for="home_welcome_text" class="offset-1 col-2">Welcome Text:</label>
+			<div class="col-5">
+				<%= f.text_area :home_welcome_text, class: "form-control", :rows=>5, :required => "true" %>
+			</div>
+
+			<label for="homepage_banner_image" class="col-2">Banner Image:</label>
+			<div class="col-2">
+				<%= image_tag @default_setting.homepage_banner_image.url(:small) %>
+				<%= f.file_field :homepage_banner_image, as: :file %>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="general_instructions" class="offset-1 col-2">General Instructions:</label>
+			<div class="col-5">
+				<%= f.text_area :general_instructions, class: "form-control", :rows=>5 %>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="registration_text" class="offset-1 col-2">Registration Text:</label>
+			<div class="col-5">
+				<%= f.text_area :registration_text, class: "form-control", :rows=>5 %>
+			</div>
+		</div>
+		<br/>
+
+		<h5>Emails:</h5>
+		<hr/>
+		<div class="form-group row">
+			<label for="confirmation_from_email" class="offset-1 col-4">Confirmation Emails Sent From:</label>
+			<div class="col-5">
+				<%= f.text_field :confirmation_from_email, class: "form-control", :required => "true" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="contact_email" class="offset-1 col-4">Email Address For Customers to Contact Us:</label>
+			<div class="col-5">
+				<%= f.text_field :contact_email, class: "form-control", :required => "true" %>
+			</div>
+		</div>
+		<hr/>
+	
+		<div class="form-group row d-flex justify-content-end">
+			<%= f.submit "Update", :class => 'btn btn-primary'%>
+			<%= f.submit "Cancel", :name => 'cancel_button', :class => 'btn btn-primary'%>
+		</div>
+	<% end %>
+</div>
