@@ -31,7 +31,7 @@ class DefaultSettingsController < ApplicationController
 
   private
   def default_setting_params    
-    params.require(:default_setting).permit(:homepage_banner_image, :home_welcome_text, :general_instructions, :registration_text, 
-      :confirmation_from_email, :contact_email)
+    params.require(:default_setting).permit(:homepage_banner_image, :homepage_general_instruction_image, :homepage_registration_image, 
+      :home_welcome_text, :general_instructions, :registration_text, :confirmation_from_email, :contact_email)
   end
 end

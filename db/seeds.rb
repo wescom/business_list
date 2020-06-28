@@ -52,7 +52,8 @@ puts ''
 # Initialize default settings:
 default_setting = DefaultSetting.first
 if default_setting.nil?
-  DefaultSetting.create(home_welcome_text: 'This is your welcome message')
+  DefaultSetting.create(home_welcome_text: 'This is your welcome message',general_instructions: 'These are your general instructions',
+    registration_text: 'This is your registration text')
   puts 'Create initial default setting record'
 end
 puts ''

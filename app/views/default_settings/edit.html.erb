@@ -24,12 +24,24 @@
 			<div class="col-5">
 				<%= f.text_area :general_instructions, class: "form-control", :rows=>5 %>
 			</div>
+
+			<label for="homepage_general_instruction_image" class="col-2">General Instruction Image:</label>
+			<div class="col-2">
+				<%= image_tag @default_setting.homepage_general_instruction_image.url(:small) %>
+				<%= f.file_field :homepage_general_instruction_image, as: :file %>
+			</div>
 		</div>
 
 		<div class="form-group row">
 			<label for="registration_text" class="offset-1 col-2">Registration Text:</label>
 			<div class="col-5">
 				<%= f.text_area :registration_text, class: "form-control", :rows=>5 %>
+			</div>
+
+			<label for="homepage_registration_image" class="col-2">Registration Image:</label>
+			<div class="col-2">
+				<%= image_tag @default_setting.homepage_registration_image.url(:small) %>
+				<%= f.file_field :homepage_registration_image, as: :file %>
 			</div>
 		</div>
 		<br/>
