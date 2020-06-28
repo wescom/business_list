@@ -149,16 +149,21 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 	width: 100%;
 	object-fit: cover;
 }
-.home-page-head .banner-wrap {
+.home-page-head .homepage-nav {
+	position: absolute;
+	top: 1%;
+	width: 99%;
+	color: #fff;
+}
+.home-page-head .homepage-wrap {
 	position: absolute;
 	top: 50%;
 	width: 100%;
 	background: rgba(0,0,0,.35);
-	height: 200px;
 	margin-top: -200px;
 	color: #fff;
 }
-.home-page-head .banner-wrap h1 {
+.home-page-head .homepage-wrap h1 {
 	color: #fff;
 	margin-top: 70px;
 	margin-bottom: 40px;
@@ -166,7 +171,7 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 	text-transform: none;
 	width: 100%;
 }
-.home-page-head .banner-wrap-text {	margin: 50px 50px; }
+.home-page-head .homepage-wrap-text {	margin: 50px 50px; }
 .home-page-info {
 	margin: 50px 50px;
   text-align: center;

@@ -1,8 +1,31 @@
 <div class="home-page-head">
-	<img src="<%= asset_path( 'DowntownBend.jpg' ) %>" />
-	<div class="banner-wrap">
+	<%= image_tag @default_settings.homepage_banner_image.url(:medium) unless @default_settings.homepage_banner_image_file_name.nil? %>
+
+	<div class="homepage-nav">
+		<div class="btn-group-vertical float-right">
+			<div class="dropleft btn-block text-center menu-items-icon-admin">
+				<button type="button" class="btn btn-secondary btn-menu" data-toggle="dropdown">
+					<%= icon('bars fa-lg') %>
+				</button>
+				<div class="dropdown-menu">
+					<% if current_user.nil? %>
+						<%= link_to "Login", new_user_session_path, :class=>"dropdown-item" %>
+						<%= link_to 'Register New Business', new_user_registration_path, :class=>"dropdown-item" %>
+					<% else %>
+						<%= link_to current_user.email, edit_user_registration_path, :class=>"dropdown-item" %>
+						<div class="dropdown-divider"></div>
+						<%= link_to "Manage My Business", businesses_path, :class=>"dropdown-item" %>
+						<div class="dropdown-divider"></div>
+						<%= link_to "Logout", destroy_user_session_path, :class=>"dropdown-item" %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="homepage-wrap">
 		<h1>Welcome to The Bulletin's Business Listings</h1>
-		<div class="banner-wrap-text">
+		<div class="homepage-wrap-text">
 			This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
 		</div>
 	</div>

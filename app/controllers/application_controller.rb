@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_mailer_host
 
+  before_action :load_default_settings
+
+  def load_default_settings
+    @default_settings = DefaultSetting.first
+  end
+  
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
