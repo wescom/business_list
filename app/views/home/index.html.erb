@@ -35,10 +35,11 @@
 	<h2 class="text-left">Full list of Central Oregon businesses</h2>
 	<div class="d-flex align-items-center justify-content-start">
 		<div class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<%= simple_format(@default_settings.general_instructions) %>
+			<%= simple_format(@default_settings.general_instructions) %>
+			<%= link_to "Register your business today", new_user_registration_path, :class=>"btn btn-success" %>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<%= image_tag(@default_settings.homepage_general_instruction_image.url(:medium), class: "img-fluid") unless @default_settings.homepage_general_instruction_image_file_name.nil? %>
+			<%= image_tag(@default_settings.homepage_general_instruction_image.url(:medium), class: "img-fluid") unless @default_settings.homepage_general_instruction_image_file_name.nil? %>
 		</div>
 	</div>
 
@@ -47,6 +48,7 @@
 	<div class="d-flex align-items-center justify-content-start">
 		<div class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<%= simple_format(@default_settings.registration_text) %>
+			<%= link_to "Register your business today", new_user_registration_path, :class=>"btn btn-success" %>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<%= image_tag(@default_settings.homepage_registration_image.url(:medium), class: "img-fluid") unless @default_settings.homepage_registration_image_file_name.nil? %>

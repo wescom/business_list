@@ -3,6 +3,7 @@ class Business < ApplicationRecord
   has_and_belongs_to_many :business_subtypes
   has_and_belongs_to_many :service_types
   has_many :contacts, :dependent => :destroy
+  belongs_to :user
 
   has_attached_file :logo, 
     styles: { 
