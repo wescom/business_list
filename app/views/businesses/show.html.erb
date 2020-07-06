@@ -42,6 +42,20 @@
 			<%= @business.hours %>
 		</div>
 	</div>
+	<div class="form-group row">
+		<label for="hours" class="col-2">Happy Hour?</label>
+		<div class="col-6">
+			<% if @business.happy_hour %>
+				<i class="fa fa-check"></i>
+			<% end %>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="hours" class="col-2">Business Listing Zone:</label>
+		<div class="col-6">
+			<%= @business.business_listing_zone %>
+		</div>
+	</div>
 	<hr/>
 
 	<div class="form-group row">
@@ -73,6 +87,20 @@
 		<label for="email" class="col-2">Email:</label>
 		<div class="col-8">
 			<%= @business.email %>
+		</div>
+	</div>
+	<hr/>
+
+	<div class="form-group row">
+		<label for="notes" class="col-2">Yelp URL:</label>
+		<div class="col-8">
+			<%= @business.yelp_url %>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="notes" class="col-2">Awards:</label>
+		<div class="col-8">
+			<%= @business.award_id %>
 		</div>
 	</div>
 	<hr/>

@@ -83,6 +83,14 @@
 		</div>
 	</div>
 </div>
+<div class="form-row">
+	<div class="form-group col-md-4">
+		<label for="business_listing_zone" class="col-form-label">Business Listing Zone: *</label>
+		<div class="col-12">
+			<%= form.text_field :business_listing_zone, class: "form-control", :required => "true" %>
+		</div>
+	</div>
+</div>
 <hr/>
 
 <div class="form-row">
@@ -93,6 +101,14 @@
 		</div>
 	</div>
 	<div class="form-group col-md-6">
+		<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
+		<div class="col-6">
+			<%= form.check_box :happy_hour, class: "form-control" %>
+		</div>
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-9">
 		<label for="website" class="col-form-label">Website:</label>
 		<div class="col-12">
 			<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
@@ -114,9 +130,40 @@
 	</div>
 </div>
 <hr/>
+
+<div class="form-row">
+	<div class="form-group col-md-9">
+		<label for="yelp_url" class="col-form-label">Yelp URL:</label>
+		<div class="col-12">
+			<%= form.url_field :yelp_url, class: "form-control", :placeholder => "https://domain.com" %>
+		</div>
+	</div>
+	<div class="form-group col-md-9">
+		<label for="awards" class="col-form-label">Awards:</label>
+		<div class="col-12">
+			<%= form.text_field :award_id, class: "form-control" %>
+		</div>
+	</div>
+</div>
+<hr/>
+
 <div class="form-group row">
 	<label for="notes" class="col-form-label">Notes:</label>
 	<div class="col-12">
 		<%= form.text_area :notes, class: "form-control" %>
 	</div>
 </div>
+
+<hr/>
+<% if (can? :manage, Business) %>
+	<h4>Admin settings:</h4>
+	<div class="form-group row">
+		<label for="notes" class="offset-1 col-form-label">Business account owner:</label>
+		<div class="col-6">
+			<%= form.select(:owner_id, options_for_select(@users.collect {|c| [c.email, c.id]}), 
+				{ :include_blank => "Select business owner"}, 
+				{:id => "select_business owner", :class => "form-control"} 
+				) unless @users.nil? %>
+		</div>
+	</div>
+<% end %>

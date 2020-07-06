@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_024343) do
+ActiveRecord::Schema.define(version: 2020_07_06_225225) do
+
+  create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "year"
+    t.string "place"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_type_id"
@@ -52,6 +61,11 @@ ActiveRecord::Schema.define(version: 2020_06_24_024343) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "owner_id"
+    t.string "yelp_url"
+    t.string "business_listing_zone"
+    t.boolean "happy_hour"
+    t.integer "award_id"
   end
 
   create_table "businesses_service_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

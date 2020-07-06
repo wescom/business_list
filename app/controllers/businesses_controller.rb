@@ -56,6 +56,7 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
+    @users = User.all.order("email")
   end
 
   def update
@@ -85,7 +86,8 @@ class BusinessesController < ApplicationController
 
   private
     def business_params
-      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:hours,:website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes)
+      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:hours,
+      :website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes,:owner_id,:yelp_url,:business_listing_zone,:happy_hour,:award_id )
     end
 
     def column_exists?(column)

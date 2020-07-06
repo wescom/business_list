@@ -38,12 +38,17 @@ class Ability
     if user.supervisor_role?
       can :manage, Business
       can :manage, BusinessType
+      can :manage, BusinessSubtype
       can :manage, ServiceType
+      can :manage, Contact
+      can :manage, Award
     end
     if user.sales_role?
       can :manage, Business
       can [:read, :business_subtype_options], BusinessType
       can :read, ServiceType
+      can :manage, Contact
+      can :manage, Award
     end
     if user.user_role?
       can :read, Business
