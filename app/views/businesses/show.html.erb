@@ -113,6 +113,35 @@
 	</div>
 	<hr/>
 
+	<h5>Business Awards: <small><em>(<%= link_to 'add new award', new_award_path(:current_business=>@business) %>)</em></small></h5>
+	<div class="offset-1 mw-100">
+		<table class="table table-hover table-sm w-auto">
+			<tbody>
+				<% @business.awards.each do |award| %>
+					<tr>
+						<td><%= award.year %></td>
+						<td><%= award.place %></td>
+						<td><%= award.name %></td>
+						<td><%= award.description %></td>
+						<td class="text-center">
+							<%= link_to icon('edit fa-lg'),
+								edit_award_path(award,:current_business=>@business),
+								title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+						</td>
+						<td class="text-center">
+							<%= link_to icon('remove fa-lg'), 
+								award_path(award), :class => "",
+								:method=> :delete, :action => 'destroy',
+								data: {confirm:'Remove award?'},
+								title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<hr/>
+	
 	<h5>Business Contacts: <small><em>(<%= link_to 'add new contact', new_contact_path(:current_business=>@business) %>)</em></small></h5>
 	<div class="offset-1 mw-100">
 		<table class="table table-hover table-sm w-auto">

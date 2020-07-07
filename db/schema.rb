@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_07_06_225225) do
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "business_id"
     t.string "name"
     t.string "description"
     t.integer "year"

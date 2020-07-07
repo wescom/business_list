@@ -1,6 +1,7 @@
 class CreateAwards < ActiveRecord::Migration[6.0]
   def self.up
     create_table :awards do |t|
+      t.integer :business_id
       t.string :name
       t.string :description
       t.integer :year

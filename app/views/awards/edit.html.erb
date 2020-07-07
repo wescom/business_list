@@ -1,14 +1,14 @@
-<div class="contact_heading">
+<div class="award_heading">
 	<div class="container search_container">
 		<div class="row justify-content-between">
-			<h1>Edit contact for <%= @business.name %></h1>
+			<h1>Edit award for <%= @business.name %></h1>
 		</div>
 	</div>
 
 </div>
 
-<div class="contact_block" >
-	<%= form_for @contact do |form| %>
+<div class="award_block" >
+	<%= form_for @award do |form| %>
 		<%= form.hidden_field :business_id, :value => @business.id %>
 
 		<%= render :partial => 'form', :object => form %>
