@@ -5,7 +5,7 @@ class Business < ApplicationRecord
   has_and_belongs_to_many :zones
   has_many :contacts, :dependent => :destroy
   has_many :awards, :dependent => :destroy
-  has_one :user, :foreign_key => "user_id"
+  belongs_to :owner, class_name: :User, foreign_key: :owner_id
 
   has_attached_file :logo, 
     styles: { 

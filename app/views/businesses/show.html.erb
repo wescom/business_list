@@ -16,7 +16,7 @@
 		</div>
 		<label for="name" class="offset-1 col-1">Owner:</label>
 		<div class="col-3">
-			<%= @business.owner_id %>
+			<%= @business.owner.nil? ? "NA" : @business.owner.email%>
 		</div>
 	</div>
 

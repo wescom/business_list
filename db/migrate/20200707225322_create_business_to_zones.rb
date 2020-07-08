@@ -7,6 +7,6 @@ class CreateBusinessToZones < ActiveRecord::Migration[6.0]
   end
 
   def self.down
-    drop_table :businesses_szones
+    drop_table :businesses_zones
   end
 end

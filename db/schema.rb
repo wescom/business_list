@@ -62,11 +62,10 @@ ActiveRecord::Schema.define(version: 2020_07_07_225322) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "owner_id"
     t.string "yelp_url"
-    t.string "business_listing_zone"
     t.boolean "happy_hour"
-    t.integer "award_id"
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_businesses_on_owner_id"
   end
 
   create_table "businesses_service_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -153,4 +152,5 @@ ActiveRecord::Schema.define(version: 2020_07_07_225322) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "businesses", "users", column: "owner_id"
 end
