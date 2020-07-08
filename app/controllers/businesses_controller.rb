@@ -10,7 +10,7 @@ class BusinessesController < ApplicationController
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
-    @businesses = @businesses.order(sort_column + " " + sort_direction).limit(10)
+    @businesses = @businesses.order(sort_column + " " + sort_direction)
   end
   
   def business_listing
@@ -28,11 +28,14 @@ class BusinessesController < ApplicationController
   end
 
   def new
-    @business = Business.new
     @business_types = BusinessType.all.order("name")
     @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+    @users = User.all.order("email")
+
+    @business = Business.new
+    @business.owner_id = current_user.id
   end
 
   def create
@@ -42,7 +45,9 @@ class BusinessesController < ApplicationController
       @business_types = BusinessType.all.order("name")
       @service_types = ServiceType.all.order("name")
       @zones = Zone.all.order("name")
+
       @business = Business.new(business_params)
+      @business.owner_id = current_user.id
       if @business.save
         flash[:notice] = "Business Created"
         redirect_to @business
@@ -54,20 +59,22 @@ class BusinessesController < ApplicationController
   end
 
   def edit
-    @business = Business.find(params[:id])
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
     @users = User.all.order("email")
+
+    @business = Business.find(params[:id])
   end
 
   def update
-    @business = Business.find(params[:id])
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+
+    @business = Business.find(params[:id])
     if @business.update(business_params)
         flash[:notice] = "Business Updated"
         redirect_to @business

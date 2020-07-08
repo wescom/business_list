@@ -8,11 +8,15 @@
 </div>
 
 <div class="business_block" >
-	<h5>Busines Info:</h5>
+	<h5>Business Info:</h5>
 	<div class="form-group row">
 		<label for="name" class="offset-1 col-2">Name:</label>
-		<div class="col-6">
-			<%= @business.name %>
+		<div class="col-4">
+			<h5><%= @business.name %></h5>
+		</div>
+		<label for="name" class="offset-1 col-1">Owner:</label>
+		<div class="col-3">
+			<%= @business.owner_id %>
 		</div>
 	</div>
 

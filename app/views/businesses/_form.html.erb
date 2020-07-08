@@ -155,7 +155,7 @@
 	<div class="form-group row">
 		<label for="notes" class="offset-1 col-form-label">Business account owner:</label>
 		<div class="col-6">
-			<%= form.select(:owner_id, options_for_select(@users.collect {|c| [c.email, c.id]}), 
+			<%= form.select(:owner_id, options_for_select(@users.collect {|c| [c.email, c.id]}, :selected => @business.owner_id), 
 				{ :include_blank => "Select business owner"}, 
 				{:id => "select_business owner", :class => "form-control"} 
 				) unless @users.nil? %>
