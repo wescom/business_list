@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
   resources :business_subtypes, :only => [:new, :create, :edit, :update, :destroy]
   resources :service_types
+  resources :zones
   resources :contacts, :only => [:new, :create, :edit, :update, :destroy]
   resources :awards, :only => [:new, :create, :edit, :update, :destroy]
 

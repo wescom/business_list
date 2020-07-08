@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_225225) do
+ActiveRecord::Schema.define(version: 2020_07_07_225322) do
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_id"
@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(version: 2020_07_06_225225) do
     t.index ["service_type_id"], name: "index_businesses_service_types_on_service_type_id"
   end
 
+  create_table "businesses_zones", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "business_id"
+    t.bigint "zone_id"
+    t.index ["business_id"], name: "index_businesses_zones_on_business_id"
+    t.index ["zone_id"], name: "index_businesses_zones_on_zone_id"
+  end
+
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_id"
     t.string "name"
@@ -138,6 +145,12 @@ ActiveRecord::Schema.define(version: 2020_07_06_225225) do
     t.boolean "user_role", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "zones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

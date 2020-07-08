@@ -6,16 +6,16 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = Business.left_outer_joins(:business_type) #.left_outer_joins(:businesses_service_types).joins(:service_types)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
-    @businesses = @businesses.order(sort_column + " " + sort_direction)
+    @businesses = @businesses.order(sort_column + " " + sort_direction).limit(10)
   end
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = Business.left_outer_joins(:business_type) #.left_outer_joins(:businesses_service_types).joins(:service_types)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
@@ -32,6 +32,7 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
+    @zones = Zone.all.order("name")
   end
 
   def create
@@ -40,10 +41,11 @@ class BusinessesController < ApplicationController
     else
       @business_types = BusinessType.all.order("name")
       @service_types = ServiceType.all.order("name")
+      @zones = Zone.all.order("name")
       @business = Business.new(business_params)
       if @business.save
         flash[:notice] = "Business Created"
-        redirect_to businesses_path
+        redirect_to @business
       else
         flash[:notice] = "Business Creation Failed"
         render :action => :new
@@ -56,6 +58,7 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
+    @zones = Zone.all.order("name")
     @users = User.all.order("email")
   end
 
@@ -64,9 +67,10 @@ class BusinessesController < ApplicationController
     @business_types = BusinessType.all.order("name")
     @business_subtypes = @business.business_type.business_subtypes
     @service_types = ServiceType.all.order("name")
+    @zones = Zone.all.order("name")
     if @business.update(business_params)
         flash[:notice] = "Business Updated"
-        redirect_to businesses_path
+        redirect_to @business
     else
         flash[:notice] = "Business Update Failed"
         render :action => :edit
@@ -86,7 +90,7 @@ class BusinessesController < ApplicationController
 
   private
     def business_params
-      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:hours,
+      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},{:zone_ids=>[]},:hours,
       :website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes,:owner_id,:yelp_url,:business_listing_zone,:happy_hour,:award_id )
     end
 

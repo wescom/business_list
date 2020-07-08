@@ -10,40 +10,38 @@
 <div class="business_block" >
 	<h5>Busines Info:</h5>
 	<div class="form-group row">
-		<label for="name" class="col-2">Name:</label>
+		<label for="name" class="offset-1 col-2">Name:</label>
 		<div class="col-6">
 			<%= @business.name %>
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="business_type" class="col-2">Type:</label>
-		<div class="col-3">
+		<label for="business_type" class="offset-1 col-2">Type:</label>
+		<div class="col-2">
 			<%= @business.business_type.name unless @business.business_type.nil? %>
 		</div>
-		<label for="business_subtype" class="col-3"><%= @business.business_type.name %> <%= @business.business_type.title_for_subtypes %>:</label>
+		<label for="business_subtype" class="offset-1 col-3"><%= @business.business_type.name %> <%= @business.business_type.title_for_subtypes %>:</label>
 		<div class="col-3">
 			<%= @business.business_subtypes.map{|v| v.name }.join(", ") %>
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="service_type" class="col-2">Service Options:</label>
+		<label for="service_type" class="offset-1 col-2">Service Options:</label>
 		<div class="col-3">
-			<% @business.service_types.each do |service_type| %>
-				<%= service_type.name %><br/>
-			<% end %>
+			<%= @business.service_types.map{|v| v.name }.join(", ") %>
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="hours" class="col-2">Business Hours:</label>
+		<label for="hours" class="offset-1 col-2">Business Hours:</label>
 		<div class="col-6">
 			<%= @business.hours %>
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="hours" class="col-2">Happy Hour?</label>
+		<label for="hours" class="offset-1 col-2">Happy Hour?</label>
 		<div class="col-6">
 			<% if @business.happy_hour %>
 				<i class="fa fa-check"></i>
@@ -51,62 +49,51 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="hours" class="col-2">Business Listing Zone:</label>
+		<label for="hours" class="offset-1 col-3">Business Listing Zones:</label>
 		<div class="col-6">
-			<%= @business.business_listing_zone %>
+			<%= @business.zones.map{|v| v.name }.join(", ") %>
 		</div>
 	</div>
 	<hr/>
 
 	<div class="form-group row">
-		<label for="address" class="col-2">Address:</label>
+		<label for="address" class="offset-1 col-2">Address:</label>
 		<div class="col-8">
-				<%= @business.address1 %><br/>
-				<% if !@business.address2.nil? %>
-					<%= @business.address2 %><br/>
-				<% end %>
-				<%= @business.city %>, <%= @business.state %>	<%= @business.zipcode %>
+			<%= business_address_city_state_zip(@business) %>
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="website" class="col-2	">Website:</label>
-		<div class="col-8">
-			<%= @business.website %>
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label for="phonenum" class="col-2">Phone Number:</label>
+		<label for="phonenum" class="offset-1 col-2">Phone Number:</label>
 		<div class="col-8">
 			<%= number_to_phone(@business.phonenum) %>
 		</div>
 	</div>
 
 	<div class="form-group row">
-		<label for="email" class="col-2">Email:</label>
+		<label for="email" class="offset-1 col-2">Email:</label>
 		<div class="col-8">
 			<%= @business.email %>
 		</div>
 	</div>
-	<hr/>
 
 	<div class="form-group row">
-		<label for="notes" class="col-2">Yelp URL:</label>
+		<label for="website" class="offset-1 col-2	">Website:</label>
+		<div class="col-8">
+			<%= @business.website %>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="notes" class="offset-1 col-2">Yelp URL:</label>
 		<div class="col-8">
 			<%= @business.yelp_url %>
 		</div>
 	</div>
-	<div class="form-group row">
-		<label for="notes" class="col-2">Awards:</label>
-		<div class="col-8">
-			<%= @business.award_id %>
-		</div>
-	</div>
 	<hr/>
 
 	<div class="form-group row">
-		<label for="notes" class="col-2">Notes:</label>
+		<label for="notes" class="offset-1 col-2">Notes:</label>
 		<div class="col-8">
 			<%= @business.notes %>
 		</div>

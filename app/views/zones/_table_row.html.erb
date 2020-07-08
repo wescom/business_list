@@ -1,0 +1,15 @@
+<tr>
+	<td><%= table_row.name %></td>	
+
+	<td class="text-center">
+		<div class="btn">
+			<%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_zone_path(table_row),
+				title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+			<%= link_to icon('trash-o fa-lg'), 
+				zone_path(table_row),
+				:method=> :delete, :action => 'destroy',
+				data: {confirm:'Delete zone?'},
+				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+		</div>
+	</td>
+</tr>

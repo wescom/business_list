@@ -42,6 +42,7 @@ class Ability
       can :manage, ServiceType
       can :manage, Contact
       can :manage, Award
+      can :manage, Zone
     end
     if user.sales_role?
       can :manage, Business

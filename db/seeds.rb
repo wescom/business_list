@@ -38,6 +38,14 @@ service_types.each do |servicetype|
 end
 puts ''
 
+puts 'Creating Zones...'
+zones = ['Bend','Redmond','Sisters','La Pine','Madras','Tumalo','Terrebonne','Warm Springs','Prineville','Summer Lake']
+zones.each do |zone|
+  Zone.create(name: zone)
+  puts '   zone: '+zone
+end
+puts ''
+
 # Initialize first account:
 user = User.find_or_create_by(email: 'admin@bendbulletin.com')
 if user

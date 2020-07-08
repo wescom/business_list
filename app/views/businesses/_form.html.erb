@@ -40,7 +40,7 @@
 		<div class="col-12">
 			<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
 				{}, 
-				{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 10 }
+				{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }
 				) unless @service_types.nil? %>
 		</div>
 	</div>
@@ -85,9 +85,12 @@
 </div>
 <div class="form-row">
 	<div class="form-group col-md-4">
-		<label for="business_listing_zone" class="col-form-label">Business Listing Zone: *</label>
+		<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
 		<div class="col-12">
-			<%= form.text_field :business_listing_zone, class: "form-control", :required => "true" %>
+			<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
+				{}, 
+				{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
+				) unless @zones.nil? %>
 		</div>
 	</div>
 </div>
@@ -108,14 +111,6 @@
 	</div>
 </div>
 <div class="form-row">
-	<div class="form-group col-md-9">
-		<label for="website" class="col-form-label">Website:</label>
-		<div class="col-12">
-			<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
 	<div class="form-group col-md-6">
 		<label for="phonenum" class="col-form-label">Phone Number: *</label>
 		<div class="col-6">
@@ -129,19 +124,19 @@
 		</div>
 	</div>
 </div>
-<hr/>
-
+<div class="form-row">
+	<div class="form-group col-md-9">
+		<label for="website" class="col-form-label">Website:</label>
+		<div class="col-12">
+			<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
+		</div>
+	</div>
+</div>
 <div class="form-row">
 	<div class="form-group col-md-9">
 		<label for="yelp_url" class="col-form-label">Yelp URL:</label>
 		<div class="col-12">
 			<%= form.url_field :yelp_url, class: "form-control", :placeholder => "https://domain.com" %>
-		</div>
-	</div>
-	<div class="form-group col-md-9">
-		<label for="awards" class="col-form-label">Awards:</label>
-		<div class="col-12">
-			<%= form.text_field :award_id, class: "form-control" %>
 		</div>
 	</div>
 </div>
