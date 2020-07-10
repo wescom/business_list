@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_07_07_225322) do
     t.string "yelp_url"
     t.boolean "happy_hour"
     t.bigint "owner_id"
+    t.string "status"
+    t.boolean "approved"
     t.index ["owner_id"], name: "index_businesses_on_owner_id"
   end
 
