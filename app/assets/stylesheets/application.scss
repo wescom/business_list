@@ -192,6 +192,41 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 /*.flickr_pagination .previous_page { margin-right: 1em; }
 .flickr_pagination .next_page { margin-left: 1em; } */
 
+/*** Progress Block ***/
+.progress_block {
+	margin: 20px 0px;
+  height: 80px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ccc!important;
+}
+.dot-one, .dot-two, .dot-three, .dot-four {
+  position: absolute;
+	margin-top: -10px;
+	z-index: 1;
+	height: 40px;
+	width: 40px;
+	border-radius: 25px;
+}
+.dot-one{ left:18%; }
+.dot-two{	left:38%; }
+.dot-three{	left:58%; }
+.dot-four{ left:78%; }
+.step-one, .step-two, .step-three, .step-four, .step-five {
+  position: absolute;
+	margin-top: -40px;
+	z-index: 1;
+	height: 40px;
+	width: 40px;
+}
+.step-one{ left:10%; }
+.step-two{ left:30%; }
+.step-three{ left:50%; }
+.step-four{ left:70%; }
+.step-five{	left:90%; }
+.info-color{ background-color:#5bc0de; }
+.no-color{ background-color:inherit; }
+
 /*** Table Column ***/
 .sorting th .current {
   padding-right: 12px;

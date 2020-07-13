@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+  
   get 'home/index'
   get 'business/index'
   resources :users, :only => [:index, :show, :destroy] do
@@ -12,6 +16,7 @@ Rails.application.routes.draw do
   resources :default_settings, :only => [:index, :edit, :update]
   
   resources :businesses do
+    resources :create, controller: 'businesses/create', :only => [:show, :create, :update]
     collection do
       get 'business_listing'
     end
