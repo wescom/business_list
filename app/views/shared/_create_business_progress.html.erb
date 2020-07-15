@@ -1,18 +1,59 @@
 <div class="col-md-12 progress_block">
 	<div class="d-flex justify-content-center text-center">
-	  <div class="col">Name</div>
-	  <div class="col">Location</div>
-	  <div class="col">Services</div>
-	  <div class="col">Extras</div>
-	  <div class="col">Contacts</div>
+		<% if past_step?(:business_info) || step.to_s == "business_info" %>
+		  <div class="col">
+				<%= link_to "Name", wizard_path(:business_info) %>
+			</div>
+		<% else %>
+		  <div class="col">
+				<%= link_to "Name", wizard_path(:business_info) %>
+			</div>
+		<% end %>
+		<% if past_step?(:business_location) || step.to_s == "business_location" %>
+		  <div class="col">
+				<%= link_to "Location", wizard_path(:business_location) %>
+			</div>
+		<% else %>
+		  <div class="col">
+				<%= link_to "Location", wizard_path(:business_location) %>
+			</div>
+		<% end %>
+		<% if past_step?(:business_services) || step.to_s == "business_services" %>
+		  <div class="col">
+				<%= link_to "Services", wizard_path(:business_services) %>
+			</div>
+		<% else %>
+		  <div class="col">
+				<%= link_to "Services", wizard_path(:business_services) %>
+			</div>
+		<% end %>
+		<% if past_step?(:business_extras) || step.to_s == "business_extras" %>
+		  <div class="col">
+				<%= link_to "Extras", wizard_path(:business_extras) %>
+			</div>
+		<% else %>
+		  <div class="col">
+				<%= link_to "Extras", wizard_path(:business_extras) %>
+			</div>
+		<% end %>
+		<% if past_step?(:business_contacts) || step.to_s == "business_contacts" %>
+		  <div class="col">
+				<%= link_to "Contacts", wizard_path(:business_contacts) %>
+			</div>
+		<% else %>
+		  <div class="col">
+				<%= link_to "Contacts", wizard_path(:business_contacts) %>
+			</div>
+		<% end %>
 	</div>
 	<div class="progress" style="height: 20px;" >
     <div class="dot-one info-color"></div>
-		<div class="dot-two no-color">
-		</div>
+		<div class="dot-two no-color"></div>
 		<div class="dot-three no-color"></div>
 		<div class="dot-four no-color"></div>
 		<div class="dot-five no-color"></div>
-    <div class="progress-bar info-color" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemax="100" style="width: <%= @progress %>%" ></div>
+    <div class="progress-bar info-color" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemax="100" style="width: <%= @progress %>%" >
+    	
+    </div>
   </div>
 </div>

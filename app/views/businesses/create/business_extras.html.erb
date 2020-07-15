@@ -1,0 +1,78 @@
+<div class="business_heading">
+	<h1>Steps to submit a Business:</h1>
+	<%= render 'shared/create_business_progress' %>
+</div>
+
+<div class="business_block" >
+	<%= form_for(@business, :url => wizard_path, :method => :put) do |form| %>
+		<h3> Add some extra information to your business listing... </h3>
+		<br/>
+
+		<div class="form-row">
+			<div class="form-group col-md-9">
+				<label for="yelp_url" class="col-form-label">Yelp URL:</label>
+				<div class="col-12">
+					<%= form.url_field :yelp_url, class: "form-control", :placeholder => "https://domain.com" %>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-12">
+				<label for="awards" class="col-form-label">Business Awards: 
+					<small><em>(<%= link_to 'add new award', new_award_path(:current_business=>@business) %>)</em></small>
+				</label>
+				<div class="offset-1 mw-100 black-border">
+					<table class="table table-hover table-borderless table-sm w-auto">
+						<tbody>
+							<% @business.awards.order("year desc, name").each do |award| %>
+								<tr>
+									<td><%= icon('edit fa-trophy') %></td>
+									<td><%= award.year %></td>
+									<td><%= award.place %></td>
+									<td><%= award.name %></td>
+									<td class="text-center">
+										<%= link_to icon('edit fa-lg'),
+											edit_award_path(award,:current_business=>@business),
+											title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+									</td>
+									<td class="text-center">
+										<%= link_to icon('remove fa-lg'), 
+											award_path(award), :class => "",
+											:method=> :delete, :action => 'destroy',
+											data: {confirm:'Remove award?'},
+											title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td><%= award.description %></td>
+									<td></td>
+									<td></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<hr/>
+	
+		<div class="form-group row">
+			<div class="form-group col-md-12">
+				<label for="notes" class="col-form-label">Notes to customers: <small>(Anything you wish for your customers to know about your business)</small></label>
+				<div class="col-12">
+					<%= form.text_area :notes, class: "form-control" %>
+				</div>
+			</div>
+		</div>
+
+		<br/>
+		<div class="form-group row d-flex justify-content-between">
+			<%= link_to "Previous", previous_wizard_path(), :class => 'btn btn-primary' %>
+			<%= form.submit "Next", :class => 'btn btn-primary'%>
+		</div>
+	<% end %>
+</div>

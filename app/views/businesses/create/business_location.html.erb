@@ -1,0 +1,76 @@
+<div class="business_heading">
+	<h1>Steps to submit a Business:</h1>
+	<%= render 'shared/create_business_progress' %>
+</div>
+
+<div class="business_block" >
+	<%= form_for(@business, :url => wizard_path, :method => :put) do |form| %>
+	<h3> Enter location info for your business. How can customers find you? </h3>
+	<br/>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="address1" class="col-form-label">Address1: *</label>
+			<div class="col-12">
+				<%= form.text_field :address1, class: "form-control", :required => "true" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="address2" class="col-form-label">Address2:</label>
+			<div class="col-12">
+				<%= form.text_field :address2, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="city" class="col-form-label">City: *</label>
+			<div class="col-12">
+				<%= form.text_field :city, class: "form-control", :required => "true" %>
+			</div>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="state" class="col-form-label">State: *</label>
+			<div class="col-12">
+				<%= form.select :state, options_for_select(us_states, @business.state || 'OR'), {:required => true}, {:class => "form-control"} %>
+			</div>
+		</div>
+		<div class="form-group col-md-2">
+			<label for="zipcode" class="col-form-label">Zipcode: *</label>
+			<div class="col-12">
+				<%= form.text_field :zipcode, class: "form-control", :required => "true" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="phonenum" class="col-form-label">Phone Number: *</label>
+			<div class="col-6">
+				<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx', :required => "true" %>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="email" class="col-form-label">Email: *</label>
+			<div class="col-12">
+				<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-9">
+			<label for="website" class="col-form-label">Website:</label>
+			<div class="col-12">
+				<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="form-group row d-flex justify-content-between">
+		<%= link_to "Previous", previous_wizard_path(), :class => 'btn btn-primary' %>
+		<%= form.submit "Next", :class => 'btn btn-primary'%>
+	</div>
+
+	<% end %>
+	
+</div>

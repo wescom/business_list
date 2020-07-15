@@ -4,6 +4,8 @@ class ContactsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    session[:return_to] = request.referer
+    
     @business = Business.find(params[:current_business])
     @contact = Contact.new
   end
@@ -11,12 +13,12 @@ class ContactsController < ApplicationController
   def create
     @business = Business.find(params[:contact][:business_id])
     if params[:cancel_button]
-      redirect_to @business
+      redirect_to session[:return_to]
     else
       @contact = Contact.new(contact_params)
       if @contact.save
         flash[:notice] = "New Contact Added"
-        redirect_to @business
+        redirect_to session[:return_to]
       else
         flash[:notice] = "Contact Failed"
         render :action => :new
@@ -25,6 +27,8 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    session[:return_to] = request.referer
+    
     @business = Business.find(params[:current_business])
     @contact = Contact.find(params[:id])
   end
@@ -33,11 +37,11 @@ class ContactsController < ApplicationController
     @business = Business.find(params[:contact][:business_id])
     @contacts = Contact.find(params[:id])
     if params[:cancel_button]
-      redirect_to @business
+      redirect_to session[:return_to]
     else
       if @contacts.update_attributes(contact_params)
         flash[:notice] = "Contact Updated"
-        redirect_to @business
+        redirect_to session[:return_to]
       else
         flash[:notice] = "Contact Failed"
         render :action => :edit
@@ -46,13 +50,15 @@ class ContactsController < ApplicationController
   end
 
   def destroy
+    session[:return_to] = request.referer
+    
     @contact = Contact.find(params[:id])
     if @contact.destroy
       flash[:notice] = "Contact Removed"
-      redirect_to @contact.business
+      redirect_to session[:return_to]
     else
       flash[:notice] = "Contact Removal Failed"
-      redirect_to @contact.business
+      redirect_to session[:return_to]
     end
   end
 
