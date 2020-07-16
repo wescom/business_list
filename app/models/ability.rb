@@ -52,8 +52,11 @@ class Ability
       can :manage, Award
     end
     if user.user_role?
-      can :read, Business
-#      can :manage, Business, user_id: user.id # can manage their own business
+      can :create, Business
+      can :create_business_wizard, Business
+      can :read, Business, owner_id: user.id # can manage their own business
+      can :update, Business, owner_id: user.id # can manage their own business
+      can :delete, Business, owner_id: user.id # can manage their own business
     end
   end
 end

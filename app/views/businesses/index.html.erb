@@ -2,10 +2,18 @@
 	<div class="business_listing_heading">
 		<div class="d-flex justify-content-between align-items-center">
 			<h2>
-				<%= params[:type].nil? ? "All" :params[:type].camelize %>
-				Businesss
+				<% if params[:type].nil? %>
+					<% if ['admin', 'sales', 'supervisor'].include? get_user_role(current_user) %>
+						All
+					<% else %>
+						My
+					<% end %>
+				<% else %>
+					<%= params[:type].camelize %>
+				<% end %>
+				Businesses
 			</h2>
-			<div class="float-right"><%= link_to "New Business", new_business_path, :class => 'btn btn-primary' %></div>
+			<div class="float-right"><%= link_to "New Business", create_business_wizard_path, :class => 'btn btn-primary' %></div>
 		</div>
 	</div>
 

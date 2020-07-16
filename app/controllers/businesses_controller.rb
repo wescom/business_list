@@ -6,7 +6,7 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @businesses = Business.left_outer_joins(:business_type) #.left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = Business.where(:owner_id => current_user).left_outer_joins(:business_type)        #.left_outer_joins(:businesses_service_types).joins(:service_types)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
@@ -15,7 +15,7 @@ class BusinessesController < ApplicationController
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type) #.left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = Business.left_outer_joins(:business_type)              #.left_outer_joins(:businesses_service_types).joins(:service_types)
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
@@ -36,6 +36,12 @@ class BusinessesController < ApplicationController
 
     @business = Business.new
     @business.owner_id = current_user.id
+  end
+
+  def create_business_wizard
+    business = Business.create
+    business.save
+    redirect_to business_create_path(business.id, :business_info)
   end
 
   def create
@@ -87,7 +93,7 @@ class BusinessesController < ApplicationController
   def destroy
     @business = Business.find(params[:id])
     if @business.destroy
-        flash[:notice] = "Business Killed"
+        flash[:notice] = "Business Deleted"
         redirect_to businesses_path
     else
         flash[:notice] = "Business Deletion Failed"

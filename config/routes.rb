@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get 'business_listing'
     end
   end
+  match "/create_business_wizard" => "businesses#create_business_wizard", :via => [:get]
+
   resources :business_types do
     get 'business_subtype_options', :on => :collection
   end

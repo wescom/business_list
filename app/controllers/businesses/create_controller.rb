@@ -1,7 +1,6 @@
 class Businesses::CreateController < ApplicationController
   include Wicked::Wizard
   before_action :set_progress, only: [:show]
-
   steps :business_info, :business_location, :business_services, :business_extras, :business_contacts
 
   def show
@@ -26,10 +25,11 @@ class Businesses::CreateController < ApplicationController
     @business.update(business_params)
     render_wizard @business
   end
-
+  
   def create
-    @business = Business.create
-    redirect_to wizard_path(steps.first, business_id: @business.id)
+    business = Business.create
+    business.save
+    redirect_to wizard_path(steps.first, product_id: business.id)
   end
 
   private
