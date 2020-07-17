@@ -40,6 +40,8 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .business_type_block, .business_subtype_block, .service_type_block, .contact_block, .zone_block, .award_block, .user_block, .default_settings_block { margin: 20px 10% 10px 10%; }
 #checkout_form { width: 100% }
 
+.field_error_messages { color: red; margin: 0px 30px 10px 30px; }
+
 .business_block, .contact_block,.award_block { 
 	margin: 20px 10% 20px 10%; 
 	min-height: 300px; 

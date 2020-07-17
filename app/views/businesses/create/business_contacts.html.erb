@@ -8,10 +8,9 @@
 	<h3> Who should we contact about this business listing? </h3>
 	<br/>
 
+	<%= form.hidden_field :owner_id, :value => @business.owner_id %>
 	<div class="form-row">
 		<div class="form-group col-md-12">
-			<%= form.hidden_field :owner_id, :value => current_user.id %>
-
 			<label for="contacts" class="col-form-label">Business Contacts: 
 				<small><em>(<%= link_to 'add new contact', new_contact_path(:current_business=>@business) %>)</em></small>
 			</label>

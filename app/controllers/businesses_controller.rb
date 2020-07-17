@@ -7,6 +7,7 @@ class BusinessesController < ApplicationController
 
   def index
     @businesses = Business.where(:owner_id => current_user).left_outer_joins(:business_type)        #.left_outer_joins(:businesses_service_types).joins(:service_types)
+    @businesses = @businesses.where.not(name: [nil, ""])
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
@@ -39,9 +40,16 @@ class BusinessesController < ApplicationController
   end
 
   def create_business_wizard
-    business = Business.create
-    business.save
-    redirect_to business_create_path(business.id, :business_info)
+    # Find businesses of current user that are not active
+    @businesses = Business.where(:owner_id => current_user.id).where(status: nil)
+    if @businesses.empty?
+      @business = Business.create
+      @business.owner_id = current_user.id
+      @business.save
+    else
+      @business = @businesses.first
+    end
+    redirect_to business_create_path(@business.id, :business_info)
   end
 
   def create

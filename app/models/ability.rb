@@ -56,7 +56,7 @@ class Ability
       can :create_business_wizard, Business
       can :read, Business, owner_id: user.id # can manage their own business
       can :update, Business, owner_id: user.id # can manage their own business
-      can :delete, Business, owner_id: user.id # can manage their own business
+      can :destroy, Business, owner_id: user.id # can manage their own business
     end
   end
 end

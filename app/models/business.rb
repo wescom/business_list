@@ -21,4 +21,35 @@ class Business < ApplicationRecord
 
   validates_attachment_content_type :logo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
+  validates :name, presence: true, if: :active_or_info?
+  validates :address1, :city, :state, :zipcode, :phonenum, :email, presence: true, if: :active_or_location?
+  validates :business_type_id, presence: true, if: :active_or_services?
+  validates :service_types, presence: { message: "must select at least one" }, if: :active_or_services?
+  validates :zones, presence: { message: "must select at least one" }, if: :active_or_services?
+  #validates :business_type_id, presence: true, if: :active_or_extras?
+  #validates :business_type_id, presence: true, if: :active_or_contacts?
+
+  def active?
+    status == 'active'
+  end
+
+  def active_or_info?
+    status.include?('business_info') || active?
+  end
+
+  def active_or_location?
+    status.include?('business_location') || active?
+  end
+
+  def active_or_services?
+    status.include?('business_services') || active?
+  end
+
+  def active_or_extras?
+    status.include?('business_extras') || active?
+  end
+
+  def active_or_contacts?
+    status.include?('business_contacts') || active?
+  end
 end

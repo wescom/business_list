@@ -1,6 +1,7 @@
 class Businesses::CreateController < ApplicationController
   include Wicked::Wizard
   before_action :set_progress, only: [:show]
+
   steps :business_info, :business_location, :business_services, :business_extras, :business_contacts
 
   def show
@@ -22,6 +23,8 @@ class Businesses::CreateController < ApplicationController
     @users = User.all.order("email")
 
     @business = Business.find(params[:business_id])
+    @business.website = sanitize_website(@business.website) unless @business.website.nil?
+    @business.status = (step == steps.last ? 'active' : step.to_s)
     @business.update(business_params)
     render_wizard @business
   end
@@ -49,5 +52,12 @@ class Businesses::CreateController < ApplicationController
     else
       @progress = 0
     end
+  end
+
+  def sanitize_website(url)
+    unless url.include?("http://") || url.include?("https://")
+      url = "http://" + url
+    end
+    return url
   end
 end

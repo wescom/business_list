@@ -22,10 +22,10 @@
 				<label for="awards" class="col-form-label">Business Awards: 
 					<small><em>(<%= link_to 'add new award', new_award_path(:current_business=>@business) %>)</em></small>
 				</label>
-				<div class="offset-1 mw-100 black-border">
-					<table class="table table-hover table-borderless table-sm w-auto">
-						<tbody>
-							<% @business.awards.order("year desc, name").each do |award| %>
+				<% @business.awards.order("year desc, name").each do |award| %>
+					<div class="offset-1 mw-100 black-border">
+						<table class="table table-hover table-borderless table-sm w-auto">
+							<tbody>
 								<tr>
 									<td><%= icon('edit fa-trophy') %></td>
 									<td><%= award.year %></td>
@@ -52,10 +52,10 @@
 									<td></td>
 									<td></td>
 								</tr>
-							<% end %>
-						</tbody>
-					</table>
-				</div>
+							</tbody>
+						</table>
+					</div>
+				<% end %>
 			</div>
 		</div>
 		<hr/>

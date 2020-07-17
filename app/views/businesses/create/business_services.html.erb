@@ -5,72 +5,76 @@
 
 <div class="business_block" >
 	<%= form_for(@business, :url => wizard_path, :method => :put) do |form| %>
-	<h3> What services does your business provide and when?</h3>
-	<br/>
+		<h3> What services does your business provide and when?</h3>
+		<br/>
 
-	<div class="">
 		<div class="">
-			<label for="business_type" class="col-form-label">Type of Business: *</label>
-			<div class="row">
-				<div class="col-6">
-					<%= form.select :business_type_id, 
-						options_from_collection_for_select(@business_types, 'id', 'name', 
-						:selected => @business.business_type_id), 
-						{:prompt => "- Select business type -", :required => true},
-						{:id => "select_business_type", :class => "form-control"} %>
-				</div>
-				<div class="col-6">
-					<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] },
-						{}, 
-						{:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }
-						) unless @business_subtypes.nil? %>
+			<div class="">
+				<label for="business_type" class="col-form-label">Type of Business: *</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :business_type_id %>
+				<div class="row">
+					<div class="col-6">
+						<%= form.select :business_type_id, 
+							options_from_collection_for_select(@business_types, 'id', 'name', :selected => @business.business_type_id), 
+							{:prompt => "- Select business type -", :required => true},
+							{:id => "select_business_type", :class => "form-control"} %>
+					</div>
+					<div class="col-6">
+						<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] },
+							{}, 
+							{:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }
+							) unless @business_subtypes.nil? %>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="form-row">
-		<div class="form-group col-md-4">
-			<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
-			<div class="col-12">
-				<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
-					{}, 
-					{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
-					) unless @zones.nil? %>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :zones, message: "must select at least one" %>
+				<div class="col-12">
+					<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
+						{:required => true}, 
+						{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
+						) unless @zones.nil? %>
+				</div>
 			</div>
 		</div>
-	</div>
-	<hr/>
-	<div class="form-row">
-		<div class="form-group col-md-6">
-			<label for="hours" class="col-form-label">Business Hours:</label>
-			<div class="col-6">
-				<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
+		<hr/>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="hours" class="col-form-label">Business Hours:</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :hours %>
+				<div class="col-6">
+					<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :happy_hour %>
+				<div class="col-6">
+					<%= form.check_box :happy_hour, class: "form-control" %>
+				</div>
+			</div>
+		</div>	
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="service_type" class="col-form-label">Service Options: *</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :service_types %>
+				<div class="col-12">
+					<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
+						{:required => true}, 
+						{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }
+						) unless @service_types.nil? %>
+				</div>
 			</div>
 		</div>
-		<div class="form-group col-md-6">
-			<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
-			<div class="col-6">
-				<%= form.check_box :happy_hour, class: "form-control" %>
-			</div>
+		<br/>
+		<div class="form-group row d-flex justify-content-between">
+			<%= link_to "Previous", previous_wizard_path(), :class => 'btn btn-primary' %>
+			<%= form.submit "Next", :class => 'btn btn-primary'%>
 		</div>
-	</div>	
-	<div class="form-row">
-		<div class="form-group col-md-6">
-			<label for="service_type" class="col-form-label">Service Options: *</label>
-			<div class="col-12">
-				<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
-					{}, 
-					{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }
-					) unless @service_types.nil? %>
-			</div>
-		</div>
-	</div>
-	<br/>
-	<div class="form-group row d-flex justify-content-between">
-		<%= link_to "Previous", previous_wizard_path(), :class => 'btn btn-primary' %>
-		<%= form.submit "Next", :class => 'btn btn-primary'%>
-	</div>
 
 	<% end %>
 	
