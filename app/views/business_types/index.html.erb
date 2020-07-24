@@ -33,7 +33,9 @@
 											<%= link_to icon('trash-o fa-lg'), 
 												business_type_path(business_type),
 												:method=> :delete, :action => 'destroy',
-												data: {confirm:'Delete business type?'},
+												data: {
+													title: 'Delete '+business_type.name+'?', 
+													confirm:'Delete this business type from the system?'},
 												title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 										</div>
 									</td>
@@ -51,7 +53,9 @@
 												<%= link_to icon('trash-o fa-lg'), 
 													business_subtype_path(subtype),
 													:method=> :delete, :action => 'destroy',
-													data: {confirm:'Delete business type?'},
+													data: {
+														title: 'Delete '+subtype.name+'?', 
+														confirm:'Delete this business subtype from the system?'},
 													title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 											</div>
 										</td>

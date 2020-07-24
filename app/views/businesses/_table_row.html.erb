@@ -40,7 +40,9 @@
 			<%= link_to icon('trash-o fa-lg'), 
 				business_path(table_row),
 				:method=> :delete, :action => 'destroy',
-				data: {confirm:'Delete business type?'},
+				data: {
+					title: 'Delete '+table_row.name+'?', 
+					confirm:'Delete this business from the system?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 		</div>
 	</td>

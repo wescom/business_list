@@ -8,7 +8,9 @@
 			<%= link_to icon('trash-o fa-lg'), 
 				service_type_path(table_row),
 				:method=> :delete, :action => 'destroy',
-				data: {confirm:'Delete service type?'},
+				data: {
+					title: 'Delete '+table_row.name+'?', 
+					confirm:'Delete this service type from the system?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 		</div>
 	</td>

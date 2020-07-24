@@ -8,7 +8,9 @@
 			<%= link_to icon('trash-o fa-lg'), 
 				zone_path(table_row),
 				:method=> :delete, :action => 'destroy',
-				data: {confirm:'Delete zone?'},
+				data: {
+					title: 'Delete '+table_row.name+'?', 
+					confirm:'Delete this zone from the system?'},
 				title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 		</div>
 	</td>
