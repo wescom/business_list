@@ -55,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def after_sign_up_path_for(resource)
-    business = Business.create
+    business = Business.new({owner_id: current_user.id})
     business.save
     return business_create_path(business.id, :business_info)
   end

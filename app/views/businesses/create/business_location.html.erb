@@ -10,6 +10,7 @@
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<label for="address1" class="col-form-label">Address1: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :address1 %>
 			<div class="col-12">
 				<%= form.text_field :address1, class: "form-control", :required => "true" %>
 			</div>
@@ -26,6 +27,7 @@
 	<div class="form-row">
 		<div class="form-group col-md-4">
 			<label for="city" class="col-form-label">City: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :city %>
 			<div class="col-12">
 				<%= form.text_field :city, class: "form-control", :required => "true" %>
 			</div>
@@ -38,6 +40,7 @@
 		</div>
 		<div class="form-group col-md-2">
 			<label for="zipcode" class="col-form-label">Zipcode: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :zipcode %>
 			<div class="col-12">
 				<%= form.text_field :zipcode, class: "form-control", :required => "true" %>
 			</div>
@@ -46,12 +49,14 @@
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<label for="phonenum" class="col-form-label">Phone Number: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :phonenum %>
 			<div class="col-6">
 				<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx', :required => "true" %>
 			</div>
 		</div>
 		<div class="form-group col-md-6">
 			<label for="email" class="col-form-label">Email: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :email %>
 			<div class="col-12">
 				<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
 			</div>

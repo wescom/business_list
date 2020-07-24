@@ -4,7 +4,7 @@
 			<div class="col d-flex align-items-end">
 				<div id="branding" class="float-left">
 					<h1>
-						<%= link_to root_url do %>
+						<%= link_to businesses_path do %>
 							Bulletin <span>- Business Listings</span>
 						<% end %>
 					</h1>
@@ -12,9 +12,6 @@
 				<% if !current_user.nil? %>
 					<div class="">
 						<ul class="nav menu-items-bar">
-							<li class="nav-item">
-			 				   <%= link_to "Home", root_path, :class=>"nav-link menu-item-home" %>
-							</li>
 							<% if current_user.admin_role? || current_user.supervisor_role? || current_user.sales_role? %>
 								<li class="nav-item">
 									<%= link_to "Businesses", businesses_path(:type=>'retail'), :class=>"nav-link menu-item-images" %>
@@ -27,57 +24,9 @@
 					</div>
 				<% end %>
 			</div>
-			<div class="col-lg-3 col-md-3 col-sm-2 col-2">
-				<div class="login-box d-flex align-items-center justify-content-end">
-					<%= current_user.nil? ? "" : current_user.email %>
-					<% if current_user.nil? %>
-						<%= link_to('Register', new_user_registration_path)  %>&nbsp;&nbsp;
-						<%= link_to new_user_session_path, class: 'login-button' do %>Login<% end %>
-					<% else %>
-						<%= link_to('My Account', edit_user_registration_path) %>&nbsp;
-						( <%= link_to "Logout", destroy_user_session_path %> )
-					<% end %>
-				</div>
-			</div>
 			<div class="col-lg-1 col-md-1 col-sm-2 col-2">
 				<div class="d-flex align-items-center">
-					<div class="btn-group-vertical">
-						<% if !current_user.nil? %>
-							<div class="dropleft btn-block text-center menu-items-icon-admin">
-								<button type="button" class="btn btn-secondary btn-menu" data-toggle="dropdown">
-									<%= icon('bars fa-lg') %>
-								</button>
-								<div class="dropdown-menu">
-									<% if (can? :manage, Business) %>
-										<%= link_to "Business List", businesses_path(:type=>'retail'), :class=>"dropdown-item" %>
-										<%= link_to "Restaurant List", businesses_path(:type=>'restaurant'), :class=>"dropdown-item" %>
-										<div class="dropdown-divider"></div>
-									<% else %>
-										<%= link_to "My Businesses", businesses_path(), :class=>"dropdown-item" %>
-										<div class="dropdown-divider"></div>
-									<% end %>
-
-									<% if (can? :manage, BusinessType) || (can? :manage, ServiceType) || (can? :manage, Zone) %>
-										<%= link_to "Business Types", business_types_path, :class=>"dropdown-item" if can? :manage, BusinessType %>
-										<%= link_to "Service Types", service_types_path, :class=>"dropdown-item" if can? :manage, ServiceType %>
-										<%= link_to "Business Zones", zones_path, :class=>"dropdown-item" if can? :manage, Zone %>
-										<div class="dropdown-divider"></div>
-									<% end %>
-
-									<% if (can? :manage, User) %>
-										<%= link_to "Users", users_path, :class=>"dropdown-item" %>
-										<div class="dropdown-divider"></div>
-									<% end %>
-									<% if (can? :manage, DefaultSetting) %>
-										<%= link_to "Default Settings", default_settings_path, :class=>"dropdown-item" %>
-										<div class="dropdown-divider"></div>
-									<% end %>
-
-									<%= link_to "Logout", destroy_user_session_path, :class=>"dropdown-item" %>
-								</div>
-							</div>
-						<% end %>
-					</div>
+					<%= render 'shared/nav_menu' %>
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,11 @@ class BusinessesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @businesses = Business.where(:owner_id => current_user).left_outer_joins(:business_type)        #.left_outer_joins(:businesses_service_types).joins(:service_types)
+    if can? :manage, Business
+      @businesses = Business.left_outer_joins(:business_type)
+    else
+      @businesses = Business.where(:owner_id => current_user).left_outer_joins(:business_type)
+    end
     @businesses = @businesses.where.not(name: [nil, ""])
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
@@ -41,15 +45,19 @@ class BusinessesController < ApplicationController
 
   def create_business_wizard
     # Find businesses of current user that are not active
-    @businesses = Business.where(:owner_id => current_user.id).where(status: nil)
+    @businesses = Business.where(:owner_id => current_user.id)
+    @businesses = @businesses.where.not(status: "active").where.not(status: "approved")
     if @businesses.empty?
-      @business = Business.create
-      @business.owner_id = current_user.id
+      @business = Business.new({owner_id: current_user.id})
+      @business.status = 'business_info'
       @business.save
+      puts "*** create new ****"+@business.inspect
+      redirect_to business_create_path(business_id: @business.id, id: :business_info)
     else
       @business = @businesses.first
+      puts "*** found existing ****"+@business.inspect
+      redirect_to business_create_path(business_id: @business.id, id: @business.status)
     end
-    redirect_to business_create_path(@business.id, :business_info)
   end
 
   def create
@@ -62,6 +70,7 @@ class BusinessesController < ApplicationController
 
       @business = Business.new(business_params)
       @business.owner_id = current_user.id
+      @business.status = "approved"
       if @business.save
         flash[:notice] = "Business Created"
         redirect_to @business
@@ -74,7 +83,11 @@ class BusinessesController < ApplicationController
 
   def edit
     @business_types = BusinessType.all.order("name")
-    @business_subtypes = @business.business_type.business_subtypes
+    if @business.business_type.nil?
+      @business_subtypes = BusinessType.first.business_subtypes
+    else
+      @business_subtypes = @business.business_type.business_subtypes
+    end
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
     @users = User.all.order("email")
@@ -84,7 +97,11 @@ class BusinessesController < ApplicationController
 
   def update
     @business_types = BusinessType.all.order("name")
-    @business_subtypes = @business.business_type.business_subtypes
+    if @business.business_type.nil?
+      @business_subtypes = BusinessType.first.business_subtypes
+    else
+      @business_subtypes = @business.business_type.business_subtypes
+    end
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
 
@@ -106,6 +123,21 @@ class BusinessesController < ApplicationController
     else
         flash[:notice] = "Business Deletion Failed"
         redirect_to businesses_path
+    end
+  end
+  
+  def approve_business
+    @business = Business.find(params[:business_id])
+    if @business.present?
+      @business.approved = true
+      @business.status = "approved"
+      if @business.save
+        flash[:notice] = "Business Approved"
+        redirect_to @business
+      else
+        flash[:notice] = "Business Approval Failed"
+        redirect_to @business
+      end
     end
   end
 

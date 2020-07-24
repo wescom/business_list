@@ -17,7 +17,7 @@
 		</div>
 	</div>
 
-	<div class="business_black">
+	<div class="business_index_block">
 		<div class="">
 			<% if @businesses %>
 				<% unless @businesses.nil? %>
@@ -43,4 +43,10 @@
 			<% end %>
 		</div>
 	</div>
+	<ul class="list-group flex-sm-row justify-content-center status_key">
+	  <li class="list-group-item"><i class="fa fa-circle" style="color: green;"></i> Approved</li>
+	  <li class="list-group-item"><i class="fa fa-clock-o"></i> Waiting for approval</li>
+	  <li class="list-group-item"><i class="fa fa-exclamation-triangle" style="color: red;"></i> Business creation needs completion</li>
+	</ul>
+	<hr/>
 </div>

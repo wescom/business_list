@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   before_action :load_default_settings
 
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || businesses_path
+  end
+
   def load_default_settings
     @default_settings = DefaultSetting.first
   end

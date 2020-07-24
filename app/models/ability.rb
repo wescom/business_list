@@ -57,6 +57,14 @@ class Ability
       can :read, Business, owner_id: user.id # can manage their own business
       can :update, Business, owner_id: user.id # can manage their own business
       can :destroy, Business, owner_id: user.id # can manage their own business
+      can :create, Contact
+      can :read, Contact, owner_id: user.id # can manage their own business
+      can :update, Contact, owner_id: user.id # can manage their own business
+      can :destroy, Contact, owner_id: user.id # can manage their own business
+      can :create, Award
+      can :read, Award, owner_id: user.id # can manage their own business
+      can :update, Award, owner_id: user.id # can manage their own business
+      can :destroy, Award, owner_id: user.id # can manage their own business
     end
   end
 end

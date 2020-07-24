@@ -23,7 +23,7 @@ class Business < ApplicationRecord
 
   validates :name, presence: true, if: :active_or_info?
   validates :address1, :city, :state, :zipcode, :phonenum, :email, presence: true, if: :active_or_location?
-  validates :business_type_id, presence: true, if: :active_or_services?
+  validates :business_type_id, presence: { message: "must select at least one" }, if: :active_or_services?
   validates :service_types, presence: { message: "must select at least one" }, if: :active_or_services?
   validates :zones, presence: { message: "must select at least one" }, if: :active_or_services?
   #validates :business_type_id, presence: true, if: :active_or_extras?

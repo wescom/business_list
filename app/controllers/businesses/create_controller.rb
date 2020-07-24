@@ -30,9 +30,9 @@ class Businesses::CreateController < ApplicationController
   end
   
   def create
-    business = Business.create
-    business.save
-    redirect_to wizard_path(steps.first, product_id: business.id)
+    @business = Business.create
+    @business.save
+    redirect_to wizard_path(steps.first, business_id: @business.id)
   end
 
   private

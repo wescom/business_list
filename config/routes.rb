@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     collection do
       get 'business_listing'
     end
+    put 'approve_business'
   end
   match "/create_business_wizard" => "businesses#create_business_wizard", :via => [:get]
 

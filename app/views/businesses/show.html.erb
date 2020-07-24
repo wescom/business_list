@@ -8,6 +8,30 @@
 </div>
 
 <div class="business_block" >
+	<hr/>
+	<div class="form-group row">
+		<label for="status" class="col-1"><h5>Status:</h5></label>
+		<div class="col-3">
+			<% case @business.status 
+		     when "approved" %><i class="fa fa-circle" style="color: green;"></i>&nbsp;&nbsp;Approved
+		  <% when "active" %>
+				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;Waiting for approval
+				<% if can? :manage, Business %>
+					&nbsp;&nbsp;
+					<%= link_to "Approve", business_approve_business_path(@business),
+						:method=> :put, :action => 'approve_business', :class => 'btn btn-success',
+						data: {confirm:'Approve business listing and publish to the public?'},
+						title: 'Approve', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+				<% end %>
+			<% else %><i class="fa fa-exclamation-triangle" style="color: red;"></i>&nbsp;&nbsp;Business creation needs completion
+		  <% end %>
+		</div>
+		<div class="col-4">
+			Last updated: <%= @business.updated_at.strftime('%m/%d/%Y %l:%M%P') %>
+		</div> 
+	</div>
+	<hr/>
+
 	<h5>Business Info:</h5>
 	<div class="form-group row">
 		<label for="name" class="offset-1 col-2">Name:</label>
@@ -25,7 +49,9 @@
 		<div class="col-2">
 			<%= @business.business_type.name unless @business.business_type.nil? %>
 		</div>
-		<label for="business_subtype" class="offset-1 col-3"><%= @business.business_type.name %> <%= @business.business_type.title_for_subtypes %>:</label>
+		<label for="business_subtype" class="offset-1 col-3">
+			<%= @business.business_type.name unless @business.business_type.nil? %> <%= @business.business_type.title_for_subtypes unless @business.business_type.nil? %>:
+		</label>
 		<div class="col-3">
 			<%= @business.business_subtypes.map{|v| v.name }.join(", ") %>
 		</div>
