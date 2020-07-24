@@ -38,7 +38,9 @@
 											<%= link_to icon('trash-o fa-lg'), 
 												user_path(user),
 												:method=> :delete, :action => 'destroy',
-												data: {confirm:'Delete user?'},
+												data: {
+													title: 'Delete account '+user.email+'?', 
+													confirm:'The user account '+user.email+' will be deleted but all associated businesses will remain in the system.'},
 												title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 										</div>
 									</td>

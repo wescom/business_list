@@ -28,6 +28,7 @@ gem 'bootstrap', '= 4.0.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'bootstrap-datepicker-rails'
 
+gem 'data-confirm-modal'
 gem 'progress_bar'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
