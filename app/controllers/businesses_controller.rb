@@ -49,12 +49,13 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.where.not(status: "active").where.not(status: "approved")
     if @businesses.empty?
       @business = Business.new({owner_id: current_user.id})
-      @business.status = 'business_info'
-      @business.save
+      @business.status = 'new'
+      @business.save!
       puts "*** create new ****"+@business.inspect
       redirect_to business_create_path(business_id: @business.id, id: :business_info)
     else
       @business = @businesses.first
+      @business.status = 'business_info' if @business.status == 'new'
       puts "*** found existing ****"+@business.inspect
       redirect_to business_create_path(business_id: @business.id, id: @business.status)
     end

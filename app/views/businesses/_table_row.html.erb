@@ -1,4 +1,8 @@
-<tr>
+<% if table_row.status == 'active' %>
+	<tr class="business_active">
+<% else %>
+	<tr>
+<% end %>
 	<td class="text-center">
 		<% case table_row.status 
 	     when "approved" %><i class="fa fa-circle" data-toggle="tooltip"  title="Approved" style="color: green;"></i>

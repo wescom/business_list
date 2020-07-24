@@ -253,5 +253,6 @@ td.image_column { padding: 0.75rem 0px 0.75rem 0 }
 .business_type_block td {padding: 0px;}
 .table-borderless td, .table-borderless th { border: 0; }
 .table td { vertical-align: middle;}
+.table tr.business_active { background-color: lightgreen; }
 .black-border { border: 1px solid black; }
 .status_key { margin: 50px 0px; }
