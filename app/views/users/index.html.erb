@@ -14,6 +14,7 @@
 							<tr>
 								<th class="">Email</th>
 								<th class="text-center align-middle">Role</th>
+								<th class="text-center align-middle">Businesses</th>
 								<th class="text-center align-middle">Created At</th>
 								<th class="text-center align-middle">Last Signed In</th>
 								<th class="text-center align-middle">Login Count</th>
@@ -25,14 +26,17 @@
 								<tr>
 									<td><%= link_to user.email, user_path(user) %></td>
 									<td class="text-center align-middle"><%= get_user_role(user) %></td>	
+									<td class="text-center align-middle"><%= user.businesses.count %></td>	
 									<td class="text-center align-middle"><%= user.created_at.strftime('%m/%d/%y %I:%M%p') %></td>	
 									<td class="text-center align-middle"><%= user.last_sign_in_at.strftime('%m/%d/%y %I:%M%p') %></td>	
 									<td class="text-center align-middle"><%= user.sign_in_count %></td>	
 
 									<td class="text-center">
 										<div class="btn">
+											<%= link_to '<i class="fa fa-edit"></i>'.html_safe, user_path(user),
+												title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 											<%= link_to icon('trash-o fa-lg'), 
-												registration_path(user),
+												user_path(user),
 												:method=> :delete, :action => 'destroy',
 												data: {confirm:'Delete user?'},
 												title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>

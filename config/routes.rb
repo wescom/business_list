@@ -5,13 +5,13 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  
-  get 'home/index'
-  get 'business/index'
   resources :users, :only => [:index, :show, :destroy] do
     put 'set_role'
     put 'password_reset_instructions'
   end
+  
+  get 'home/index'
+  get 'business/index'
 
   resources :default_settings, :only => [:index, :edit, :update]
   
