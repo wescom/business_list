@@ -51,7 +51,11 @@
 			<div class="form-group row">
 				<label for="cancel_account" class="offset-1 col-3 col-form-label"></label>
 				<div class="col">
-					<%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to cancel your account? This will remove all business listings associated with your account as well and can not be undone." }, 
+					<%= link_to "Cancel my account", registration_path(resource_name), 
+						data: {
+							title: 'Cancel account?', 
+							confirm: "Are you sure you want to cancel your account? This will remove your account from the system and can not be undone.",
+							verify: 'DELETE', verify_text: 'Type "DELETE" to confirm'},
 						method: :delete, :class => 'btn btn-danger' %>
 				</div>
 			</div>

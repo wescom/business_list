@@ -31,7 +31,9 @@
 									<%= link_to icon('remove fa-lg'), 
 										contact_path(contact), :class => "",
 										:method=> :delete, :action => 'destroy',
-										data: {confirm:'Remove contact?'},
+										data: {
+											title: 'Delete '+contact.name+'?', 
+											confirm:'Remove this contact from the business?'},
 										title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 								</td>
 							</tr>

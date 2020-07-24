@@ -40,7 +40,9 @@
 										<%= link_to icon('remove fa-lg'), 
 											award_path(award), :class => "",
 											:method=> :delete, :action => 'destroy',
-											data: {confirm:'Remove award?'},
+											data: {
+												title: 'Delete '+award.name+'?', 
+												confirm:'Remove this award from the business?'},
 											title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 									</td>
 								</tr>

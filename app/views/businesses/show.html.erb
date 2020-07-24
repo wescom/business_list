@@ -20,7 +20,10 @@
 					&nbsp;&nbsp;
 					<%= link_to "Approve", business_approve_business_path(@business),
 						:method=> :put, :action => 'approve_business', :class => 'btn btn-success',
-						data: {confirm:'Approve business listing and publish to the public?'},
+						data: {
+							title: 'Approve '+@business.name+'?', 
+							confirm:'Proceeding will approve this business listing and publish to the public', 
+							commit: 'Approve', 'commit-class': 'btn-success'},
 						title: 'Approve', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 				<% end %>
 			<% else %><i class="fa fa-exclamation-triangle" style="color: red;"></i>&nbsp;&nbsp;Business creation needs completion
@@ -149,7 +152,9 @@
 							<%= link_to icon('remove fa-lg'), 
 								award_path(award), :class => "",
 								:method=> :delete, :action => 'destroy',
-								data: {confirm:'Remove award?'},
+								data: {
+									title: 'Delete '+award.name+'?', 
+									confirm:'Remove this award from the business?'},
 								title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 						</td>
 					</tr>
@@ -177,7 +182,9 @@
 							<%= link_to icon('remove fa-lg'), 
 								contact_path(contact), :class => "",
 								:method=> :delete, :action => 'destroy',
-								data: {confirm:'Remove contact?'},
+								data: {
+									title: 'Delete '+contact.name+'?', 
+									confirm:'Remove this contact from the business?'},
 								title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 						</td>
 					</tr>
