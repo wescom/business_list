@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
   
-  has_many :businesses, foreign_key: :owner_id
+  has_many :businesses, foreign_key: :owner_id, dependent: :nullify
          
   ROLES = %i[admin supervisor sales user]
 
