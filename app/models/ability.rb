@@ -54,17 +54,15 @@ class Ability
     if user.user_role?
       can :create, Business
       can :create_business_wizard, Business
-      can :read, Business, owner_id: user.id # can manage their own business
-      can :update, Business, owner_id: user.id # can manage their own business
-      can :destroy, Business, owner_id: user.id # can manage their own business
+      can [:read,:update,:destroy], Business, owner_id: user.id # can manage their own business
       can :create, Contact
-      can :read, Contact, owner_id: user.id # can manage their own business
-      can :update, Contact, owner_id: user.id # can manage their own business
-      can :destroy, Contact, owner_id: user.id # can manage their own business
+      can [:read,:update,:destroy], Contact do |contact|  # can manage their own business contacts
+           contact.business.owner_id == user.id
+      end
       can :create, Award
-      can :read, Award, owner_id: user.id # can manage their own business
-      can :update, Award, owner_id: user.id # can manage their own business
-      can :destroy, Award, owner_id: user.id # can manage their own business
+      can [:read,:update,:destroy], Award do |award|  # can manage their own business awards
+           award.business.owner_id == user.id
+      end
     end
   end
 end
