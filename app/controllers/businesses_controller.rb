@@ -1,8 +1,8 @@
 class BusinessesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:business_listing]
 
-  skip_before_action :authenticate_user!, :only => [:business_listing,:restaurant_listing]
-  layout 'listings', :only => [:business_listing, :restaurant_listing]
+  skip_before_action :authenticate_user!, :only => [:business_listing]
+  layout 'listings', :only => [:business_listing]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -25,6 +25,7 @@ class BusinessesController < ApplicationController
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
     @businesses = @businesses.order(sort_column + " " + sort_direction)
+    @businesses = @businesses.where(approved: true)
   end
   
   def show
@@ -107,6 +108,7 @@ class BusinessesController < ApplicationController
     @zones = Zone.all.order("name")
 
     @business = Business.find(params[:id])
+    @business.status = "active"
     if @business.update(business_params)
         flash[:notice] = "Business Updated"
         redirect_to @business

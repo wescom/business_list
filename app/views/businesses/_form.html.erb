@@ -1,6 +1,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
 		<label for="name" class="col-form-label">Business Name: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :name %>
 		<div class="col-12">
 			<%= form.text_field :name, class: "form-control", :placeholder => "Name", :required => "true" %>
 		</div>
@@ -16,6 +17,7 @@
 <div class="">
 	<div class="">
 		<label for="business_type" class="col-form-label">Type of Business: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :business_type %>
 		<div class="row">
 			<div class="col-6">
 				<%= form.select :business_type_id, 
@@ -37,6 +39,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
 		<label for="service_type" class="col-form-label">Service Options: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :service_types %>
 		<div class="col-12">
 			<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
 				{}, 
@@ -50,6 +53,7 @@
 <div class="form-row">
 	<div class="form-group col-md-6">
 		<label for="address1" class="col-form-label">Address1: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :address1 %>
 		<div class="col-12">
 			<%= form.text_field :address1, class: "form-control", :required => "true" %>
 		</div>
@@ -66,6 +70,7 @@
 <div class="form-row">
 	<div class="form-group col-md-4">
 		<label for="city" class="col-form-label">City: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :city %>
 		<div class="col-12">
 			<%= form.text_field :city, class: "form-control", :required => "true" %>
 		</div>
@@ -78,6 +83,7 @@
 	</div>
 	<div class="form-group col-md-2">
 		<label for="zipcode" class="col-form-label">Zipcode: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :zipcode %>
 		<div class="col-12">
 			<%= form.text_field :zipcode, class: "form-control", :required => "true" %>
 		</div>
@@ -86,6 +92,7 @@
 <div class="form-row">
 	<div class="form-group col-md-4">
 		<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :zones %>
 		<div class="col-12">
 			<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
 				{}, 
@@ -119,6 +126,7 @@
 	</div>
 	<div class="form-group col-md-6">
 		<label for="email" class="col-form-label">Email: *</label>
+		<%= render 'shared/field_error_messages', object: @business, field: :email %>
 		<div class="col-12">
 			<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
 		</div>
