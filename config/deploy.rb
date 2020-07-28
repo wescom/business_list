@@ -29,7 +29,7 @@ set :keep_releases, 5
 
 ##### Need change to your own configs #####
 #server 'newmedia1.wescompapers.com', port: 22, roles: [:web, :app, :db], primary: true
-server 'wescomphotos.com', port: 22, roles: [:web, :app, :db], primary: true
+server 'business.bendbulletin.com', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url, "git@github.com:wescom/business_list.git"
 set :application, "business_list"
