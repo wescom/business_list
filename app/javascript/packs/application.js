@@ -7,7 +7,7 @@ import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
 require("@rails/ujs").start()
-require("turbolinks")
+require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('data-confirm-modal')
@@ -23,8 +23,8 @@ require("@fortawesome/fontawesome-free")
 // const imagePath = (name) => images(name, true)
 
 document.addEventListener("turbolinks:load", () => {
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
+	//  $('[data-toggle="tooltip"]').tooltip();
+	//  $('[data-toggle="popover"]').popover();
 
 	$('select#select_business_type.form-control').ready(function() {
 		var business_type_id = $('#select_business_type').val();
