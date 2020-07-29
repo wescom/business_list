@@ -1,0 +1,23 @@
+<% if field.kind_of? String %>
+	<% if field.nil? %>
+		<% if required %>
+			<div class="field_error_messages">
+				* required info
+			</div>
+		<% else %>
+			<div class="field_error_messages">
+			</div>
+		<% end %>
+	<% end %>
+<% else %>
+	<% if field.blank? %>
+		<% if required %>
+			<div class="field_error_messages">
+				* required info
+			</div>
+		<% else %>
+			<div class="field_error_messages">
+			</div>
+		<% end %>
+	<% end %>
+<% end %>

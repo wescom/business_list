@@ -38,23 +38,28 @@
 	<h5>Business Info:</h5>
 	<div class="form-group row">
 		<label for="name" class="offset-1 col-2">Name:</label>
+		<%= render 'shared/field_missing_data', field: @business.name, required: true %>
 		<div class="col-4">
 			<h5><%= @business.name %></h5>
 		</div>
-		<label for="name" class="offset-1 col-1">Owner:</label>
-		<div class="col-3">
-			<%= @business.owner.nil? ? "NA" : @business.owner.email%>
-		</div>
+		<% if (can? :manage, Business) %>
+			<label for="name" class="offset-1 col-1">Owner:</label>
+			<div class="col-3">
+				<%= @business.owner.nil? ? "NA" : @business.owner.email%>
+			</div>
+		<% end %>
 	</div>
 
 	<div class="form-group row">
 		<label for="business_type" class="offset-1 col-2">Type:</label>
+		<%= render 'shared/field_missing_data', field: @business.business_type, required: true %>
 		<div class="col-2">
 			<%= @business.business_type.name unless @business.business_type.nil? %>
 		</div>
-		<label for="business_subtype" class="offset-1 col-3">
+		<label for="business_subtype" class="offset-1 col-2">
 			<%= @business.business_type.name unless @business.business_type.nil? %> <%= @business.business_type.title_for_subtypes unless @business.business_type.nil? %>:
 		</label>
+		<%= render 'shared/field_missing_data', field: @business.business_subtypes, required: false %>
 		<div class="col-3">
 			<%= @business.business_subtypes.map{|v| v.name }.join(", ") %>
 		</div>
@@ -62,6 +67,7 @@
 
 	<div class="form-group row">
 		<label for="service_type" class="offset-1 col-2">Service Options:</label>
+		<%= render 'shared/field_missing_data', field: @business.service_types, required: true %>
 		<div class="col-3">
 			<%= @business.service_types.map{|v| v.name }.join(", ") %>
 		</div>
@@ -74,7 +80,7 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="hours" class="offset-1 col-2">Happy Hour?</label>
+		<label for="happy_hour" class="offset-1 col-2">Happy Hour?</label>
 		<div class="col-6">
 			<% if @business.happy_hour %>
 				<i class="fa fa-check"></i>
@@ -82,7 +88,8 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="hours" class="offset-1 col-3">Business Listing Zones:</label>
+		<label for="zones" class="offset-1 col-2">Business Zones:</label>
+		<%= render 'shared/field_missing_data', field: @business.zones, required: true %>
 		<div class="col-6">
 			<%= @business.zones.map{|v| v.name }.join(", ") %>
 		</div>
@@ -91,6 +98,10 @@
 
 	<div class="form-group row">
 		<label for="address" class="offset-1 col-2">Address:</label>
+		<%= render 'shared/field_missing_data', field: @business.address1, required: true %>
+		<%= render 'shared/field_missing_data', field: @business.city, required: true %>
+		<%= render 'shared/field_missing_data', field: @business.state, required: true %>
+		<%= render 'shared/field_missing_data', field: @business.zipcode, required: true %>
 		<div class="col-8">
 			<%= business_address_city_state_zip(@business) %>
 		</div>
@@ -98,6 +109,7 @@
 
 	<div class="form-group row">
 		<label for="phonenum" class="offset-1 col-2">Phone Number:</label>
+		<%= render 'shared/field_missing_data', field: @business.phonenum, required: true %>
 		<div class="col-8">
 			<%= number_to_phone(@business.phonenum) %>
 		</div>
@@ -105,6 +117,7 @@
 
 	<div class="form-group row">
 		<label for="email" class="offset-1 col-2">Email:</label>
+		<%= render 'shared/field_missing_data', field: @business.email, required: true %>
 		<div class="col-8">
 			<%= @business.email %>
 		</div>
