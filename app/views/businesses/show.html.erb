@@ -75,12 +75,14 @@
 
 	<div class="form-group row">
 		<label for="hours" class="offset-1 col-2">Business Hours:</label>
+		<%= render 'shared/field_missing_data', field: @business.hours, required: false %>
 		<div class="col-6">
 			<%= @business.hours %>
 		</div>
 	</div>
 	<div class="form-group row">
 		<label for="happy_hour" class="offset-1 col-2">Happy Hour?</label>
+		<%= render 'shared/field_missing_data', field: @business.happy_hour, required: false %>
 		<div class="col-6">
 			<% if @business.happy_hour %>
 				<i class="fa fa-check"></i>
@@ -125,6 +127,7 @@
 
 	<div class="form-group row">
 		<label for="website" class="offset-1 col-2	">Website:</label>
+		<%= render 'shared/field_missing_data', field: @business.website, required: false %>
 		<div class="col-8">
 			<%= @business.website %>
 		</div>
