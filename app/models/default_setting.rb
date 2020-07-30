@@ -7,7 +7,7 @@ class DefaultSetting < ApplicationRecord
       :large => ["1000x1000>",:jpg]
     },
     :url => "/uploads/homepage_images/:id/:style_:basename.:extension",  
-    :path => ":rails_root/uploads/images/homepage_images/:id/:style_:basename.:extension",
+    :path => ":rails_root/public/uploads/homepage_images/:id/:style_:basename.:extension",
     :default_url => '/images/no-image.jpg'
 
     validates_attachment_content_type :homepage_banner_image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
