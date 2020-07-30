@@ -1,0 +1,13 @@
+	<div class='welcome-block d-flex justify-content-center flex-wrap'>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+			<%= image_tag @default_settings.registered_welcome_image.url(:medium) unless @default_settings.registered_welcome_image.nil? %>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+			<h1>Thank you for registering</h1>
+			<div class="welcome-text">
+				<%= simple_format(@default_settings.registered_welcome_text) %>
+			</div>
+			<div class="text-center"><%= link_to "Create First Listing", create_business_wizard_path, :class => 'btn btn-success' %></div>
+		</div>
+	</div>
+

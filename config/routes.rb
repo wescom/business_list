@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   
   get 'home/index'
+  get 'welcome', :controller => 'home', :action => :welcome
   get 'business/index'
 
   resources :default_settings, :only => [:index, :edit, :update]

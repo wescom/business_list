@@ -46,6 +46,22 @@
 		</div>
 		<br/>
 
+		<h5>Welcome Page After Registration:</h5>
+		<hr/>
+		<div class="form-group row">
+			<label for="registered_welcome_text" class="offset-1 col-2">Welcome Text:</label>
+			<div class="col-5">
+				<%= f.text_area :registered_welcome_text, class: "form-control", :rows=>5 %>
+			</div>
+
+			<label for="registered_welcome_image" class="col-2">Welcome Image:</label>
+			<div class="col-2">
+				<%= image_tag @default_setting.registered_welcome_image.url(:small) %>
+				<%= f.file_field :registered_welcome_image, as: :file %>
+			</div>
+		</div>
+		<br/>
+
 		<h5>Emails:</h5>
 		<hr/>
 		<div class="form-group row">

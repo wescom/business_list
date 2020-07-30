@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_225322) do
+ActiveRecord::Schema.define(version: 2020_07_30_222008) do
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_id"
@@ -119,6 +119,11 @@ ActiveRecord::Schema.define(version: 2020_07_07_225322) do
     t.string "contact_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "registered_welcome_text"
+    t.string "registered_welcome_image_file_name"
+    t.string "registered_welcome_image_content_type"
+    t.bigint "registered_welcome_image_file_size"
+    t.datetime "registered_welcome_image_updated_at"
   end
 
   create_table "service_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

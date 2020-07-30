@@ -55,12 +55,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def after_sign_up_path_for(resource)
-#    @business = Business.new({owner_id: current_user.id})
-#    @business.status = 'business_info'
-#    @business.save
-#    puts "*** create new ****"+@business.inspect
-#    return business_create_path(business_id: @business.id, id: :business_info)
-    create_business_wizard_path
+#    create_business_wizard_path
+    welcome_path
   end
 
   # The path used after sign up for inactive accounts.
