@@ -42,7 +42,7 @@ node_modules/
 
 # Ignore development images
 /public/system/db_images
-/public/uploads/db_images
+/public/uploads
 /public/images
 
 # Ignore yarn files
