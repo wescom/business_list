@@ -99,6 +99,13 @@ namespace :deploy do
     end
   end
 
+  desc "Recompile webpacker files"
+  task :recompile do
+    on roles(:app) do
+      execute "#{release_path}/bin/webpack"
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -111,6 +118,7 @@ namespace :deploy do
 
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
+  after  :finishing,    :recompile
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
