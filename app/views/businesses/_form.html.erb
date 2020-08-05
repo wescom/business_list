@@ -1,159 +1,178 @@
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="name" class="col-form-label">Business Name: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :name %>
-		<div class="col-12">
-			<%= form.text_field :name, class: "form-control", :placeholder => "Name", :required => "true" %>
+<hr/>
+<h3>Info</h3>
+<div class="offset-1">
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="name" class="col-form-label">Business Name: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :name %>
+			<div class="col-12">
+				<%= form.text_field :name, class: "form-control", :placeholder => "Name" %>
+			</div>
 		</div>
-	</div>
-	<div class="form-group col-md-6">
-		<label for="logo" class="col-form-label">Business Logo:</label>
-		<div class="col-8">
-			<%= image_tag @business.logo.url(:thumb) unless @business.new_record? %>
-			<br/><br/><%= form.file_field :logo %>
+		<div class="form-group col-md-6">
+			<label for="logo" class="col-form-label">Business Logo:</label>
+			<div class="col-8">
+				<%= image_tag @business.logo.url(:thumb) unless @business.new_record? %>
+				<br/><br/><%= form.file_field :logo %>
+			</div>
 		</div>
 	</div>
 </div>
-<div class="">
+
+<hr/>
+<h3>Location</h3>
+<div class="offset-1">
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="address1" class="col-form-label">Address1: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :address1 %>
+			<div class="col-12">
+				<%= form.text_field :address1, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="address2" class="col-form-label">Address2:</label>
+			<div class="col-12">
+				<%= form.text_field :address2, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="city" class="col-form-label">City: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :city %>
+			<div class="col-12">
+				<%= form.text_field :city, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group col-md-3">
+			<label for="state" class="col-form-label">State: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :zipcode %>
+			<div class="col-12">
+				<%= form.select :state, options_for_select(us_states, @business.state || 'OR'), {}, {:class => "form-control"} %>
+			</div>
+		</div>
+		<div class="form-group col-md-3">
+			<label for="zipcode" class="col-form-label">Zipcode: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :zipcode %>
+			<div class="col-12">
+				<%= form.text_field :zipcode, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="phonenum" class="col-form-label">Phone Number: *</label>
+			<div class="col-6">
+				<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx' %>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="email" class="col-form-label">Email: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :email %>
+			<div class="col-12">
+				<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-9">
+			<label for="website" class="col-form-label">Website:</label>
+			<div class="col-12">
+				<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr/>
+<h3>Services</h3>
+<div class="offset-1">
 	<div class="">
-		<label for="business_type" class="col-form-label">Type of Business: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :business_type %>
-		<div class="row">
-			<div class="col-6">
-				<%= form.select :business_type_id, 
-					options_from_collection_for_select(@business_types, 'id', 'name', 
-					:selected => @business.business_type_id), 
-					{:prompt => "- Select business type -", :required => true},
-					{:id => "select_business_type", :class => "form-control"} %>
+		<div class="">
+			<label for="business_type" class="col-form-label">Type of Business: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :business_type %>
+			<div class="row">
+				<div class="col-6">
+					<%= form.select :business_type_id, 
+						options_from_collection_for_select(@business_types, 'id', 'name', 
+						:selected => @business.business_type_id), 
+						{:prompt => "- Select business type -"},
+						{:id => "select_business_type", :class => "form-control"} %>
+				</div>
+				<div class="col-6">
+					<small>(Select one or more)</small>
+					<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] },
+						{}, 
+						{:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }
+						) unless @business_subtypes.nil? %>
+				</div>
 			</div>
-			<div class="col-6">
-				<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] },
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :zones %>
+			<div class="col-12">
+				<small>(Select one or more)</small>
+				<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
 					{}, 
-					{:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }
-					) unless @business_subtypes.nil? %>
+					{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
+					) unless @zones.nil? %>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="hours" class="col-form-label">Business Hours:</label>
+			<div class="col-6">
+				<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
+			<div class="col-6">
+				<%= form.check_box :happy_hour, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="service_type" class="col-form-label">Service Options: *</label>
+			<%= render 'shared/field_error_messages', object: @business, field: :service_types %>
+			<div class="col-12">
+				<small>(Select one or more)</small>
+				<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
+					{}, 
+					{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }
+					) unless @service_types.nil? %>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="service_type" class="col-form-label">Service Options: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :service_types %>
-		<div class="col-12">
-			<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
-				{}, 
-				{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }
-				) unless @service_types.nil? %>
-		</div>
-	</div>
-</div>
 <hr/>
+<h3>Extras</h3>
+<div class="offset-1">
+	<div class="form-row">
+		<div class="form-group col-md-9">
+			<label for="yelp_url" class="col-form-label">Yelp URL:</label>
+			<div class="col-12">
+				<%= form.url_field :yelp_url, class: "form-control", :placeholder => "https://domain.com" %>
+			</div>
+		</div>
+	</div>
+	<hr/>
 
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="address1" class="col-form-label">Address1: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :address1 %>
+	<div class="form-group row">
+		<label for="notes" class="col-form-label">Notes:</label>
 		<div class="col-12">
-			<%= form.text_field :address1, class: "form-control", :required => "true" %>
+			<%= form.text_area :notes, class: "form-control" %>
 		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="address2" class="col-form-label">Address2:</label>
-		<div class="col-12">
-			<%= form.text_field :address2, class: "form-control" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-4">
-		<label for="city" class="col-form-label">City: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :city %>
-		<div class="col-12">
-			<%= form.text_field :city, class: "form-control", :required => "true" %>
-		</div>
-	</div>
-	<div class="form-group col-md-2">
-		<label for="state" class="col-form-label">State: *</label>
-		<div class="col-12">
-			<%= form.select :state, options_for_select(us_states, @business.state || 'OR'), {:required => true}, {:class => "form-control"} %>
-		</div>
-	</div>
-	<div class="form-group col-md-2">
-		<label for="zipcode" class="col-form-label">Zipcode: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :zipcode %>
-		<div class="col-12">
-			<%= form.text_field :zipcode, class: "form-control", :required => "true" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-4">
-		<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :zones %>
-		<div class="col-12">
-			<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
-				{}, 
-				{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
-				) unless @zones.nil? %>
-		</div>
-	</div>
-</div>
-<hr/>
-
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="hours" class="col-form-label">Business Hours:</label>
-		<div class="col-6">
-			<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
-		</div>
-	</div>
-	<div class="form-group col-md-6">
-		<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
-		<div class="col-6">
-			<%= form.check_box :happy_hour, class: "form-control" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-6">
-		<label for="phonenum" class="col-form-label">Phone Number: *</label>
-		<div class="col-6">
-			<%= form.telephone_field :phonenum, class: "form-control", placeholder: 'xxx-xxx-xxxx', :required => "true" %>
-		</div>
-	</div>
-	<div class="form-group col-md-6">
-		<label for="email" class="col-form-label">Email: *</label>
-		<%= render 'shared/field_error_messages', object: @business, field: :email %>
-		<div class="col-12">
-			<%= form.email_field :email, class: "form-control", :placeholder => "test@domain.com", :required => "true" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-9">
-		<label for="website" class="col-form-label">Website:</label>
-		<div class="col-12">
-			<%= form.url_field :website, class: "form-control", :placeholder => "https://domain.com" %>
-		</div>
-	</div>
-</div>
-<div class="form-row">
-	<div class="form-group col-md-9">
-		<label for="yelp_url" class="col-form-label">Yelp URL:</label>
-		<div class="col-12">
-			<%= form.url_field :yelp_url, class: "form-control", :placeholder => "https://domain.com" %>
-		</div>
-	</div>
-</div>
-<hr/>
-
-<div class="form-group row">
-	<label for="notes" class="col-form-label">Notes:</label>
-	<div class="col-12">
-		<%= form.text_area :notes, class: "form-control" %>
 	</div>
 </div>
 

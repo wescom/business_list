@@ -20,6 +20,7 @@
 							{:id => "select_business_type", :class => "form-control"} %>
 					</div>
 					<div class="col-6">
+						<small>(Select one or more)</small>
 						<%= form.select(:business_subtype_ids, @business_subtypes.order('name').collect {|p| [ p.name, p.id ] },
 							{}, 
 							{:id => "select_business_subtypes", :class => "form-control", :multiple => true, :size => 10 }
@@ -34,6 +35,7 @@
 				<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
 				<%= render 'shared/field_error_messages', object: @business, field: :zones, message: "must select at least one" %>
 				<div class="col-12">
+					<small>(Select one or more)</small>
 					<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
 						{:required => true}, 
 						{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
@@ -63,6 +65,7 @@
 				<label for="service_type" class="col-form-label">Service Options: *</label>
 				<%= render 'shared/field_error_messages', object: @business, field: :service_types %>
 				<div class="col-12">
+					<small>(Select one or more)</small>
 					<%= form.select(:service_type_ids, @service_types.order('name').collect {|p| [ p.name, p.id ] },
 						{:required => true}, 
 						{:id => "select_service_types", :class => "form-control", :multiple => true, :size => 5 }

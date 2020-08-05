@@ -98,23 +98,27 @@ class BusinessesController < ApplicationController
   end
 
   def update
-    @business_types = BusinessType.all.order("name")
-    if @business.business_type.nil?
-      @business_subtypes = BusinessType.first.business_subtypes
+    if params[:cancel_button]
+      redirect_to businesses_path
     else
-      @business_subtypes = @business.business_type.business_subtypes
-    end
-    @service_types = ServiceType.all.order("name")
-    @zones = Zone.all.order("name")
+      @business_types = BusinessType.all.order("name")
+      if @business.business_type.nil?
+        @business_subtypes = BusinessType.first.business_subtypes
+      else
+        @business_subtypes = @business.business_type.business_subtypes
+      end
+      @service_types = ServiceType.all.order("name")
+      @zones = Zone.all.order("name")
 
-    @business = Business.find(params[:id])
-    @business.status = "active"
-    if @business.update(business_params)
-        flash[:notice] = "Business Updated"
-        redirect_to @business
-    else
-        flash[:notice] = "Business Update Failed"
-        render :action => :edit
+      @business = Business.find(params[:id])
+      @business.status = "active"
+      if @business.update(business_params)
+          flash[:notice] = "Business Updated"
+          redirect_to @business
+      else
+          flash[:notice] = "Business Update Failed"
+          render :action => :edit
+      end
     end
   end
 
