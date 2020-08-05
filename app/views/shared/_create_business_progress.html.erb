@@ -6,7 +6,7 @@
 			</div>
 		<% else %>
 		  <div class="col">
-				<%= link_to "Name", wizard_path(:business_info) %>
+				<div>Name</div>
 			</div>
 		<% end %>
 		<% if past_step?(:business_location) || step.to_s == "business_location" %>
@@ -15,7 +15,7 @@
 			</div>
 		<% else %>
 		  <div class="col">
-				<%= link_to "Location", wizard_path(:business_location) %>
+				<div>Location</div>
 			</div>
 		<% end %>
 		<% if past_step?(:business_services) || step.to_s == "business_services" %>
@@ -24,7 +24,7 @@
 			</div>
 		<% else %>
 		  <div class="col">
-				<%= link_to "Services", wizard_path(:business_services) %>
+				<div>Services</div>
 			</div>
 		<% end %>
 		<% if past_step?(:business_extras) || step.to_s == "business_extras" %>
@@ -33,7 +33,7 @@
 			</div>
 		<% else %>
 		  <div class="col">
-				<%= link_to "Extras", wizard_path(:business_extras) %>
+				<div>Extras</div>
 			</div>
 		<% end %>
 		<% if past_step?(:business_contacts) || step.to_s == "business_contacts" %>
@@ -42,7 +42,7 @@
 			</div>
 		<% else %>
 		  <div class="col">
-				<%= link_to "Contacts", wizard_path(:business_contacts) %>
+				<div>Contacts</div>
 			</div>
 		<% end %>
 	</div>
