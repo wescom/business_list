@@ -6,8 +6,9 @@
 	<%= form_for(@zone) do |f| %>
 		<div class="form-group row">
 			<label for="name" class="offset-1 col-3 col-form-label">Zone:</label>
+			<%= render 'shared/field_error_messages', object: @zone, field: :name %>
 			<div class="col-3">
-				<%= f.text_field :name, class: "form-control", :required => "true" %>
+				<%= f.text_field :name, class: "form-control" %>
 			</div>
 		</div>
 

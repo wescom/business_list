@@ -6,14 +6,16 @@
 	<%= form_for(@business_type) do |f| %>
 		<div class="form-group row">
 			<label for="name" class="offset-1 col-3 col-form-label">Business Type:</label>
+			<%= render 'shared/field_error_messages', object: @business_type, field: :name %>
 			<div class="col-3">
-				<%= f.text_field :name, class: "form-control", :required => "true", :placeholder => 'Retail, Restaurants,...' %>
+				<%= f.text_field :name, class: "form-control", :placeholder => 'Retail, Restaurants,...' %>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="name" class="offset-1 col-3 col-form-label">Title for SubTypes:</label>
+			<%= render 'shared/field_error_messages', object: @business_type, field: :title_for_subtypes %>
 			<div class="col-3">
-				<%= f.text_field :title_for_subtypes, class: "form-control", :required => "true", :placeholder => 'Cuisine, Business Types,...' %>
+				<%= f.text_field :title_for_subtypes, class: "form-control", :placeholder => 'Cuisine, Business Types,...' %>
 			</div>
 		</div>
 

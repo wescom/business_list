@@ -3,4 +3,5 @@ class BusinessSubtype < ApplicationRecord
   has_and_belongs_to_many :businesses
 
   validates :name, uniqueness: { scope: :business_type_id }
+  validates :name, presence: true
 end

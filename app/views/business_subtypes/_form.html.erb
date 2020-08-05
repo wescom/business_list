@@ -1,6 +1,7 @@
 <div class="form-group row">
 	<label for="name" class="col-form-label">Name:</label>
-	<div class="col-12">
-		<%= form.text_field :name, class: "form-control", :required => "true" %>
+	<%= render 'shared/field_error_messages', object: @business_subtype, field: :name %>
+	<div class="col-6">
+		<%= form.text_field :name, class: "form-control" %>
 	</div>
 </div>
