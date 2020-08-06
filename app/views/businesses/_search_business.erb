@@ -1,0 +1,16 @@
+<%= form_tag businesses_path, :class => "form-inline", :method => :get do %>
+	<div class="search_bar d-flex flex-wrap justify-content-center">
+        <div class="collapse" id="search_field">
+    		<div class="form-search-text-col">
+    			<%= text_field_tag :search_query, params[:search_query], 
+    				:class => "form-control", 
+    				:placeholder => "Search for images", 
+    				:autofocus => true %>
+    		</div>
+		</div>
+		<div>
+		 	<button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#search_field" 
+            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i></button>
+		</div>
+	</div>
+<% end %>

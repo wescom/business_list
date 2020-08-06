@@ -1,7 +1,7 @@
 <div class="page-content">
-	<div class="business_listing_heading">
-		<div class="d-flex justify-content-between align-items-center">
-			<h2>
+	<div class="business_heading">
+		<div class="d-flex align-items-center">
+			<h2 class="mr-auto p-2">
 				<% if params[:type].nil? %>
 					<% if ['admin', 'sales', 'supervisor'].include? get_user_role(current_user) %>
 						All
@@ -14,24 +14,40 @@
 				Businesses
 			</h2>
 			<div class="float-right"><%= link_to "New Business", create_business_wizard_path, :class => 'btn btn-primary' %></div>
+			<% if ['admin', 'sales', 'supervisor'].include? get_user_role(current_user) %>
+				<div class=""><%= render :partial => 'search_business' %></div>
+			<% end %>
 		</div>
 	</div>
 
 	<div class="business_index_block">
-		<div class="">
+		<div>
 			<% if @businesses %>
 				<% unless @businesses.nil? %>
 					<table id="businesss" class="table table-hover table-condensed table-sm">
 						<thead class="sorting">
 							<tr>
-								<th class="text-center align-middle d-none d-sm-table-cell"></th>
+								<th class="text-center align-middle d-none d-sm-table-cell">
+									<% if ['admin', 'sales', 'supervisor'].include? get_user_role(current_user) %>
+						    		<div>
+											<%= form_tag businesses_path, :class => "form-inline", :method => :get do %>
+							    			<%= select_tag 'status_select', 
+							    				options_for_select([['Waiting Approval','Active'], ['Approved & Live','Approved']], 
+							    				:selected => params[:status_select]), 
+							    				{ onchange: "this.form.submit();",
+													:class => "form-control form-search-select", 
+							    				:prompt => "- All Statuses -"} %>
+											<% end %>
+						    		</div>
+									<% else %>
+										Status
+									<% end %>
+								</th>
 								<th class="text-center align-middle d-none d-sm-table-cell">Logo</th>
 								<th class="align-middle"><%= sortable "name" %></th>
 								<th class="text-center align-middle d-none d-sm-table-cell"><%= sortable "business_types.name", "Type" %></th>
 								<th class="align-middle d-none d-lg-table-cell">Location</th>
-								<th class="text-center align-middle d-none d-lg-table-cell">Phone</th>
-								<th class="text-center align-middle d-none d-lg-table-cell">Website</th>
-								<th class="text-center align-middle d-none d-sm-table-cell"><%= sortable "service_types.name", "Service" %></th>
+								<th class="text-center align-middle d-none d-lg-table-cell">Last Updated</th>
 								<th class="text-center align-middle ">Action</th>
 							</tr>
 						</thead>

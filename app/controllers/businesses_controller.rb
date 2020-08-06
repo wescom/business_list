@@ -8,6 +8,8 @@ class BusinessesController < ApplicationController
   def index
     if can? :manage, Business
       @businesses = Business.left_outer_joins(:business_type)
+      @businesses = @businesses.where('businesses.name LIKE ?', "%#{params[:search_query]}%") if params[:search_query].present?
+      @businesses = @businesses.where(status: params[:status_select]) if params[:status_select].present?
     else
       @businesses = Business.where(:owner_id => current_user).left_outer_joins(:business_type)
     end
@@ -112,6 +114,7 @@ class BusinessesController < ApplicationController
 
       @business = Business.find(params[:id])
       @business.status = "active"
+      @business.approved = false
       if @business.update(business_params)
           flash[:notice] = "Business Updated"
           redirect_to @business
