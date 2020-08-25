@@ -34,6 +34,9 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "kt-paperclip", "~> 6.2.0"
 gem 'premailer-rails' # use for css styling in mailer
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'geocoder'
 
 # Wicked gem lets us split controllers into step-by-step wizards
 gem 'wicked'

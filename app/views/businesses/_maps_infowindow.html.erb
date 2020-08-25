@@ -1,0 +1,30 @@
+<div id="iw-container">
+	<div class="iw-title"><%= business.name %></div>
+
+	<div class="iw-content">
+		<div class="iw-subTitle">
+			<%= image_tag business.logo.url(:thumb), :style => "height=auto width=60px" unless business.logo_file_name.nil? %>
+		</div>
+		<div>
+			<%= business.business_type.name unless business.business_type.nil? %>:
+			<% business.business_subtypes.each do |subtype| %>
+				<%= subtype.name %><br/>
+			<% end %>
+			Hours: <%= business.hours unless business.hours.nil? %><br>
+			Service Options: <%= business.service_types.map{|v| v.name }.join(", ") %><br/>
+			<% if business.happy_hour %>
+				Happy Hour? <i class="fa fa-check"></i>
+			<% end %>
+		</div>
+		<br/>
+
+		<div class="iw-subTitle">Info</div>
+		<div>
+			Address: <%= business_address_city(business).titleize %><br>
+			Phone: <%= number_to_phone(business.phonenum) unless business.phonenum.nil? %><br>
+			E-mail: <%= mail_to(business.email, business.email, target: "_blank") unless business.email.nil? %><br>
+			Website: <%= link_to(truncate(business.website, :length => 140), business.website, target: "_blank") unless business.website.nil? %>
+		</div>
+	</div>
+	<div class="iw-bottom-gradient"></div>
+</div>

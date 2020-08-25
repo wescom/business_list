@@ -3,6 +3,7 @@ class BusinessesController < ApplicationController
 
   skip_before_action :authenticate_user!, :only => [:business_listing]
   layout 'listings', :only => [:business_listing]
+  layout 'maps', :only => [:maps]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -149,6 +150,33 @@ class BusinessesController < ApplicationController
         redirect_to @business
       end
     end
+  end
+  
+  def maps
+    # maps businesses for embedding into an external webpage using paramter 'type'
+    @businesses = Business.left_outer_joins(:business_type)
+    if !params[:type].nil?
+      @businesses = @businesses.where('business_types.name = ?', params[:type])
+    end
+    @businesses = @businesses.where(approved: true)
+    @business_locations = load_business_locations(@businesses).reject(&:blank?)
+  end
+  
+  def load_business_locations(businesses)  
+    @businesses = businesses
+    @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
+      coords = Geocoder.coordinates(helpers.business_address_city_state_zip(business))
+      unless coords.nil?
+        marker.lat coords[0]
+        marker.lng coords[1]
+        marker.picture({
+#               "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
+               "width" =>  32,
+               "height" => 32})
+        marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
+      end
+    end  
+    return @businesses
   end
 
   private

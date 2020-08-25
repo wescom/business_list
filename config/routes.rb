@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :create, controller: 'businesses/create', :only => [:show, :create, :update]
     collection do
       get 'business_listing'
+      get 'maps'
     end
     put 'approve_business'
   end

@@ -112,8 +112,10 @@ GEM
     ffi (1.12.2)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     highline (2.0.3)
     htmlentities (4.3.4)
     i18n (1.8.2)
@@ -257,6 +259,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    underscore-rails (1.8.3)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.2)
@@ -301,6 +304,8 @@ DEPENDENCIES
   data-confirm-modal
   devise
   font-awesome-sass (~> 4.7.0)
+  geocoder
+  gmaps4rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kt-paperclip (~> 6.2.0)
@@ -317,6 +322,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
+  underscore-rails
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 5.x)

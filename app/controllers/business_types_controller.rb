@@ -56,9 +56,9 @@ class BusinessTypesController < ApplicationController
   end
 
   def get_subtypes_for_business_type(business_type_id)
-    puts business_type_id.to_s
+    #puts business_type_id.to_s
     @business_subtypes = BusinessType.find(business_type_id).business_subtypes unless business_type_id.nil?
-    puts @business_subtypes.inspect
+    #puts @business_subtypes.inspect
   end
 
   def business_subtype_options
