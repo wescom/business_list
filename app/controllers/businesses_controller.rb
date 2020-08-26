@@ -17,7 +17,7 @@ class BusinessesController < ApplicationController
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
-    @businesses = @businesses.order(sort_column + " " + sort_direction)
+    @businesses = @businesses.order(sort_column + " " + sort_direction).distinct
   end
   
   def business_listing
@@ -27,7 +27,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.order(sort_column + " " + sort_direction)
-    @businesses = @businesses.where(approved: true)
+    @businesses = @businesses.where(approved: true).distinct
   end
   
   def show
@@ -157,7 +157,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
     @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
-    @businesses = @businesses.where(approved: true)
+    @businesses = @businesses.where(approved: true).distinct
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
     params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
