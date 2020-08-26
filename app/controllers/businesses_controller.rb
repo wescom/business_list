@@ -229,7 +229,7 @@ class BusinessesController < ApplicationController
       coords = Geocoder.coordinates(zone+", Oregon")
       coord_string = []
       if coords.nil?
-        puts "\nCENTER coordinates nil: " + address
+        puts "\nCENTER coordinates nil: "
       else
         puts "\nCENTER coordinates: " + coords[0].to_s + "," + coords[1].to_s
         coord_string[0] = coords[0]

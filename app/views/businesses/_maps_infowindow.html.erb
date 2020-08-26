@@ -2,21 +2,22 @@
 	<div class="iw-title"><%= business.name %></div>
 
 	<div class="iw-content">
-		<div class="iw-subTitle">
-			<%= image_tag business.logo.url(:thumb), :style => "height=auto width=60px" unless business.logo_file_name.nil? %>
+		<div class="d-flex align-items-center">
+			<div class="img-block d-flex justify-content-center align-items-center col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<%= image_tag business.logo.url(:thumb) unless business.logo_file_name.nil? %>
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<%= business.business_type.title_for_subtypes unless business.business_type.nil? %>:
+				<% business.business_subtypes.each do |subtype| %>
+					<%= subtype.name %><br/>
+				<% end %>
+				Hours: <%= business.hours unless business.hours.nil? %><br>
+				Service Options: <%= business.service_types.map{|v| v.name }.join(", ") %><br/>
+				<% if business.happy_hour %>
+					Happy Hour? <i class="fa fa-check"></i>
+				<% end %>
+			</div>
 		</div>
-		<div>
-			<%= business.business_type.name unless business.business_type.nil? %>:
-			<% business.business_subtypes.each do |subtype| %>
-				<%= subtype.name %><br/>
-			<% end %>
-			Hours: <%= business.hours unless business.hours.nil? %><br>
-			Service Options: <%= business.service_types.map{|v| v.name }.join(", ") %><br/>
-			<% if business.happy_hour %>
-				Happy Hour? <i class="fa fa-check"></i>
-			<% end %>
-		</div>
-		<br/>
 
 		<div class="iw-subTitle">Info</div>
 		<div>
