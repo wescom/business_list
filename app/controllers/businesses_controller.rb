@@ -218,6 +218,7 @@ class BusinessesController < ApplicationController
   #          "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
             "width" =>  32,
             "height" => 32})
+            marker.title business.name
           marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
         end
       end  
