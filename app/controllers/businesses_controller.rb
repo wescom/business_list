@@ -160,27 +160,9 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.where(approved: true)
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
-    puts "******* "+params[:zoom].to_s
+    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
   end
   
-  def get_business_locations(businesses)  
-    @businesses = businesses
-    @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
-      if business.lat.nil? or business.lng.nil?
-        puts "Geocoder coordinates nil: " + helpers.business_address_city_state_zip(business)
-      else
-        marker.lat business.lat
-        marker.lng business.lng
-        marker.picture({
-#          "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
-          "width" =>  32,
-          "height" => 32})
-        marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
-      end
-    end  
-    return @businesses
-  end
-
   private
     def business_params
       params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},{:zone_ids=>[]},:hours,
@@ -222,5 +204,38 @@ class BusinessesController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def get_business_locations(businesses)  
+      @businesses = businesses
+      @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
+        if business.lat.nil? or business.lng.nil?
+          puts "Geocoder coordinates nil: " + helpers.business_address_city_state_zip(business)
+        else
+          marker.lat business.lat
+          marker.lng business.lng
+          marker.picture({
+  #          "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
+            "width" =>  32,
+            "height" => 32})
+          marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
+        end
+      end  
+      return @businesses
+    end
+
+    def get_zone_geocode(zone)
+      zone = zone.nil? || zone.empty? ? "Bend" : zone
+      coords = Geocoder.coordinates(zone+", Oregon")
+      coord_string = []
+      if coords.nil?
+        puts "\nCENTER coordinates nil: " + address
+      else
+        puts "\nCENTER coordinates: " + coords[0].to_s + "," + coords[1].to_s
+        coord_string[0] = coords[0]
+        coord_string[1] = coords[1]
+      end
+      #puts "****** "+coord_string.inspect
+      return coord_string
     end
 end

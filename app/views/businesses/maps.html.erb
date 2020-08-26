@@ -18,7 +18,7 @@
 			  handler.bounds.extendWith(markers) 
 			  handler.fitMapToBounds()
 				handler.getMap().setZoom(<%=params[:zoom]%>)
-				handler.map.centerOn([44.047770, -121.310920])
+				handler.map.centerOn(<%= params[:center] %>)
 			});
 		</script>
 
