@@ -17,7 +17,7 @@
 				markers = handler.addMarkers(<%=raw @business_locations.to_json %>)
 			  handler.bounds.extendWith(markers) 
 			  handler.fitMapToBounds()
-				handler.getMap().setZoom(11)
+				handler.getMap().setZoom(<%=params[:zoom]%>)
 				handler.map.centerOn([44.047770, -121.310920])
 			});
 		</script>

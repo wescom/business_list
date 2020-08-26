@@ -22,10 +22,10 @@ class BusinessesController < ApplicationController
   
   def business_listing
     # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type)              #.left_outer_joins(:businesses_service_types).joins(:service_types)
-    if !params[:type].nil?
-      @businesses = @businesses.where('business_types.name = ?', params[:type])
-    end
+    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_types).left_outer_joins(:zones)
+    @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
+    @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.order(sort_column + " " + sort_direction)
     @businesses = @businesses.where(approved: true)
   end
@@ -153,15 +153,17 @@ class BusinessesController < ApplicationController
   
   def maps
     # maps businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type)
-    if !params[:type].nil?
-      @businesses = @businesses.where('business_types.name = ?', params[:type])
-    end
+    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_types).left_outer_joins(:zones)
+    @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
+    @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.where(approved: true)
-    @business_locations = load_business_locations(@businesses).reject(&:blank?)
+    @business_locations = get_business_locations(@businesses).reject(&:blank?)
+    params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
+    puts "******* "+params[:zoom].to_s
   end
   
-  def load_business_locations(businesses)  
+  def get_business_locations(businesses)  
     @businesses = businesses
     @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
       if business.lat.nil? or business.lng.nil?
@@ -170,9 +172,9 @@ class BusinessesController < ApplicationController
         marker.lat business.lat
         marker.lng business.lng
         marker.picture({
-#               "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
-               "width" =>  32,
-               "height" => 32})
+#          "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
+          "width" =>  32,
+          "height" => 32})
         marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
       end
     end  
