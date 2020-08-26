@@ -2,8 +2,7 @@ class BusinessesController < ApplicationController
   load_and_authorize_resource :except => [:business_listing]
 
   skip_before_action :authenticate_user!, :only => [:business_listing]
-  layout 'listings', :only => [:business_listing]
-  layout 'maps', :only => [:maps]
+  layout :determine_layout
   helper_method :sort_column, :sort_direction
 
   def index
@@ -187,6 +186,17 @@ class BusinessesController < ApplicationController
       :status, :approved )
     end
 
+    def determine_layout
+      case action_name
+      when "business_listing"
+        "listings"
+      when "maps"
+        "maps"
+      else
+        "application"
+      end
+    end
+      
     def column_exists?(column)
       if Business.column_names.include?(column) 
         return true
