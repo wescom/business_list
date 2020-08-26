@@ -165,10 +165,11 @@ class BusinessesController < ApplicationController
   def load_business_locations(businesses)  
     @businesses = businesses
     @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
-      coords = Geocoder.coordinates(helpers.business_address_city_state_zip(business))
-      unless coords.nil?
-        marker.lat coords[0]
-        marker.lng coords[1]
+      if business.lat.nil? or business.lng.nil?
+        puts "Geocoder coordinates nil: " + helpers.business_address_city_state_zip(business)
+      else
+        marker.lat business.lat
+        marker.lng business.lng
         marker.picture({
 #               "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
                "width" =>  32,
