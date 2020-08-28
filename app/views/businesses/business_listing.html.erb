@@ -12,7 +12,7 @@
 									options_from_collection_for_select(@business_subtypes, 'name', 'name', 
 									:selected => params[:business_subtype]), 
 									{:class => "form-filter-select btn btn-primary", 
-									:prompt => "Type", 
+									:prompt => "- Type -", 
 									onchange: 'this.form.submit()'} %>
 								<%= hidden_field_tag :type, params[:type] %>
 							<% else %>
@@ -33,7 +33,7 @@
 								options_from_collection_for_select(@service_types, 'name', 'name', 
 								:selected => params[:service_type]), 
 								{:class => "form-filter-select btn btn-primary", 
-								:prompt => "Service", 
+								:prompt => "- Service -", 
 								onchange: 'this.form.submit()'} %>
 						</th>
 					</tr>
