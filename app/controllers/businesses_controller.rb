@@ -17,17 +17,28 @@ class BusinessesController < ApplicationController
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
-    @businesses = @businesses.order(sort_column + " " + sort_direction)
+    @businesses = @businesses.order(sort_column + " " + sort_direction).distinct
   end
   
   def business_listing
-    # lists businesses for embedding into an external webpage using paramter 'type'
-    @businesses = Business.left_outer_joins(:business_type).left_outer_joins(:service_types).left_outer_joins(:zones)
-    @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
-    @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
+    @business_types = BusinessType.order("name")
+    if params[:type].nil?
+      # switch to filtering by type when no type param
+      # @business_subtypes = BusinessSubtype.all.joins(:business_type).order("business_types.name","business_subtypes.name")
+    else
+      @business_subtypes = BusinessSubtype.joins(:business_type).where('business_types.name = ?', params[:type]).order("name") unless params[:type].nil?
+    end
+    puts @business_subtypes.inspect
+    @service_types = ServiceType.all.order("name")
+
+    # lists businesses for embedding into an external webpage using paramters 'type', 'service_type', 'zone'
+    @businesses = Business.all
+    @businesses = @businesses.left_outer_joins(:business_type).where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
+    @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
+    @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.order(sort_column + " " + sort_direction)
-    @businesses = @businesses.where(approved: true)
+    @businesses = @businesses.where(approved: true).distinct
   end
   
   def show
@@ -157,7 +168,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
     @businesses = @businesses.where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
-    @businesses = @businesses.where(approved: true)
+    @businesses = @businesses.where(approved: true).distinct
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
     params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 

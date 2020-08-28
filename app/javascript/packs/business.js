@@ -5,7 +5,7 @@ document.addEventListener("turbolinks:load", () => {
 	$('select#select_business_type.form-control').ready(function() {
 		var business_type_id = $('#select_business_type').val();
 		var business_subtypes = $('#select_business_subtypes').val()
-	
+		
 		// Send the request and update select dropdown
 		jQuery.getJSON('/business_types/business_subtype_options',{business_type_id: business_type_id, ajax: 'true'}, function(data){
 			// update Business_subtypes list

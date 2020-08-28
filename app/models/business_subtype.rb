@@ -4,4 +4,9 @@ class BusinessSubtype < ApplicationRecord
 
   validates :name, uniqueness: { scope: :business_type_id }
   validates :name, presence: true
+
+  def business_name_subtype_name
+    "#{business_type.name} - #{name}"
+  end
+
 end
