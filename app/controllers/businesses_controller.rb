@@ -22,13 +22,13 @@ class BusinessesController < ApplicationController
   
   def business_listing
     @business_types = BusinessType.order("name")
+    @business_type_label = BusinessType.where('business_types.name = ?', params[:type]).first
     if params[:type].nil?
       # switch to filtering by type when no type param
       # @business_subtypes = BusinessSubtype.all.joins(:business_type).order("business_types.name","business_subtypes.name")
     else
       @business_subtypes = BusinessSubtype.joins(:business_type).where('business_types.name = ?', params[:type]).order("name") unless params[:type].nil?
     end
-    puts @business_subtypes.inspect
     @service_types = ServiceType.all.order("name")
 
     # lists businesses for embedding into an external webpage using paramters 'type', 'service_type', 'zone'
