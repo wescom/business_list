@@ -4,10 +4,17 @@
 			<thead  class="sorting">
 				<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
 					<tr class="d-flex">
-						<th class="col-1 text-center">Logo</th>
-						<th class="col-2">Name</th>
-						<th class="col-2 text-center d-none d-lg-table-cell">
-							<% if @business_subtypes %>
+						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
+						<th class="col-xs-4 col-sm-4 col-md-4 col-lg-2">Name</th>
+						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
+							<% if params[:type].nil? || params[:type].empty? %>
+								<%= select_tag 'type', 
+									options_from_collection_for_select(@business_types, 'name', 'name', 
+									:selected => params[:type]), 
+									{:class => "form-search-select btn btn-primary", 
+									:prompt => "- Type -", 
+									onchange: 'this.form.submit()'} %>
+							<% else %>
 								<%= select_tag 'business_subtype', 
 									options_from_collection_for_select(@business_subtypes, 'name', 'name', 
 									:selected => params[:business_subtype]), 
@@ -15,19 +22,12 @@
 									:prompt => "-#{@business_type_label.title_for_subtypes}-", 
 									onchange: 'this.form.submit()'} %>
 								<%= hidden_field_tag :type, params[:type] %>
-							<% else %>
-								<%= select_tag 'type', 
-									options_from_collection_for_select(@business_types, 'name', 'name', 
-									:selected => params[:type]), 
-									{:class => "form-search-select btn btn-primary", 
-									:prompt => "- Type -", 
-									onchange: 'this.form.submit()'} %>
 							<% end %>
 						</th>
-						<th class="col-2 d-none d-sm-table-cell">Location</th>
-						<th class="col-2 text-center d-none d-sm-table-cell">Phone</th>
-						<th class="col-2 text-center d-none d-sm-table-cell">Website</th>
-						<th class="col-1 text-center d-none d-lg-table-cell">
+						<th class="col-xs-2 col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell">Location</th>
+						<th class="col-2 text-center d-none d-lg-table-cell">Phone</th>
+						<th class="col-2 text-center d-none d-lg-table-cell">Website</th>
+						<th class="col-xs-1 col-sm-2 col-md-2 col-lg-1 text-center">
 							<%= select_tag 'service_type', 
 								options_from_collection_for_select(@service_types, 'name', 'name', 
 								:selected => params[:service_type]), 
@@ -43,18 +43,18 @@
 			<tbody>
 				<% @businesses.each do |business| %>
 					<tr class="d-flex">
-						<td class="col-1 text-center">
+						<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">
 							<%= image_tag business.logo.url(:thumb), :class => "max_100" unless business.logo_file_name.nil? %>
 						</td>	
-						<td class="col-2"><%= business.name %></td>	
-						<td class="col-2 text-center d-none d-lg-table-cell">
+						<td class="col-xs-4 col-sm-4 col-md-4 col-lg-2"><%= business.name %></td>	
+						<td class="ccol-xs-2 col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 							<%= business.business_subtypes.map{|v| v.name }.join(", ") unless business.business_subtypes.nil? %></td>
-						<td class="col-2 d-none d-sm-table-cell"><%= business_address_city(business) %></td>
-						<td class="col-2 text-center d-none d-sm-table-cell"><%= number_to_phone(business.phonenum) %></td>
-						<td class="col-2 d-none d-sm-table-cell">
+						<td class="col-xs-2 col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell"><%= business_address_city(business) %></td>
+						<td class="col-2 text-center d-none d-lg-table-cell"><%= number_to_phone(business.phonenum) %></td>
+						<td class="col-2 d-none d-lg-table-cell">
 							<%= link_to shrink_url_field(business.website), business.website, target: :_blank unless business.website.nil? %>
 						</td>
-						<td class="col-1 text-center d-none d-lg-table-cell">
+						<td class="col-xs-1 col-sm-2 col-md-2 col-lg-1 text-center">
 							<% business.service_types.each do |service_type| %>
 								<%= service_type.name %><br/>
 							<% end %>
