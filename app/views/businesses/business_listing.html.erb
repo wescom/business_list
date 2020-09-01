@@ -6,7 +6,7 @@
 					<thead  class="sorting">
 						<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
 							<tr class="d-flex">
-								<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
+								<th class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
 								<th class="col-xs-4 col-sm-4 col-md-4 col-lg-2">Name</th>
 								<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<% if params[:type].nil? || params[:type].empty? %>
@@ -45,7 +45,7 @@
 					<tbody>
 						<% @businesses.each do |business| %>
 							<tr class="d-flex">
-								<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">
+								<td class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">
 									<%= image_tag business.logo.url(:thumb), :class => "max_100" unless business.logo_file_name.nil? %>
 								</td>	
 								<td class="col-xs-4 col-sm-4 col-md-4 col-lg-2"><%= business.name %></td>	
