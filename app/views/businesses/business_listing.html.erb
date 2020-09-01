@@ -56,7 +56,7 @@
 								<td class="col-2 d-none d-lg-table-cell">
 									<%= link_to shrink_url_field(business.website), business.website, target: :_blank unless business.website.nil? %>
 								</td>
-								<td class="col-6 col-sm-2 col-md-2 col-lg-1 text-center">
+								<td class="col-6 col-sm-2 col-md-2 col-lg-1">
 									<% business.service_types.each do |service_type| %>
 										<%= service_type.name %><br/>
 									<% end %>
