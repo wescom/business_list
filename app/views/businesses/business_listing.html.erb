@@ -7,7 +7,7 @@
 						<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
 							<tr class="d-flex">
 								<th class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
-								<th class="col-6 col-sm-4 col-md-4 col-lg-2">Name</th>
+								<th class="col-5 col-sm-4 col-md-4 col-lg-2">Name</th>
 								<th class="col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<% if params[:type].nil? || params[:type].empty? %>
 										<%= select_tag 'type', 
@@ -29,7 +29,7 @@
 								<th class="col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell">Location</th>
 								<th class="col-2 text-center d-none d-lg-table-cell">Phone</th>
 								<th class="col-2 text-center d-none d-lg-table-cell">Website</th>
-								<th class="col-5 col-sm-2 col-md-2 col-lg-1 text-center">
+								<th class="col-6 col-sm-2 col-md-2 col-lg-1 text-center">
 									<%= select_tag 'service_type', 
 										options_from_collection_for_select(@service_types, 'name', 'name', 
 										:selected => params[:service_type]), 
@@ -48,7 +48,7 @@
 								<td class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">
 									<%= image_tag business.logo.url(:thumb), :class => "max_100" unless business.logo_file_name.nil? %>
 								</td>	
-								<td class="col-6 col-sm-4 col-md-4 col-lg-2"><%= business.name %></td>	
+								<td class="col-5 col-sm-4 col-md-4 col-lg-2"><%= business.name %></td>	
 								<td class="col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<%= business.business_subtypes.map{|v| v.name }.join(", ") unless business.business_subtypes.nil? %></td>
 								<td class="col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell"><%= business_address_city(business) %></td>
@@ -56,7 +56,7 @@
 								<td class="col-2 d-none d-lg-table-cell">
 									<%= link_to shrink_url_field(business.website), business.website, target: :_blank unless business.website.nil? %>
 								</td>
-								<td class="col-5 col-sm-2 col-md-2 col-lg-1 text-center">
+								<td class="col-6 col-sm-2 col-md-2 col-lg-1 text-center">
 									<% business.service_types.each do |service_type| %>
 										<%= service_type.name %><br/>
 									<% end %>
