@@ -3,16 +3,18 @@
 
 	<div class="iw-content">
 		<div class="d-flex align-items-center">
-			<div class="img-block d-flex justify-content-center align-items-center col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<%= image_tag business.logo.url(:thumb) unless business.logo_file_name.nil? %>
-			</div>
+			<% unless business.logo_file_name.nil? %>
+				<div class="img-block d-flex justify-content-center align-items-center col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<%= image_tag business.logo.url(:thumb) unless business.logo_file_name.nil? %>
+				</div>
+			<% end %>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<%= business.business_type.title_for_subtypes unless business.business_type.nil? %>:
+				<strong><%= business.business_type.title_for_subtypes unless business.business_type.nil? %>:</strong>
 				<% business.business_subtypes.each do |subtype| %>
 					<%= subtype.name %><br/>
 				<% end %>
-				Hours: <%= business.hours unless business.hours.nil? %><br>
-				Service Options: <%= business.service_types.map{|v| v.name }.join(", ") %><br/>
+				<strong>Hours: </strong><%= business.hours unless business.hours.nil? %><br>
+				<strong>Service Options: </strong><%= business.service_types.map{|v| v.name }.join(", ") %><br/>
 				<% if business.happy_hour %>
 					Happy Hour? <i class="fa fa-check"></i>
 				<% end %>
@@ -21,10 +23,10 @@
 
 		<div class="iw-subTitle">Info</div>
 		<div>
-			Address: <%= business_address_city(business).titleize %><br>
-			Phone: <%= number_to_phone(business.phonenum) unless business.phonenum.nil? %><br>
-			E-mail: <%= mail_to(business.email, business.email, target: "_blank") unless business.email.nil? %><br>
-			Website: <%= link_to(truncate(business.website, :length => 140), business.website, target: "_blank") unless business.website.nil? %>
+			<strong>Address: </strong><%= business_address_city(business).titleize %><br>
+			<strong>Phone: </strong><%= number_to_phone(business.phonenum) unless business.phonenum.nil? %><br>
+			<strong>E-mail: </strong><%= mail_to(business.email, business.email, target: "_blank") unless business.email.nil? %><br>
+			<strong>Website: </strong><%= link_to(truncate(business.website, :length => 140), business.website, target: "_blank") unless business.website.nil? %>
 		</div>
 	</div>
 	<div class="iw-bottom-gradient"></div>

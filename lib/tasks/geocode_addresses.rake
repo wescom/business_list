@@ -6,7 +6,7 @@ namespace :business do
 
     @businesses = Business.all
     @businesses.each do |business|
-      address = business_address_city_state_zip(business)
+      address = business_address_city_state(business)
       coords = Geocoder.coordinates(address)
       if coords.nil?
         puts "\nGeocoder coordinates nil: " + address
