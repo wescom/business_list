@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :businesses do
     resources :create, controller: 'businesses/create', :only => [:show, :create, :update]
     collection do
+      get 'business_listing_map'
       get 'business_listing'
       get 'maps'
     end

@@ -20,27 +20,6 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.order(sort_column + " " + sort_direction).distinct
   end
   
-  def business_listing
-    @business_types = BusinessType.order("name")
-    @business_type_label = BusinessType.where('business_types.name = ?', params[:type]).first
-    if params[:type].nil?
-      # switch to filtering by type when no type param
-      # @business_subtypes = BusinessSubtype.all.joins(:business_type).order("business_types.name","business_subtypes.name")
-    else
-      @business_subtypes = BusinessSubtype.joins(:business_type).where('business_types.name = ?', params[:type]).order("name") unless params[:type].nil?
-    end
-    @service_types = ServiceType.all.order("name")
-
-    # lists businesses for embedding into an external webpage using paramters 'type', 'service_type', 'zone'
-    @businesses = Business.all
-    @businesses = @businesses.left_outer_joins(:business_type).where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
-    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
-    @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
-    @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.order(sort_column + " " + sort_direction)
-    @businesses = @businesses.where(approved: true).distinct
-  end
-  
   def show
     @business = Business.find(params[:id])
     @business_subtypes = @business.business_subtypes
@@ -162,6 +141,54 @@ class BusinessesController < ApplicationController
     end
   end
   
+  def business_listing_map
+    @business_types = BusinessType.order("name")
+    @business_type_label = BusinessType.where('business_types.name = ?', params[:type]).first
+    if params[:type].nil?
+      # switch to filtering by type when no type param
+      # @business_subtypes = BusinessSubtype.all.joins(:business_type).order("business_types.name","business_subtypes.name")
+    else
+      @business_subtypes = BusinessSubtype.joins(:business_type).where('business_types.name = ?', params[:type]).order("name") unless params[:type].nil?
+    end
+    @service_types = ServiceType.all.order("name")
+
+    # lists businesses for embedding into an external webpage using paramters 'type', 'service_type', 'zone'
+    @businesses = Business.all
+    @businesses = @businesses.left_outer_joins(:business_type).where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
+    @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
+    @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
+    @businesses = @businesses.where(approved: true).distinct
+
+    @business_locations = get_business_locations(@businesses).reject(&:blank?)
+    params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
+    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+  end
+
+  def business_listing
+    @business_types = BusinessType.order("name")
+    @business_type_label = BusinessType.where('business_types.name = ?', params[:type]).first
+    if params[:type].nil?
+      # switch to filtering by type when no type param
+      # @business_subtypes = BusinessSubtype.all.joins(:business_type).order("business_types.name","business_subtypes.name")
+    else
+      @business_subtypes = BusinessSubtype.joins(:business_type).where('business_types.name = ?', params[:type]).order("name") unless params[:type].nil?
+    end
+    @service_types = ServiceType.all.order("name")
+
+    # lists businesses for embedding into an external webpage using paramters 'type', 'service_type', 'zone'
+    @businesses = Business.all
+    @businesses = @businesses.left_outer_joins(:business_type).where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
+    @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
+    @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
+    @businesses = @businesses.where(approved: true).distinct
+
+    @business_locations = get_business_locations(@businesses).reject(&:blank?)
+    params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
+    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+  end
+  
   def maps
     # maps businesses for embedding into an external webpage using paramter 'type'
     @businesses = Business.all
@@ -170,6 +197,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where(approved: true).distinct
+
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
     params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
@@ -186,6 +214,8 @@ class BusinessesController < ApplicationController
       case action_name
       when "business_listing"
         "listings"
+      when "business_listing_map"
+        "maps"
       when "maps"
         "maps"
       else
@@ -219,8 +249,8 @@ class BusinessesController < ApplicationController
     end
 
     def get_business_locations(businesses)  
-      @businesses = businesses
-      @businesses = Gmaps4rails.build_markers(@businesses) do |business, marker|
+      @business_locations = businesses
+      @business_locations = Gmaps4rails.build_markers(@business_locations) do |business, marker|
         if business.lat.nil? or business.lng.nil?
           puts "Geocoder coordinates nil: " + helpers.business_address_city_state_zip(business)
         else
@@ -231,10 +261,11 @@ class BusinessesController < ApplicationController
             "width" =>  32,
             "height" => 32})
             marker.title business.name
+            marker.json({ :id => business.id })
           marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
         end
       end  
-      return @businesses
+      return @business_locations
     end
 
     def get_zone_geocode(zone)
@@ -242,9 +273,9 @@ class BusinessesController < ApplicationController
       coords = Geocoder.coordinates(zone+", Oregon")
       coord_string = []
       if coords.nil?
-        puts "\nCENTER coordinates nil: "
+#        puts "\nCENTER coordinates nil: "
       else
-        puts "\nCENTER coordinates: " + coords[0].to_s + "," + coords[1].to_s
+#        puts "\nCENTER coordinates: " + coords[0].to_s + "," + coords[1].to_s
         coord_string[0] = coords[0]
         coord_string[1] = coords[1]
       end

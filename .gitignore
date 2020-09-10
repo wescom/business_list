@@ -42,8 +42,8 @@ node_modules/
 
 # Ignore development images
 /public/system/db_images
-/public/uploads
-/public/images
+/public/uploads/
+/public/images/
 
 # Ignore yarn files
 /yarn-error.log
