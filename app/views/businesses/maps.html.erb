@@ -2,7 +2,7 @@
 	<div class="maps_heading">
 
 		<div>  
-		  <div id="map3" style='width: 100%; height: 500px;'></div>  
+		  <div id="map" style='width: 100%; height: 500px;'></div>  
 		</div>  
 		
 		<script type="text/javascript">  
@@ -14,7 +14,7 @@
 			handler.buildMap({ 
 				provider: {},
 				internal: {
-					id: 'map3'
+					id: 'map'
 				}
 			}, 
 			function(){
@@ -38,34 +38,22 @@
 			  });
 			};
 			
-			function refreshMap() {
-				console.log("refreshMap");
-				handler.setMap(null);
-			};
-			
-			function selectMarker(id){
-				console.log(markers);
-				let business = markers.find(o => o.id === id);
-				if (business != null) {
-					console.log(business);
-					Gmaps.selectMarker(business);	
-				} else {
-					console.log('not found');
-				};
-
-			};
-
 	    function openMarkerInfo(id) {
 				console.log(markers);
 				let business = markers.find(o => o.id === id);
 				if (business != null) {
 					console.log(business);
 					google.maps.event.trigger(business.getServiceObject(), 'click')
+					scrollToElementId('map');
 				} else {
 					console.log('not found');
 				};
 	    };
 			
+			function scrollToElementId(id) { 
+	      var elem = document.getElementById(id); 
+	      elem.scrollIntoView(); 
+      };
 		</script>
 
 	</div>

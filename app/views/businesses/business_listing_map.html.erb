@@ -1,7 +1,7 @@
 <div class="page-content">
 	<div class="maps_heading">
 		<div>  
-		  <div id="map3" style='width: 100%; height: 500px;'></div>  
+		  <div id="map" style='width: 100%; height: 500px;'></div>  
 		</div>  
 		
 		<script type="text/javascript">  
@@ -13,7 +13,7 @@
 			handler.buildMap({ 
 				provider: {},
 				internal: {
-					id: 'map3'
+					id: 'map'
 				}
 			}, 
 			function(){
@@ -42,11 +42,17 @@
 				let marker = markers.find(o => o.id === id);
 				if (marker != null) {
 					console.log(marker);
-					google.maps.event.trigger(marker.getServiceObject(), 'click')
+					google.maps.event.trigger(marker.getServiceObject(), 'click');
+					scrollToElementId('map');
 				} else {
 					console.log('not found');
 				};
 	    };
+			
+			function scrollToElementId(id) { 
+	      var elem = document.getElementById(id); 
+	      elem.scrollIntoView(); 
+      };
 		</script>
 	</div>
 	
@@ -110,7 +116,7 @@
 								<td class="col-2 d-none d-lg-table-cell business_listing_email">
 									<%= link_to shrink_url_field(business.website), business.website, target: :_blank unless business.website.nil? %>
 								</td>
-								<td class="col-6 col-sm-2 col-md-2 col-lg-1">
+								<td class="col-6 col-sm-2 col-md-2 col-lg-1 text-center">
 									<% business.service_types.each do |service_type| %>
 										<%= service_type.name %><br/>
 									<% end %>
