@@ -5,7 +5,39 @@
 		  <div id="map" style='width: 100%; height: 500px;'></div>  
 		</div>  
 		
-		<%= render :partial => 'map_scripts' %>
+		<script type="text/javascript">  
+			var business_json = <%=raw @business_locations.to_json %>;
+		    var handler;
+		    var markers = [];
+
+				handler = Gmaps.build('Google');
+				handler.buildMap({ 
+					provider: {},
+					internal: {
+						id: 'map'
+					}
+				}, 
+				function(){
+		    markers = handler.addMarkers(business_json);
+		    _.each(business_json, function(elt, index){
+		      _.extend(markers[index], elt);
+		    });
+				  handler.bounds.extendWith(markers) 
+				  handler.fitMapToBounds()
+					handler.getMap().setZoom(<%=params[:zoom]%>)
+					handler.map.centerOn(<%= params[:center] %>)
+				});
+		
+				Gmaps.selectMarker = function(id) {
+				  $.each(Gmaps.store.markers, function() {
+				    if (this.serviceObject.id == id) {
+				      this.panTo();
+				      this.serviceObject.setAnimation(google.maps.Animation.BOUNCE);
+				    }
+				    else this.serviceObject.setAnimation(null);
+				  });
+				};
+			</script>
 	</div>
 
 </div>
