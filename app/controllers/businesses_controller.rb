@@ -1,7 +1,7 @@
 class BusinessesController < ApplicationController
   load_and_authorize_resource :except => [:maps, :business_listing]
 
-  skip_before_action :authenticate_user!, :only => [:maps, :business_listing]
+  skip_before_action :authenticate_user!, :only => [:maps, :business_listing, :business_listing_map]
   layout :determine_layout
   helper_method :sort_column, :sort_direction
 
