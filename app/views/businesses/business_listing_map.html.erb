@@ -103,9 +103,9 @@
 					<tbody>
 						<% @businesses.each do |business| %>
 							<tr>
-								<% if business.city.titleize != current_city %>
+								<% if business.city && business.city.titleize != current_city %>
 									<% current_city = business.city.titleize %>
-									<td><h1><%= current_city %></h1></td>
+									<td><br/><h1><%= current_city %></h1></td>
 								<% end %>
 							</tr>
 							

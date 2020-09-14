@@ -164,6 +164,7 @@ class BusinessesController < ApplicationController
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
     params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+    puts "*** params[:center]: " + params[:center].to_s
   end
 
   def business_listing
@@ -203,7 +204,7 @@ class BusinessesController < ApplicationController
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
-    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend")
   end
   
   private
