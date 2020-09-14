@@ -159,7 +159,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where(approved: true).distinct
-    @businesses = @businesses.order('name')
+    @businesses = @businesses.order('city').order('name')
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11

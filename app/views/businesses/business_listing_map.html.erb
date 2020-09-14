@@ -59,11 +59,12 @@
 	<div class="business_listing_block">
 		<% if @businesses %>
 			<% unless @businesses.nil? %>
+				<% current_city = "" %>
 				<table id="businesss_listing" class="table table-condensed table-striped table-sm ">
 					<thead  class="sorting">
 						<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
 							<tr class="d-flex">
-								<th class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
+								<th class="col-1 col-sm-1 col-md-1 col-lg-1 text-center"></th>
 								<th class="col-5 col-sm-4 col-md-4 col-lg-2">Name</th>
 								<th class="col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<% if params[:type].nil? || params[:type].empty? %>
@@ -101,6 +102,13 @@
 					</thead>
 					<tbody>
 						<% @businesses.each do |business| %>
+							<tr>
+								<% if business.city.titleize != current_city %>
+									<% current_city = business.city.titleize %>
+									<td><h1><%= current_city %></h1></td>
+								<% end %>
+							</tr>
+							
 							<tr class="d-flex">
 								<td class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">
 									<%= image_tag business.logo.url(:thumb), :class => "max_100" unless business.logo_file_name.nil? %>
@@ -109,7 +117,7 @@
 								<td class="col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<%= business.business_subtypes.map{|v| v.name }.join(", ") unless business.business_subtypes.nil? %></td>
 								<td class="col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell">
-									<%= icon('edit fa-globe', :title => "Map it", :onclick => "openMarkerInfo(#{business.id})") %>
+									<%= icon('edit fa-globe', :title => "Map it", :onclick => "openMarkerInfo(#{business.id})") unless business.lat.nil? || business.lng.nil? %>
 									<%= business_address_city(business) %>
 								</td>
 								<td class="col-2 text-center d-none d-lg-table-cell"><%= number_to_phone(business.phonenum) %></td>
