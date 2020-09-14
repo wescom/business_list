@@ -163,7 +163,7 @@ class BusinessesController < ApplicationController
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
-    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+    params[:center] = get_center_geocode(params[:center],params[:zone])
   end
 
   def business_listing
@@ -188,7 +188,7 @@ class BusinessesController < ApplicationController
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
-    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend") 
+    params[:center] = get_center_geocode(params[:center],params[:zone])
   end
   
   def maps
@@ -203,7 +203,7 @@ class BusinessesController < ApplicationController
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
-    params[:center] = params[:zone] ? get_zone_geocode(params[:zone]) : get_zone_geocode("Bend")
+    params[:center] = get_center_geocode(params[:center],params[:zone])
   end
   
   private
@@ -271,18 +271,24 @@ class BusinessesController < ApplicationController
       return @business_locations
     end
 
-    def get_zone_geocode(zone)
-      zone = zone.nil? || zone.empty? ? "Bend" : zone
-      coords = Geocoder.coordinates(zone+", Oregon")
+    def get_center_geocode(center,zone)
+      puts "center: "+center.to_s
+      puts "zone: "+zone.to_s
       coord_string = []
-      if coords.nil?
-#        puts "\nCENTER coordinates nil: "
+      if center.nil? || center.empty?
+        # center is not defined
+        zone = zone.nil? || zone.empty? ? "Bend" : zone 
+        coords = Geocoder.coordinates(zone+", OR")
+        if !coords.nil?
+          coord_string[0] = coords[0]
+          coord_string[1] = coords[1]
+        end
+        #puts "****** "+coord_string.inspect
       else
-#        puts "\nCENTER coordinates: " + coords[0].to_s + "," + coords[1].to_s
-        coord_string[0] = coords[0]
-        coord_string[1] = coords[1]
+        # center is defined
+        coord_string = center
+        #puts "****** "+coord_string.inspect
       end
-      puts "****** "+coord_string.inspect
       return coord_string
     end
 end
