@@ -27,22 +27,6 @@
 				handler.map.centerOn(<%= params[:center] %>)
 			});
 	
-	    function openMarkerInfo(id) {
-				//console.log(markers);
-				let business = markers.find(o => o.id === id);
-				if (business != null) {
-					//console.log(business);
-					google.maps.event.trigger(business.getServiceObject(), 'click')
-					scrollToElementId('map');
-				} else {
-					console.log('marker not found');
-				};
-	    };
-	
-			function scrollToElementId(id) { 
-	      var elem = document.getElementById(id); 
-	      elem.scrollIntoView(); 
-		  };
 		</script>
 	</div>
 	
