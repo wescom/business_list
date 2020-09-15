@@ -4,7 +4,7 @@ namespace :business do
   task :geocode_addresses => [:environment] do
     puts "GeoCode Business Addresses"
 
-    @businesses = Business.all.where('name like ?','The Bulletin')
+    @businesses = Business.all
     @businesses.each do |business|
       address = business_address_city_state(business).upcase
       coords = Geocoder.coordinates(address)
