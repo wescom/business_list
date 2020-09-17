@@ -229,13 +229,6 @@ class BusinessesController < ApplicationController
         marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
       end
     end
-    
-    puts "*********"
-    puts params[:type]
-    puts params[:zoom]
-    puts params[:center]
-    puts params[:zone]
-    #puts @map_markers.inspect
     return @map_markers
   end
   

@@ -2,6 +2,64 @@ document.addEventListener("turbolinks:load", () => {
 	//  $('[data-toggle="tooltip"]').tooltip();
 	//  $('[data-toggle="popover"]').popover();
 
+
+// Google Maps
+	var business_json = document.getElementById('map-markers').dataset.businessMapMarkers;
+	var business_json = "{lat:44.046635,lng:-121.311208}"
+	console.log(business_json);
+	
+//	$.getJSON('/businesses/get_map_markers', function(data) {
+	    // you can access your data here in the "data" variable passed to this success handler
+//			console.log("JSON:");
+//	    console.log(data);
+//	});
+//	business_json = JSON.parse('<%= @business_locations %>');
+	console.log("business_json: ");
+	console.log(business_json);
+
+  var handler;
+  var markers = [];
+
+	var zoom = parseInt(document.getElementById('zoom').value,10);
+	console.log("zoom: "+zoom);
+
+	console.log("center: "+document.getElementById('center').value);
+	var center = {lat:44.0581728, lng: -121.3153096};
+	console.log("center: "+center);
+
+	handler = Gmaps.build('Google');
+	handler.buildMap({ 
+		provider: {},
+		internal: {
+			id: 'map'
+		}
+	}, 
+	function(){
+		markers = handler.addMarkers(business_json);
+		_.each(business_json, function(elt, index){
+			_.extend(markers[index], elt);
+		});
+	  handler.bounds.extendWith(markers);
+	  handler.fitMapToBounds();
+		handler.getMap().setZoom(zoom);
+		handler.map.centerOn(center);
+	});
+
+	$('#354').on(
+    'click',
+    function() {
+			//console.log(markers);
+			let business = markers.find(o => o.id === id);
+			if (business != null) {
+				//console.log(business);
+				google.maps.event.trigger(business.getServiceObject(), 'click')
+				scrollToElementId('map');
+			} else {
+				console.log('marker not found');
+			};
+    }
+  );
+
 // Business Forms
 	$('select#select_business_type.form-control').ready(function() {
 		var business_type_id = $('#select_business_type').val();

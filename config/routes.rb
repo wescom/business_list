@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get 'business_listing_map'
       get 'business_listing'
       get 'maps'
+      get 'get_map_markers'
     end
     put 'approve_business'
   end

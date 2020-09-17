@@ -4,8 +4,8 @@
 			<% unless @businesses.nil? %>
 				<% current_city = "" %>
 				<div id="map-markers" data-business-map-markers="<%= @business_locations.to_json %>"></div>
-				<table id="businesss_listing" class="table table-condensed table-striped table-sm ">
-					<thead  class="sorting">
+				<table id="businesss_listing" class="table table-condensed table-striped table-sm">
+					<thead class="sorting">
 						<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
 							<tr class="d-flex">
 								<th class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">Logo</th>
