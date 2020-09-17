@@ -2,6 +2,8 @@
 	<div class="business_listing_block">
 		<% if @businesses %>
 			<% unless @businesses.nil? %>
+				<% current_city = "" %>
+				<div id="map-markers" data-business-map-markers="<%= @business_locations.to_json %>"></div>
 				<table id="businesss_listing" class="table table-condensed table-striped table-sm ">
 					<thead  class="sorting">
 						<%= form_for business_listing_businesses_path, :method => 'get' do |form| %>
@@ -39,11 +41,20 @@
 								</th>
 							</tr>
 
-							<%= hidden_field_tag :zone, params[:zone] %>
+							<%= hidden_field_tag :zone, params[:zone], :id=>"zone" %>
+							<%= hidden_field_tag :center, params[:center], :id=>"center" %>
+							<%= hidden_field_tag :zoom, params[:zoom], :id=>"zoom" %>
 						<% end %>
 					</thead>
 					<tbody>
 						<% @businesses.each do |business| %>
+							<tr>
+								<% if business.city && business.city.titleize != current_city %>
+									<% current_city = business.city.titleize %>
+									<td><br/><h1><%= current_city %></h1></td>
+								<% end %>
+							</tr>
+							
 							<tr class="d-flex">
 								<td class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">
 									<%= image_tag business.logo.url(:thumb), :class => "max_100" unless business.logo_file_name.nil? %>
@@ -52,7 +63,7 @@
 								<td class="col-sm-2 col-md-2 col-lg-2 text-center d-none d-md-table-cell">
 									<%= business.business_subtypes.map{|v| v.name }.join(", ") unless business.business_subtypes.nil? %></td>
 								<td class="col-sm-3 col-md-3 col-lg-2 d-none d-sm-table-cell">
-									<%= icon('edit fa-globe', :title => "Map it", :onclick => "openMarkerInfo(#{business.id})") %>
+									<%= icon('edit fa-globe', :id => "#{business.id}", :title => "Map it", :onclick => "openMarkerInfo(#{business.id})") %>
 									<%= business_address_city(business) %>
 								</td>
 								<td class="col-2 text-center d-none d-lg-table-cell"><%= number_to_phone(business.phonenum) %></td>

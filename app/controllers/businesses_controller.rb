@@ -184,7 +184,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
     @businesses = @businesses.where(approved: true).distinct
-    @businesses = @businesses.order('name')
+    @businesses = @businesses.order('city').order('name')
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
@@ -205,6 +205,39 @@ class BusinessesController < ApplicationController
     params[:zoom] = (params[:zoom] && params[:zoom].to_i > 0) ? params[:zoom] : 11
     params[:center] = get_center_geocode(params[:center],params[:zone])
   end
+
+  def get_map_markers
+    @businesses = Business.all
+    @businesses = @businesses.left_outer_joins(:business_type).where('business_types.name = ?', params[:type]) unless params[:type].nil? || params[:type].empty?
+    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
+    @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
+    @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
+    @businesses = @businesses.where(approved: true).distinct
+
+    @map_markers = Gmaps4rails.build_markers(@businesses) do |business, marker|
+      if business.lat.nil? or business.lng.nil?
+        puts "Geocoder coordinates nil: " + helpers.business_address_city_state_zip(business)
+      else
+        marker.lat business.lat
+        marker.lng business.lng
+        marker.picture({
+#          "url" => "http://maps.google.com/mapfiles/ms/icons/green.png",
+          "width" =>  32,
+          "height" => 32})
+          marker.title business.name
+          marker.json({ :id => business.id })
+        marker.infowindow render_to_string(:partial => "/businesses/maps_infowindow", :locals => {:business => business})
+      end
+    end
+    
+    puts "*********"
+    puts params[:type]
+    puts params[:zoom]
+    puts params[:center]
+    puts params[:zone]
+    #puts @map_markers.inspect
+    return @map_markers
+  end
   
   private
     def business_params
@@ -216,7 +249,7 @@ class BusinessesController < ApplicationController
     def determine_layout
       case action_name
       when "business_listing"
-        "listings"
+        "maps"
       when "business_listing_map"
         "maps"
       when "maps"
@@ -272,8 +305,6 @@ class BusinessesController < ApplicationController
     end
 
     def get_center_geocode(center,zone)
-      puts "center: "+center.to_s
-      puts "zone: "+zone.to_s
       coord_string = []
       if center.nil? || center.empty?
         # center is not defined
