@@ -22,7 +22,7 @@ namespace :business do
         geo_count = geo_count +1
       end
     end
-    puts "Businesses with Lat/Long: "+geo_count
+    puts "Businesses with Lat/Long: "+geo_count.to_i
   end
   
   def business_address_city_state(business)
