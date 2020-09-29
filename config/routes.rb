@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :business_subtypes, :only => [:new, :create, :edit, :update, :destroy]
   resources :service_types
   resources :zones
+  resources :regions
   resources :contacts, :only => [:new, :create, :edit, :update, :destroy]
   resources :awards, :only => [:new, :create, :edit, :update, :destroy]
 

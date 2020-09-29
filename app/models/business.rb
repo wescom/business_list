@@ -1,5 +1,6 @@
 class Business < ApplicationRecord
   belongs_to :business_type, optional: true
+  belongs_to :region, optional: true
   has_and_belongs_to_many :business_subtypes
   has_and_belongs_to_many :service_types
   has_and_belongs_to_many :zones

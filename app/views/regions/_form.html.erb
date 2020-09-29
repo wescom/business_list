@@ -1,0 +1,7 @@
+<div class="form-group row">
+	<label for="name" class="col-form-label">Name:</label>
+	<%= render 'shared/field_error_messages', object: @region, field: :name %>
+	<div class="col-6">
+		<%= form.text_field :name, class: "form-control" %>
+	</div>
+</div>

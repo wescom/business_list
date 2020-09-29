@@ -45,6 +45,7 @@ class ZonesController < ApplicationController
 
   def destroy
     @zone = Zone.find(params[:id])
+    puts @zone.inspect
     if @zone.destroy
         flash[:notice] = "Zone Killed"
         redirect_to zones_path

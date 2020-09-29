@@ -1,0 +1,22 @@
+<div class="region_heading">
+	<div class="container search_container">
+		<div class="row justify-content-between">
+			<h1>Edit region within zone '<%= @region.zone.name %>'</h1>
+		</div>
+	</div>
+
+</div>
+
+<div class="region_block" >
+	<%= form_for @region do |form| %>
+		<%= form.hidden_field :zone_id, :value => @region.zone.id %>
+
+		<%= render :partial => 'form', :object => form %>
+	
+		<div class="form-group row d-flex justify-content-end">
+			<%= form.submit "Update", :class => 'btn btn-primary'%>
+			<%= form.submit "Cancel", :name => 'cancel_button', :class => 'btn btn-primary'%>
+		</div>
+	
+	<% end %>
+</div>

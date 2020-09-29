@@ -1,11 +1,11 @@
 <div class="zone_heading">
-	<h1><%= @zone.name %></h1>
+	<h1>Edit zone '<%= @zone.name %>'</h1>
 </div>
 
 <div class="zone_block" >
 	<%= form_for(@zone) do |f| %>
 		<div class="form-group row">
-			<label for="name" class="offset-1 col-3 col-form-label">Zone:</label>
+			<label for="name" class="offset-1 col-1 col-form-label">Zone:</label>
 			<%= render 'shared/field_error_messages', object: @zone, field: :name %>
 			<div class="col-3">
 				<%= f.text_field :name, class: "form-control" %>
