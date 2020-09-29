@@ -44,6 +44,7 @@ class Ability
       can :manage, Contact
       can :manage, Award
       can :manage, Zone
+      can :manage, Region
     end
     if user.sales_role?
       can :manage, Business
