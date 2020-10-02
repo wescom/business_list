@@ -28,9 +28,7 @@ class Businesses::CreateController < ApplicationController
     @business.website = sanitize_website(@business.website) unless @business.website.nil?
     @business.status = (step == steps.last ? 'active' : step.to_s)
     if step.to_s == "business_services"
-      puts "****** step: "+step.to_s
       if params[:business][:region_id].nil? # if no region was selected, clear the current business region_id
-        puts "****** clear region_id"
         @business.region_id = nil
       end
     end
