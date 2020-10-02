@@ -30,6 +30,7 @@ class BusinessesController < ApplicationController
     @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+    @business_regions = Zone.first.regions
     @users = User.all.order("email")
 
     @business = Business.new
@@ -84,6 +85,11 @@ class BusinessesController < ApplicationController
     end
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+    if @business.zones.nil?
+      @business_regions = Zone.first.regions
+    else
+      @business_regions = Region.where(:zone_id => @business.zones ).order(:name)
+    end
     @users = User.all.order("email")
 
     @business = Business.find(params[:id])
@@ -101,10 +107,18 @@ class BusinessesController < ApplicationController
       end
       @service_types = ServiceType.all.order("name")
       @zones = Zone.all.order("name")
+      if @business.zones.nil?
+        @business_regions = Zone.first.regions
+      else
+        @business_regions = Region.where(:zone_id => @business.zones ).order(:name)
+      end
 
       @business = Business.find(params[:id])
       @business.status = "active"
       @business.approved = false
+      if params[:business][:region_id].nil? # if no region was selected, clear the current business region_id
+        @business.region_id = nil
+      end
       if @business.update(business_params)
           flash[:notice] = "Business Updated"
           redirect_to @business
@@ -234,7 +248,7 @@ class BusinessesController < ApplicationController
   
   private
     def business_params
-      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},{:zone_ids=>[]},:hours,
+      params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:zone_ids,:region_id,:hours,
       :website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes,:yelp_url,:business_listing_zone,:happy_hour,:award_id,:owner_id,
       :status, :approved )
     end

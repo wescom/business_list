@@ -27,6 +27,7 @@ class Business < ApplicationRecord
   validates :business_type_id, presence: { message: "must select at least one" }, if: :active_or_services?
   validates :service_types, presence: { message: "must select at least one" }, if: :active_or_services?
   validates :zones, presence: { message: "must select at least one" }, if: :active_or_services?
+  validates :region, presence: { message: "must select one when zone has regions" }, if: -> record { active_or_services? && zone_has_regions? }
   #validates :business_type_id, presence: true, if: :active_or_extras?
   #validates :business_type_id, presence: true, if: :active_or_contacts?
 
@@ -52,5 +53,9 @@ class Business < ApplicationRecord
 
   def active_or_contacts?
     status.include?('business_contacts') || active?
+  end
+  
+  def zone_has_regions?
+    self.zones.present? && (self.zones.first.regions.size > 0)
   end
 end

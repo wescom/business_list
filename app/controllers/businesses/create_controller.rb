@@ -9,6 +9,7 @@ class Businesses::CreateController < ApplicationController
     @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+    @business_regions = Zone.all.order("name")
     @users = User.all.order("email")
 
     @business = Business.find(params[:business_id])
@@ -20,11 +21,19 @@ class Businesses::CreateController < ApplicationController
     @business_subtypes = BusinessType.first.business_subtypes
     @service_types = ServiceType.all.order("name")
     @zones = Zone.all.order("name")
+    @business_regions = Zone.all.order("name")
     @users = User.all.order("email")
 
     @business = Business.find(params[:business_id])
     @business.website = sanitize_website(@business.website) unless @business.website.nil?
     @business.status = (step == steps.last ? 'active' : step.to_s)
+    if step.to_s == "business_services"
+      puts "****** step: "+step.to_s
+      if params[:business][:region_id].nil? # if no region was selected, clear the current business region_id
+        puts "****** clear region_id"
+        @business.region_id = nil
+      end
+    end
     @business.update(business_params)
     render_wizard @business
   end
@@ -37,7 +46,7 @@ class Businesses::CreateController < ApplicationController
 
   private
   def business_params
-    params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},{:zone_ids=>[]},:hours,
+    params.require(:business).permit(:name,:logo,:business_type_id,{:business_subtype_ids=>[]},{:service_type_ids=>[]},:zone_ids,:region_id,:hours,
     :website,:address1,:address2,:city,:state,:zipcode,:phonenum,:email,:notes,:yelp_url,:business_listing_zone,:happy_hour,:award_id,:owner_id,
     :status, :approved )
   end

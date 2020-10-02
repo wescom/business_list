@@ -55,6 +55,14 @@ class ZonesController < ApplicationController
     end
   end
 
+  def zone_region_options
+    business_regions = Region.where(:zone_id => params[:zone_id]) unless params[:zone_id].nil?
+
+    respond_to do |format|
+      format.html
+      format.json  { render :json => {:business_regions => business_regions} }
+    end
+  end
   private
     def zone_params
       params.require(:zone).permit(:name)

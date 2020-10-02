@@ -49,6 +49,7 @@ class Ability
     if user.sales_role?
       can :manage, Business
       can [:read, :business_subtype_options], BusinessType
+      can [:read, :zone_region_options], Zone
       can :read, ServiceType
       can :manage, Contact
       can :manage, Award
@@ -57,6 +58,8 @@ class Ability
       can :create, Business
       can :create_business_wizard, Business
       can [:read,:update,:destroy], Business, owner_id: user.id # can manage their own business
+      can [:read, :business_subtype_options], BusinessType
+      can [:read, :zone_region_options], Zone
       can :create, Contact
       can [:read,:update,:destroy], Contact do |contact|  # can manage their own business contacts
            contact.business.owner_id == user.id

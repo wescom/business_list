@@ -31,16 +31,22 @@
 		</div>
 
 		<div class="form-row">
-			<div class="form-group col-md-4">
-				<label for="business_listing_zone" class="col-form-label">Business Listing Zones: *</label>
-				<%= render 'shared/field_error_messages', object: @business, field: :zones, message: "must select at least one" %>
-				<div class="col-12">
-					<small>(Select one or more)</small>
-					<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
-						{:required => true}, 
-						{:id => "select_zones", :class => "form-control", :multiple => true, :size => 5 }
-						) unless @zones.nil? %>
-				</div>
+			<div class="form-group col-md-6">
+				<label for="zone_ids" class="col-form-label">Business Zone: *</label>
+				<%= render 'shared/field_error_messages', object: @business, field: :zones, message: "must select one" %>
+				<%= form.select(:zone_ids, @zones.order('name').collect {|p| [ p.name, p.id ] },
+					{}, 
+					{:id => "select_zones", :class => "form-control", :size => 5 }
+					) unless @zones.nil? %>
+			</div>
+			<div class="form-group col-md-6">
+			<label for="business_listing_zone" class="col-form-label">Region: </label><small> (* if applicable)</small>
+				<%= render 'shared/field_error_messages', object: @business, field: :region, message: "must select one when zone has regions" %>
+				<%= form.select :region_id, 
+					options_from_collection_for_select(@business_regions, 'id', 'name', 
+					:selected => @business.region_id), 
+					{},
+					{:id => "select_region", :class => "form-control", :size => 5} %>
 			</div>
 		</div>
 		<hr/>

@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   end
   resources :business_subtypes, :only => [:new, :create, :edit, :update, :destroy]
   resources :service_types
-  resources :zones
+  resources :zones do
+    get 'zone_region_options', :on => :collection
+  end
   resources :regions
   resources :contacts, :only => [:new, :create, :edit, :update, :destroy]
   resources :awards, :only => [:new, :create, :edit, :update, :destroy]

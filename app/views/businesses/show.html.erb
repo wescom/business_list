@@ -90,10 +90,14 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="zones" class="offset-1 col-2">Business Zones:</label>
+		<label for="zones" class="offset-1 col-2">Business Zone:</label>
 		<%= render 'shared/field_missing_data', field: @business.zones, required: true %>
-		<div class="col-6">
+		<div class="col-2">
 			<%= @business.zones.map{|v| v.name }.join(", ") %>
+		</div>
+		<label for="region" class="offset-1 col-2">Region:</label>
+		<div class="col-3">
+			<%= @business.region.name unless @business.region.nil? %>
 		</div>
 	</div>
 	<hr/>

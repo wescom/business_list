@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_230320) do
+ActiveRecord::Schema.define(version: 2020_09_29_230609) do
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "business_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_230320) do
     t.decimal "lng", precision: 10, scale: 6
     t.boolean "pause_listing"
     t.boolean "food_truck"
+    t.integer "region_id"
     t.index ["owner_id"], name: "index_businesses_on_owner_id"
   end
 
