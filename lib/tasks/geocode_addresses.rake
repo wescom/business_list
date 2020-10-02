@@ -19,10 +19,10 @@ namespace :business do
         business.lat = coords[0]
         business.lng = coords[1]
         business.save
-        geo_count = geo_count +1
+        geo_count = geo_count + 1
       end
     end
-    puts "Businesses with Lat/Long: "+geo_count.to_i
+    puts "Businesses with Lat/Long: "+geo_count.to_s
   end
   
   def business_address_city_state(business)
