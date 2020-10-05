@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get 'get_map_markers'
     end
     put 'approve_business'
+    put 'pause_business'
   end
   match "/create_business_wizard" => "businesses#create_business_wizard", :via => [:get]
 

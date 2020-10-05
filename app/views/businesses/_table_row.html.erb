@@ -1,7 +1,12 @@
 <tr>
 	<td class="text-center " style="width:150px;">
 		<% case table_row.status 
-	     when "approved" %><i class="fa fa-circle" data-toggle="tooltip"  title="Approved" style="color: green;font-size: 1.5rem;"></i>
+	     when "approved" %>
+			<% if table_row.pause_listing %>
+				<i class="fa fa-pause" data-toggle="tooltip"  title="Listing Paused" style="color: red;font-size: 1.5rem;"></i>
+			<% else %>
+				<i class="fa fa-circle" data-toggle="tooltip"  title="Approved" style="color: green;font-size: 1.5rem;"></i>
+			<% end %>
 	  <% when "active" %><i class="fa fa-clock-o" data-toggle="tooltip"  title="Waiting for approval" style="font-size: 1.5rem;"></i>
 		<% else %><i class="fa fa-exclamation-triangle" data-toggle="tooltip"  title="Business creation needs completion" style="color: red;font-size: 1.5rem;"></i>
 	  <% end %>

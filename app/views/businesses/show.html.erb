@@ -13,7 +13,7 @@
 		<label for="status" class="col-1"><h5>Status:</h5></label>
 		<div class="col-3">
 			<% case @business.status 
-		     when "approved" %><i class="fa fa-circle" style="color: green;"></i>&nbsp;&nbsp;Approved
+		     when "approved" %> <i class="fa fa-circle" style="color: green;"></i>&nbsp;&nbsp;Approved
 		  <% when "active" %>
 				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;Waiting for approval
 				<% if can? :manage, Business %>
@@ -28,6 +28,29 @@
 				<% end %>
 			<% else %><i class="fa fa-exclamation-triangle" style="color: red;"></i>&nbsp;&nbsp;Business creation needs completion
 		  <% end %>
+		</div>
+		<div class="col-3">
+			<% if @business.status == "approved" %>
+				<% if @business.pause_listing %>
+					<%= link_to business_pause_business_path(@business),
+						:method=> :put, :action => 'pause_business', :class => 'btn btn-danger',
+						data: {
+							title: 'Unpause?', 
+							confirm:'Proceeding will unpause this business listing and allow it to publish online', 
+							commit: 'Unpause', 'commit-class': 'btn-danger'},
+						title: 'Unpause business listing', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
+						<i class="fa fa-pause" aria-hidden="true"></i> Paused
+					<% end %>
+				<% else %>
+					<%= link_to "Live", business_pause_business_path(@business),
+						:method=> :put, :action => 'pause_business', :class => 'btn btn-success',
+						data: {
+							title: 'Pause '+@business.name+'?', 
+							confirm:'Proceeding will pause this business listing and remove it from online', 
+							commit: 'Pause', 'commit-class': 'btn-success'},
+						title: 'Business listing is Live. Click to pause and take offline.', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+				<% end %>
+			<% end %>
 		</div>
 		<div class="col-4">
 			Last updated: <%= @business.updated_at.strftime('%m/%d/%Y %l:%M%P') %>

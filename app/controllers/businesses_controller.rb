@@ -154,6 +154,31 @@ class BusinessesController < ApplicationController
       end
     end
   end
+
+  def pause_business
+    @business = Business.find(params[:business_id])
+    if @business.present?
+      if @business.pause_listing
+        @business.pause_listing = false
+        if @business.save
+          flash[:notice] = "Business Unpaused"
+          redirect_to @business
+        else
+          flash[:notice] = "Unpause Failed"
+          redirect_to @business
+        end
+      else
+        @business.pause_listing = true
+        if @business.save
+          flash[:notice] = "Business Paused"
+          redirect_to @business
+        else
+          flash[:notice] = "Pause Failed"
+          redirect_to @business
+        end
+      end
+    end
+  end
   
   def business_listing_map
     @business_types = BusinessType.order("name")
@@ -172,7 +197,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.where(approved: true).distinct
+    @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('city').order('name')
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
@@ -197,7 +222,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.where(approved: true).distinct
+    @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('city').order('name')
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
@@ -212,7 +237,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.where(approved: true).distinct
+    @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('name')
 
     @business_locations = get_business_locations(@businesses).reject(&:blank?)
@@ -226,7 +251,7 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.where(approved: true).distinct
+    @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
 
     @map_markers = Gmaps4rails.build_markers(@businesses) do |business, marker|
       if business.lat.nil? or business.lng.nil?
