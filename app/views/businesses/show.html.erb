@@ -104,15 +104,6 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="happy_hour" class="offset-1 col-2">Happy Hour?</label>
-		<%= render 'shared/field_missing_data', field: @business.happy_hour, required: false %>
-		<div class="col-6">
-			<% if @business.happy_hour %>
-				<i class="fa fa-check"></i>
-			<% end %>
-		</div>
-	</div>
-	<div class="form-group row">
 		<label for="zones" class="offset-1 col-2">Business Zone:</label>
 		<%= render 'shared/field_missing_data', field: @business.zones, required: true %>
 		<div class="col-2">
@@ -122,6 +113,26 @@
 		<div class="col-3">
 			<%= @business.region.name unless @business.region.nil? %>
 		</div>
+	</div>
+	<div class="form-group row">
+		<div class="offset-2 col-1">
+			<% if @business.happy_hour %>
+				<i class="fa fa-check-square fa-2x"></i>
+			<% else %>
+				<i class="fa fa-ban fa-2x"></i>
+			<% end %>
+		</div>
+		<label for="happy_hour" class="col-2">Happy Hour</label>
+	</div>
+	<div class="form-group row">
+		<div class="offset-2 col-1">
+			<% if @business.food_truck %>
+				<i class="fa fa-check-square fa-2x"></i>
+			<% else %>
+				<i class="fa fa-ban fa-2x"></i>
+			<% end %>
+		</div>
+		<label for="food_truck" class=" col-2">Food Truck</label>
 	</div>
 	<hr/>
 

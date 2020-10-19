@@ -112,6 +112,8 @@
 			</div>
 		</div>
 	</div>
+	<br/>
+	
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<label for="business_listing_zone" class="col-form-label">Business Zone: *</label>
@@ -139,11 +141,18 @@
 				<%= form.text_field :hours, class: "form-control", :placeholder => "8-5pm" %>
 			</div>
 		</div>
-		<div class="form-group col-md-6">
-			<label for="happy_hour" class="col-form-label">Happy Hour?:</label>
-			<div class="col-6">
-				<%= form.check_box :happy_hour, class: "form-control" %>
-			</div>
+		<div class="form-group col-md-4">
+			<h5>Other items:</h5>
+			<ul class="list-group">
+			  <li class="list-group-item d-flex justify-content-between align-items-center">
+			    Happy Hour?
+			    <span class="badge badge-primary"><%= form.check_box :happy_hour %></span>
+			  </li>
+			  <li class="list-group-item d-flex justify-content-between align-items-center">
+			    Food Truck?
+			    <span class="input-group-lg badge badge-primary"><%= form.check_box :food_truck %></span>
+			  </li>
+			</ul>
 		</div>
 	</div>
 	<div class="form-row">
