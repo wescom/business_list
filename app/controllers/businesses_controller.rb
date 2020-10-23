@@ -114,15 +114,19 @@ class BusinessesController < ApplicationController
       end
 
       @business = Business.find(params[:id])
-      @business.status = "active"
-      @business.approved = false
+      if !current_user.admin_role?    # current user is not an Admin so require the business to be Approved
+        @business.status = "active"
+        @business.approved = false
+      end
       if params[:business][:region_id].nil? # if no region was selected, clear the current business region_id
         @business.region_id = nil
       end
       if @business.update(business_params)
           flash[:notice] = "Business Updated"
-#          @default_settings_email = DefaultSettingsEmail.find_by(name: 'Business Updated')
-#          BusinessMailer.business_updated(@business,@default_settings_email).deliver_later unless @default_settings_email.nil? 
+          if current_user = @business.owner   # If owner makes a change, email changes
+            @default_settings_email = DefaultSettingsEmail.find_by(name: 'Business Updated')
+            BusinessMailer.business_updated(@business,@default_settings_email).deliver_later unless @default_settings_email.nil? 
+          end
           redirect_to @business
       else
           flash[:notice] = "Business Update Failed"
@@ -199,8 +203,8 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', 'Food Truck') unless params[:food_truck] != 'true'
     @businesses = @businesses.where(happy_hour: true) unless params[:happy_hour] != 'true'
+    @businesses = @businesses.where(food_truck: true) unless params[:food_truck] != 'true'
     @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('city').order('name')
 
@@ -226,8 +230,8 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', 'Food Truck') unless params[:food_truck] != 'true'
     @businesses = @businesses.where(happy_hour: true) unless params[:happy_hour] != 'true'
+    @businesses = @businesses.where(food_truck: true) unless params[:food_truck] != 'true'
     @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('city').order('name')
 
@@ -243,8 +247,8 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', 'Food Truck') unless params[:food_truck] != 'true'
     @businesses = @businesses.where(happy_hour: true) unless params[:happy_hour] != 'true'
+    @businesses = @businesses.where(food_truck: true) unless params[:food_truck] != 'true'
     @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
     @businesses = @businesses.order('name')
 
@@ -259,8 +263,8 @@ class BusinessesController < ApplicationController
     @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', params[:business_subtype]) unless params[:business_subtype].nil? || params[:business_subtype].empty?
     @businesses = @businesses.left_outer_joins(:zones).where('zones.name = ?', params[:zone]) unless params[:zone].nil? || params[:zone].empty?
     @businesses = @businesses.left_outer_joins(:service_types).where('service_types.name = ?', params[:service_type]) unless params[:service_type].nil? || params[:service_type].empty?
-    @businesses = @businesses.left_outer_joins(:business_subtypes).where('business_subtypes.name = ?', 'Food Truck') unless params[:food_truck] != 'true'
     @businesses = @businesses.where(happy_hour: true) unless params[:happy_hour] != 'true'
+    @businesses = @businesses.where(food_truck: true) unless params[:food_truck] != 'true'
     @businesses = @businesses.where(approved: true).where('pause_listing is null or pause_listing != true').distinct
 
     @map_markers = Gmaps4rails.build_markers(@businesses) do |business, marker|
