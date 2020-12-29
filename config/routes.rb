@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'business/index'
 
   resources :default_settings, :only => [:index, :edit, :update]
+  resources :default_settings_emails
   
   resources :businesses do
     resources :create, controller: 'businesses/create', :only => [:show, :create, :update]

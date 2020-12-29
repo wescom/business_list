@@ -1,7 +1,10 @@
 class DefaultSettingsController < ApplicationController
+  load_and_authorize_resource
+  before_action :authenticate_user!
 
   def index
     @default_setting = DefaultSetting.first
+    @default_settings_emails = DefaultSettingsEmail.all.order("name")
 
     if @default_setting.nil?
       # If no default settings record, then create one and send user to edit
@@ -21,9 +24,10 @@ class DefaultSettingsController < ApplicationController
       redirect_to default_settings_path
     else
       if @default_setting.update_attributes(default_setting_params)
-        flash_message :notice, "Settings updated"
+        flash[:notice] = "Settings updated"
         render :action => :index
       else
+        flash[:error] = "Error"
         render :action => :edit
       end
     end

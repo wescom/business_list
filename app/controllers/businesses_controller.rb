@@ -17,6 +17,9 @@ class BusinessesController < ApplicationController
     if !params[:type].nil?
       @businesses = @businesses.where('business_types.name = ?', params[:type])
     end
+    if current_user.admin_role? and !params[:owner].nil?
+      @businesses = @businesses.where('businesses.owner_id = ?', params[:owner])
+    end
     @businesses = @businesses.order(sort_column + " " + sort_direction).distinct
   end
   
@@ -97,7 +100,7 @@ class BusinessesController < ApplicationController
 
   def update
     if params[:cancel_button]
-      redirect_to businesses_path
+      redirect_to @business
     else
       @business_types = BusinessType.all.order("name")
       if @business.business_type.nil?

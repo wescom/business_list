@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>business.bendbulletin.com - Business listing '<%= @business.name %>' updated</h3>
+    <p><%= @default_settings_email.email_pretext %></p>
+		<p>
+			<% if @default_settings_email.show_business_info %>
+				<hr/>
+				<h4><%= @business.name %></h4>
+				<%= image_tag @business.logo.url(:medium) %><br/>
+				
+				<h4>Business Location:</h4>
+				<%= @business.address1 %>	<%= @business.address2 %><br/>
+				<%= @business.city %>, <%= @business.state %> <%= @business.zipcode %><br/>
+				<%= @business.phonenum %><br/>
+				<%= @business.email %><br/>
+				<%= @business.website %><br/>
+
+				<h4>Business Services:</h4>
+				Business Type: <%= @business.business_type.name unless @business.business_type.nil? %> - <%= @business.business_subtypes.map{|v| v.name }.join(", ") %><br/>
+				Service Options: <%= @business.service_types.map{|v| v.name }.join(", ") %><br/>
+				Hours: <%= @business.hours %><br/>
+				Business Zone: <%= @business.zones.map{|v| v.name }.join(", ") %> <%= @business.region.name unless @business.region.nil? %><br/>
+
+				<h4>Business Extras:</h4>
+				Yelp: <%= @business.yelp_url %><br/>
+				Notes: <%= @business.notes %><br/>
+				
+				<h4>Awards:</h4>
+				<% @business.awards.each do |award| %>
+				<%= award.year %> <%= award.place %> - <%= award.name %>, <%= award.description %><br/>
+				<% end %>
+
+				<h4>Business Contacts:</h4>
+				<% @business.contacts.each do |contact| %>
+				<%= contact.name %>, <%= number_to_phone(contact.phonenum) %>, <%= contact.email %><br/>
+				<% end %>
+				<hr/>
+			<% end %>
+		</p>
+    <p><%= @default_settings_email.email_posttext %></p>
+  </body>
+</html>

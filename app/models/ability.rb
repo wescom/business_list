@@ -37,6 +37,7 @@ class Ability
     end
     if user.supervisor_role?
       can :manage, DefaultSetting
+      can :manage, DefaultSettingsEmail
       can :manage, Business
       can :manage, BusinessType
       can :manage, BusinessSubtype

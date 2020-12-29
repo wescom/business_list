@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_230609) do
+ActiveRecord::Schema.define(version: 2020_10_09_215959) do
 
-  create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "business_id"
     t.string "name"
     t.string "description"
@@ -22,28 +22,28 @@ ActiveRecord::Schema.define(version: 2020_09_29_230609) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "business_subtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "business_type_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "business_subtypes_businesses", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "business_subtypes_businesses", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "business_subtype_id"
     t.index ["business_id"], name: "index_business_subtypes_businesses_on_business_id"
     t.index ["business_subtype_id"], name: "index_business_subtypes_businesses_on_business_subtype_id"
   end
 
-  create_table "business_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "business_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "title_for_subtypes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "businesses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "businesses", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "logo_file_name"
     t.string "logo_content_type"
@@ -75,21 +75,21 @@ ActiveRecord::Schema.define(version: 2020_09_29_230609) do
     t.index ["owner_id"], name: "index_businesses_on_owner_id"
   end
 
-  create_table "businesses_service_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "businesses_service_types", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "service_type_id"
     t.index ["business_id"], name: "index_businesses_service_types_on_business_id"
     t.index ["service_type_id"], name: "index_businesses_service_types_on_service_type_id"
   end
 
-  create_table "businesses_zones", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "businesses_zones", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "business_id"
     t.bigint "zone_id"
     t.index ["business_id"], name: "index_businesses_zones_on_business_id"
     t.index ["zone_id"], name: "index_businesses_zones_on_zone_id"
   end
 
-  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "business_id"
     t.string "name"
     t.string "address1"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_230609) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "default_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "default_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "homepage_banner_image_file_name"
     t.string "homepage_banner_image_content_type"
     t.bigint "homepage_banner_image_file_size"
@@ -131,20 +131,33 @@ ActiveRecord::Schema.define(version: 2020_09_29_230609) do
     t.datetime "registered_welcome_image_updated_at"
   end
 
-  create_table "regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "default_settings_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "email_from_address"
+    t.string "email_subject"
+    t.text "email_pretext"
+    t.text "email_posttext"
+    t.boolean "show_contact_info", default: true
+    t.boolean "show_business_info", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "regions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "zone_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "service_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "service_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -165,7 +178,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_230609) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "zones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "zones", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

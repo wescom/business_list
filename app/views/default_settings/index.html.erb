@@ -62,19 +62,46 @@
 	<h5>Emails:</h5>
 	<hr/>
 	<div class="form-group row">
-		<label for="confirmation_from_email" class="offset-1 col-4">Confirmation Emails Sent From:</label>
-		<div class="col-5">
-			<%= @default_setting.confirmation_from_email %>
-		</div>
-	</div>
-	<div class="form-group row">
-		<label for="contact_email" class="offset-1 col-4">Email Address For Customers to Contact Us:</label>
+		<label for="contact_email" class="offset-1 col-4">General Contact Email Address:</label>
 		<div class="col-5">
 			<%= @default_setting.contact_email %>
 		</div>
 	</div>
-	<hr/>
-
+	<table class="table table-sm w-auto offset-1">
+		<thead class="thead-light">
+			<tr>
+				<th class="">Templates</th>
+				<th class="">Description</th>
+				<th class="text-center align-middle ">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% unless @default_settings_emails.nil? %>
+				<% @default_settings_emails.each do |email| %>
+					<tr>
+						<td><%= email.name %></td>
+						<td><%= email.description %></td>
+						<td class="text-center">
+							<div class="btn">
+								<%= link_to icon('edit fa-lg'),
+									edit_default_settings_email_path(email),
+									title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+								<%= link_to icon('remove fa-lg'), 
+									default_settings_emails_path(email), :class => "",
+									:method=> :delete, :action => 'destroy',
+									data: {
+										title: 'Delete '+email.name+'?', 
+										confirm:'Remove this email remplate from the system?'},
+									title: 'Delete', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+		<tfoot><tr><td><%= link_to "New Template", new_default_settings_email_path %></td></tr>
+		</tfoot>
+	</table>
 	<br/>
 	<br/>
 	
