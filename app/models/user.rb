@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
   after_create :send_admin_mail
   def send_admin_mail
-    UserMailer.send_welcome_email(self).deliver_later
+    @default_settings_email = DefaultSettingsEmail.find_by(name: 'Welcome')
+    UserMailer.send_welcome_email(self,@default_settings_email).deliver_later unless @default_settings_email.nil? 
   end
     
 end

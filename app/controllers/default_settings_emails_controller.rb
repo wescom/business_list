@@ -62,6 +62,17 @@ class DefaultSettingsEmailsController < ApplicationController
     end
   end
 
+  def destroy
+    @default_settings_email = DefaultSettingsEmail.find(params[:id])
+    if @default_settings_email.destroy
+        flash[:notice] = "Email Template Deleted"
+        redirect_to default_settings_path
+    else
+        flash[:notice] = "Email Template Deletion Failed"
+        redirect_to default_settings_path
+    end
+  end
+  
   private
   def default_settings_emails_params    
     params.require(:default_settings_email).permit(:name,:description,:email_from_address,:email_subject,:email_pretext,

@@ -5,8 +5,8 @@
   </head>
   <body>
     <h3>business.bendbulletin.com - Business listing '<%= @business.name %>' updated</h3>
-	<p><%= link_to businesses_url, businesses_url %></p>
     <p><%= @default_settings_email.email_pretext %></p>
+	<p><%= link_to business_url(@business), business_url(@business) %></p>
 	<p>
 		<% if @default_settings_email.show_business_info %>
 			<hr/>

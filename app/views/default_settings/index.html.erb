@@ -87,7 +87,7 @@
 									edit_default_settings_email_path(email),
 									title: 'Edit', 'data-toggle' => 'tooltip', 'data-placement' => 'right' %>
 								<%= link_to icon('remove fa-lg'), 
-									default_settings_emails_path(email), :class => "",
+									default_settings_email_path(email), :class => "",
 									:method=> :delete, :action => 'destroy',
 									data: {
 										title: 'Delete '+email.name+'?', 

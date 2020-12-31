@@ -130,6 +130,8 @@ class BusinessesController < ApplicationController
             @default_settings_email = DefaultSettingsEmail.find_by(name: 'Business Updated')
             BusinessMailer.business_updated(@business,@default_settings_email).deliver_later unless @default_settings_email.nil? 
           end
+          @default_settings_email = DefaultSettingsEmail.find_by(name: 'Business Waiting For Approval')
+          BusinessMailer.business_waiting_for_approval(@business,@default_settings_email).deliver_later unless @default_settings_email.nil? 
           redirect_to @business
       else
           flash[:notice] = "Business Update Failed"
